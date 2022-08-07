@@ -1,15 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import Header from '../Header/Header';
 
 export interface Props {
-  children?: React.ReactNode; // best, accepts everything React can render
+  children?: React.ReactNode | JSX.Element | JSX.Element[]; // best, accepts everything React can render
   childrenElement: JSX.Element; // A single React element
   style?: React.CSSProperties; // to pass through style props
 }
 
-const MainLayout = (props: Props) => {
+const MainLayout = () => {
   return (
-    <div>MainLayout</div>
+    <div>
+      <Header />
+    </div>
   )
 }
 
