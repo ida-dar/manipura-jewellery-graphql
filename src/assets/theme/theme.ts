@@ -1,13 +1,12 @@
-import * as interfaces from './themeInterface';
+import * as interfaces from './theme.interface';
 
-export const breakpoints: interfaces.Breakpoints  = {
-  huge: '1700',
-  bigDesktop: '1440',
-  desktop: '1150',
-  bigTablet: '1020',
-  tablet: '767',
-  bigPhone: '400',
-  phone: '320',
+export const breakpoints: interfaces.Breakpoints = {
+  xs: '0',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1400px',
 };
 
 export const colors: interfaces.Colors = {
@@ -18,25 +17,31 @@ export const colors: interfaces.Colors = {
   grey300: 'hsl(0, 0%, 87%)',
   grey400: 'hsl(0, 0%, 91%)',
   grey500: 'hsl(0, 0%, 97%)',
-  primary: '#FFD226',
+  primary: '#d2b976',
+  secondary: '#65dac7',
 };
 
 export const font: interfaces.Font = {
   size: {
-    header: '4.5rem',
+    header: '4rem',
     paragraph: '1.7rem',
     button: '1.5rem',
   },
+  fontMain: "'Raleway', sans-serif",
+  fontHeader: 'Jost',
+  fontHighlight: 'Playfair Display',
+  fontParagraph: 'Catamaran',
 };
 
 export const mq = Object.keys(breakpoints).reduce((acc, breakpoint) => {
-  (acc as Record<string, string>)[breakpoint] = `@media (min-width: ${breakpoints[breakpoint]}px)`;
+  (acc as Record<string, string>)[breakpoint] = `@media (min-width: ${(breakpoints as Record<string, string>)[breakpoint]}px)`;
   return acc;
 }, {});
 
 export const theme = {
-  ...colors,
+  colors,
   mq,
+  breakpoints,
   font,
   layout: {
     searchBarHeight: '80px',

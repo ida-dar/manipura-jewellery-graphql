@@ -1,16 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
-import 'vendors/normalize.css';
+import '../../vendors/normalize.css';
 
 const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 62.5%;
+    scroll-behavior: smooth;
   }
 
   *,
   *::before,
   *::after {
-    box-sizing: inherit;
+    box-sizing: border-box;
   }
 
   body {
@@ -18,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     font-size: 1.6rem;
+    font-family: 'Raleway', sans-serif;
   }
 
   h1, h2, h3, h4, h5, span {
@@ -32,6 +34,10 @@ const GlobalStyle = createGlobalStyle`
   ul {
     padding: 0;
     margin: 0;
+  }
+
+  a, a:hover, a:visited {
+    text-decoration: none;
   }
 `;
 
