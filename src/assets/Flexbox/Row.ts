@@ -8,7 +8,7 @@ const Row = styled.div<RowProps>`
   flex-direction: row;
   max-width: ${({ lg, gapMd = 1 }) => (lg && lg < 12 ? `${(100 * lg) / 12 - gapMd}%` : '100%')};
   ${({ justify }) => justify && `justify-content: ${justify}`};
-  ${({ align }) => align && `align-content: ${align}`};
+  ${({ align }) => align && `align-items: ${align}`};
 
   @media (max-width: 768px) {
     max-width: ${({ md, gapMd = 1 }) => (md && md < 12 ? `${(100 * md) / 12 - gapMd}%` : '100%')};

@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import { ColProps } from './interfaces';
 
 const Col = styled.div<ColProps>`
+  display: flex;
   width: 100%;
   padding: 10px;
   max-width: ${({ lg }) => lg && (lg < 12 ? `${(100 * lg) / 12}%` : '100%')};
   ${({ justify }) => justify && `justify-content: ${justify}`};
-  ${({ align }) => align && `align-content: ${align}`};
+  ${({ align }) => align && `align-items: ${align}`};
 
   @media (max-width: 768px) {
     max-width: ${({ md }) => md && (md < 12 ? `${(100 * md) / 12}%` : '100%')};

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { theme } from '../../../assets/theme/theme';
 
 export const Div = styled.div`
-  height: 100px;
+  height: 80px;
   font-family: ${theme.font.fontHighlight};
   font-size: ${theme.font.size.header};
   font-weight: 400;
