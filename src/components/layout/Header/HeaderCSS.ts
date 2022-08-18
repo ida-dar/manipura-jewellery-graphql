@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { theme } from '../../../assets/theme/theme';
 import { NavLink } from 'react-router-dom';
 
+interface ButtonProps {
+  isActive?: boolean;
+}
+
 export const NavBar = styled.nav`
   display: flex;
   width: 100%;
@@ -78,7 +82,8 @@ export const NavBarLink = styled(NavLink)`
     width: 75%;
     bottom: -5px;
     left: 13%;
-    background: ${theme.colors.secondary};
+    background-color: ${theme.colors.secondary};
+    transition: background-color 1s ease;
   }
 `;
 
@@ -140,4 +145,12 @@ export const Link = styled.span`
     transform-origin: left right;
     transform: translateX(35px);
   }
+`;
+
+export const Button = styled.button`
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+  color: ${(props: ButtonProps) => (props.isActive ? theme.colors.secondary : theme.colors.black)};
+  transition: color 0.4s ease;
 `;

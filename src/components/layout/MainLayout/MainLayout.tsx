@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../../../assets/theme/GlobalStyle';
 import { theme } from '../../../assets/theme/theme';
-import { Col, Container, Row } from '../../../assets/Flexbox/index';
+import { Container } from '../../../assets/Flexbox/index';
 
 export interface Props {
   children: React.ReactNode | JSX.Element | JSX.Element[]; // best, accepts everything React can render
@@ -33,7 +33,11 @@ const MainLayout = ({ children }: Props) => {
       <GlobalStyle />
       <Header />
       <Container>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <main>
+            {children}
+          </main>
+          </ThemeProvider>
       </Container>
     </>
   )

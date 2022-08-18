@@ -19,6 +19,7 @@ export const colors: interfaces.Colors = {
   grey500: 'hsl(0, 0%, 97%)',
   primary: '#d2b976',
   secondary: '#65dac7',
+  bgColor: '#eeeeee',
 };
 
 export const font: interfaces.Font = {
@@ -34,7 +35,9 @@ export const font: interfaces.Font = {
 };
 
 export const mq = Object.keys(breakpoints).reduce((acc, breakpoint) => {
-  (acc as Record<string, string>)[breakpoint] = `@media (min-width: ${(breakpoints as Record<string, string>)[breakpoint]}px)`;
+  (acc as Record<string, string>)[breakpoint] = `@media (min-width: ${
+    (breakpoints as Record<string, string>)[breakpoint]
+  }px)`;
   return acc;
 }, {});
 

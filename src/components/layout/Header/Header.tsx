@@ -1,11 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../common/Logo/Logo';
 import { Col, Row } from '../../../assets/Flexbox';
-import { Link, LinkContainer, Mask, NavAccountLink, NavBar, NavBarLink } from './HeaderCSS';
+import { Button, Link, LinkContainer, Mask, NavAccountLink, NavBar, NavBarLink } from './HeaderCSS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingBag, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export interface AccountLinks {
   path: string,
@@ -51,6 +51,12 @@ const Header = () => {
     },
   ];
 
+  const [ active, setActive ] = useState(false);
+
+  const buttonOnClick = () => {
+    setActive(!active)
+  }
+
   return (
     <Row lg={10} md={12} align='center' justify='space-between'>
       <Col align='center'>
@@ -63,6 +69,9 @@ const Header = () => {
               <span>{link.name}</span>
             </NavBarLink>
           ))}
+          <Button onClick={buttonOnClick} isActive={active}>
+            <FontAwesomeIcon icon={faSearch} />
+          </Button>
           {accountLinks.map((link) => (
             <NavAccountLink key={link.path} to={`${process.env.PUBLIC_URL}${link.path}`}>
               <Mask>
