@@ -1,11 +1,9 @@
-import React from 'react'
-import Featured from '../../layout/Intro/Intro'
+import Products from '@layout/Products'
 
 const Home = () => {
   return (
     <div>
-      Home
-      <Featured />
+      <Products />
     </div>
   )
 }

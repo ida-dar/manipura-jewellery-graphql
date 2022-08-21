@@ -10,6 +10,7 @@ export const Div = styled.div`
   color: ${theme.colors.black};
   line-height: 1.5;
   letter-spacing: 0.25rem;
+  font-style: italic;
 `;
 
 export {};

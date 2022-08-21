@@ -1,7 +1,13 @@
+
 module.exports = {
   extends: ['prettier'],
   plugins: ['babel', 'react-hooks'],
   parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false,
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module',
+  },
   env: {
     jest: true,
   },
@@ -16,7 +22,7 @@ module.exports = {
     'no-useless-catch': 0,
     'lines-between-class-members': 0,
     'eol-last': 'error',
-    'react/prop-types': 0,
+    'react/prop-types': "off", // disable as I use TypeScript for type checking
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': 0,
     'react/jsx-props-no-spreading': 0,

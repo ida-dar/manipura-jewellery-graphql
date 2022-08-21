@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "experimentalDecorators": true,
+    "target": "ES2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -19,9 +20,29 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node"]
+    "types": ["node", "react"],
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@assetsImages/*": ["src/assets/images/*"],
+      "@assetsImagesProducts/*": ["src/assets/images/products/*"],
+      "@common/*": ["src/components/common/*"],
+      "@features/*": ["src/components/features/*"],
+      "@views/*": ["src/components/views/*"],
+      "@layout/*": ["src/components/layout/*"],
+    },
+    "outDir": "./build",
+    "rootDirs": ["./src"],
+    "noUnusedLocals": true,
   },
+  "target": "es6",
+  "compileOnSave": true,
   "include": [
     "src"
+  ],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
   ]
 }

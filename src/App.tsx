@@ -15,11 +15,11 @@ export interface RoutesInterface {
 export const routes: RoutesInterface[] = [
   {
     path: '/',
-    element: Home,
+    element: <Home />,
   },
   {
     path: '*',
-    element: NotFound,
+    element: <NotFound />,
   },
 ]
 

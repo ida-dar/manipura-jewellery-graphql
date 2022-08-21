@@ -1,4 +1,3 @@
-import React from 'react';
 import { Div } from './LogoCSS';
 
 const Logo = () => {

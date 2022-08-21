@@ -1,0 +1,51 @@
+[
+  {
+    "name": "product1",
+    "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum porro sed at dolor quidem fugiat totam voluptates quod dolorum iusto ratione, maiores fugit est necessitatibus.",
+    "price": 200,
+    "categories": ["featured", "rings"],
+    "img": "default.jpg"
+  },
+  {
+    "name": "product2",
+    "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum porro sed at dolor quidem fugiat totam voluptates quod dolorum iusto ratione, maiores fugit est necessitatibus.",
+    "price": 300,
+    "categories": ["featured", "necklaces"],
+    "img": "default.jpg"
+  },
+  {
+    "name": "product3",
+    "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum porro sed at dolor quidem fugiat totam voluptates quod dolorum iusto ratione, maiores fugit est necessitatibus.",
+    "price": 250,
+    "categories": ["featured", "earrings"],
+    "img": "default.jpg"
+  },
+  {
+    "name": "product4",
+    "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum porro sed at dolor quidem fugiat totam voluptates quod dolorum iusto ratione, maiores fugit est necessitatibus.",
+    "price": 225,
+    "categories": ["featured", "rings"],
+    "img": "default.jpg"
+  },
+  {
+    "name": "product5",
+    "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum porro sed at dolor quidem fugiat totam voluptates quod dolorum iusto ratione, maiores fugit est necessitatibus.",
+    "price": 210,
+    "categories": ["featured", "necklaces"],
+    "img": "default.jpg"
+  },
+  {
+    "name": "product6",
+    "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum porro sed at dolor quidem fugiat totam voluptates quod dolorum iusto ratione, maiores fugit est necessitatibus.",
+    "price": 400,
+    "categories": ["featured", "bracelets"],
+    "img": "default.jpg"
+  },
+  {
+    "name": "product7",
+    "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum porro sed at dolor quidem fugiat totam voluptates quod dolorum iusto ratione, maiores fugit est necessitatibus.",
+    "price": 1500,
+    "categories": ["featured", "bracelets"],
+    "img": "default.jpg"
+  }
+]

@@ -1,5 +1,3 @@
-import { HTMLAttributes, ReactNode, StyleHTMLAttributes } from 'react';
-
 /* column range */
 type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
   ? Acc[number]
@@ -18,6 +16,7 @@ export interface RowProps {
   lg?: ColumnRange; // 992px
   md?: ColumnRange; // 768px
   sm?: ColumnRange; // 576px
+  wrap?: 'wrap' | 'nowrap';
   align?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   justify?: 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'center';
   className?: string;

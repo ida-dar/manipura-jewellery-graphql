@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     font-size: 1.6rem;
-    font-family: 'Raleway', sans-serif;
+    font-family: ${theme.font.fontMain};
     background-color: ${theme.colors.bgColor};
   }
 
