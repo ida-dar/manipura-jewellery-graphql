@@ -1,4 +1,4 @@
-import Products from '@layout/Products'
+import Products from '../../layout/Products'
 
 const Home = () => {
   return (

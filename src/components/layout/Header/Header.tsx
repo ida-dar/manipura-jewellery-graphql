@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '@common/Logo/Logo';
-import { Col, Row } from '@assets/Flexbox';
+import Logo from '../../common/Logo/Logo';
+import { Col, Row } from '../../../assets/Flexbox';
 import { Button, Link, LinkContainer, Mask, NavAccountLink, NavBar, NavBarLink } from './HeaderCSS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons';

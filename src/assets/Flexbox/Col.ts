@@ -9,7 +9,7 @@ const Col = styled.div<ColProps>`
   ${({ justify }) => justify && `justify-content: ${justify}`};
   ${({ align }) => align && `align-items: ${align}`};
 
-  @media (max-width: 768px) {
+  @media (max-width: 754px) {
     max-width: ${({ md }) => md && (md < 12 ? `${(100 * md) / 12}%` : '100%')};
     order: ${({ orderMd }) => orderMd && (orderMd < 12 ? `${(100 * orderMd) / 12}%` : '100%')};
   }

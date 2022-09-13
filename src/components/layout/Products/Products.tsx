@@ -1,16 +1,17 @@
-import { Col, Row } from '@assets/Flexbox';
-import { presenter, presenterProps } from '../../../presenter'
+import { Col, Row } from '../../../assets/Flexbox';
 import { Product } from './interfaces';
-import ProductItem from '@features/ProductItem';
-import Presenter from './ProductsPM';
+import ProductItem from '../../features/ProductItem';
+import products from '../../../data/products.json';
 
-const Products = ({ pm }: presenterProps) => {
+const Products = () => {
+
+  const _products = JSON.parse(JSON.stringify(products));
 
   return (
     <Row wrap={"wrap"}>
-      {pm._products.map(
+      {_products.map(
         (el: Product, i: number) =>
-        <Col key={i} lg={3} md={6} sm={12}>
+        <Col key={i} lg={4} md={6} sm={12}>
           <ProductItem {...el} />
         </Col>
       )}
@@ -18,4 +19,4 @@ const Products = ({ pm }: presenterProps) => {
   )
 }
 
-export default presenter(Presenter, Products)
+export default Products;

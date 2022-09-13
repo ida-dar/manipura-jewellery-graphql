@@ -12,6 +12,7 @@ module.exports = {
     jest: true,
   },
   globals: {
+
     window: true,
     document: true,
     localStorage: true,
