@@ -24,7 +24,7 @@
     "baseUrl": ".",
     "outDir": "./build",
     "rootDirs": ["src"],
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
   },
   "target": "es6",
   "compileOnSave": true,

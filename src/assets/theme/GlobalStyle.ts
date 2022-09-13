@@ -15,6 +15,11 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  *::selection {
+    color: ${theme.colors.white};
+    background: ${theme.colors.black};
+  }
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
