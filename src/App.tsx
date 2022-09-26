@@ -4,24 +4,35 @@ import MainLayout from './components/layout/MainLayout/MainLayout';
 import PageToTop from './components/common/PageToTop/PageToTop';
 
 // import routes
+import { appRoutes } from './utils/routes';
 import Home from './components/views/Home/Home';
 import NotFound from './components/views/NotFound/NotFound';
+import Login from './components/views/Login/Login';
+import Register from './components/views/Register';
 
 export interface RoutesInterface {
-  path: string,
-  element: any,
+  path: string;
+  element: JSX.Element;
 }
 
 export const routes: RoutesInterface[] = [
   {
-    path: '/',
+    path: appRoutes.HOME,
     element: <Home />,
   },
   {
-    path: '*',
+    path: appRoutes.NOT_FOUND,
     element: <NotFound />,
   },
-]
+  {
+    path: appRoutes.ACCOUNT,
+    element: <Login />,
+  },
+  {
+    path: appRoutes.ACCOUNT_REGISTER,
+    element: <Register />,
+  },
+];
 
 class App extends React.Component {
   render() {
@@ -30,12 +41,12 @@ class App extends React.Component {
         <PageToTop />
         <MainLayout>
           <Routes>
-            {routes.map(route => (
+            {routes.map((route) => (
               <Route key={route.path} path={`${process.env.PUBLIC_URL}${route.path}`} element={route.element} />
             ))}
           </Routes>
         </MainLayout>
-    </BrowserRouter>
+      </BrowserRouter>
     );
   }
 }

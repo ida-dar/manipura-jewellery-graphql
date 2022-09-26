@@ -6,10 +6,12 @@ const Row = styled.div<RowProps>`
   margin: 10px auto;
   padding: 10px 0;
   flex-direction: row;
+  ${({ textAlign }) => textAlign && `text-align: ${textAlign}`};
   ${({ wrap }) => wrap && `flex-wrap: ${wrap}`};
   max-width: ${({ lg, gapMd = 1 }) => (lg && lg < 12 ? `${(100 * lg) / 12 - gapMd}%` : '100%')};
   ${({ justify }) => justify && `justify-content: ${justify}`};
   ${({ align }) => align && `align-items: ${align}`};
+  ${({ alignContent }) => alignContent && `align-content: ${alignContent}`};
 
   @media (max-width: 768px) {
     max-width: ${({ md, gapMd = 1 }) => (md && md < 12 ? `${(100 * md) / 12 - gapMd}%` : '100%')};

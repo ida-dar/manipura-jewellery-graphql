@@ -3,6 +3,8 @@
     "experimentalDecorators": true,
     "target": "ES2022",
     "lib": [
+      "ES5",
+      "ES6",
       "dom",
       "dom.iterable",
       "esnext"

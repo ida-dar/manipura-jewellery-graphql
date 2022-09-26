@@ -1,68 +1,73 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { appRoutes } from 'src/utils/routes';
+
 import Logo from '../../common/Logo/Logo';
 import { Col, Row } from '../../../assets/Flexbox';
 import { Button, Link, LinkContainer, Mask, NavAccountLink, NavBar, NavBarLink } from './HeaderCSS';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faShoppingBag, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export interface AccountLinks {
-  path: string,
-  name: JSX.Element,
+  path: string;
+  name: JSX.Element;
 }
 
 export interface Links {
-  [key: string]: string,
+  [key: string]: string;
 }
 
 const Header = () => {
   const accountLinks: AccountLinks[] = [
     {
-      path: '/account',
+      path: appRoutes.ACCOUNT,
       name: <FontAwesomeIcon icon={faUser} />,
     },
     {
-      path: '/cart',
-      name: <FontAwesomeIcon icon={faShoppingBag} />
+      path: appRoutes.CART,
+      name: <FontAwesomeIcon icon={faShoppingBag} />,
     },
   ];
 
   const links: Links[] = [
     {
-      path: '/jewellery',
+      path: appRoutes.PRODUCTS.JEWELLERY,
       name: 'Jewellery',
     },
     {
-      path: '/necklaces',
+      path: appRoutes.PRODUCTS.NECKLACES,
       name: 'Necklaces',
     },
     {
-      path: '/bracelets',
+      path: appRoutes.PRODUCTS.BRACELETS,
       name: 'Bracelets',
     },
     {
-      path: '/earrings',
+      path: appRoutes.PRODUCTS.EARRINGS,
       name: 'Earrings',
     },
     {
-      path: '/rings',
+      path: appRoutes.PRODUCTS.RINGS,
       name: 'Rings',
     },
   ];
 
-  const [ active, setActive ] = useState(false);
+  const [active, setActive] = useState(false);
 
   const buttonOnClick = () => {
-    setActive(!active)
-  }
+    setActive(!active);
+  };
 
   return (
-    <Row lg={10} md={12} align='center' justify='space-between'>
-      <Col align='center'>
-        <NavLink to={`${process.env.PUBLIC_URL}/`}><Logo /></NavLink>
+    <Row lg={10} md={12} align="center" justify="space-between">
+      <Col align="center">
+        <NavLink to={`${process.env.PUBLIC_URL}/`}>
+          <Logo />
+        </NavLink>
       </Col>
-      <Col align='center' justify='flex-end'>
+      <Col align="center" justify="flex-end">
         <NavBar>
           {links.map((link) => (
             <NavBarLink key={link.path} to={`${process.env.PUBLIC_URL}${link.path}`}>
@@ -76,17 +81,13 @@ const Header = () => {
             <NavAccountLink key={link.path} to={`${process.env.PUBLIC_URL}${link.path}`}>
               <Mask>
                 <LinkContainer>
-                  <Link>
-                    {link.name}
-                  </Link>
-                  <Link>
-                    {link.name}
-                  </Link>
+                  <Link>{link.name}</Link>
+                  <Link>{link.name}</Link>
                 </LinkContainer>
               </Mask>
             </NavAccountLink>
           ))}
-      </NavBar>
+        </NavBar>
       </Col>
     </Row>
   );

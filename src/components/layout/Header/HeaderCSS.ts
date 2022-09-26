@@ -34,12 +34,9 @@ export const NavBarLink = styled(NavLink)`
     pointer-events: none;
   }
 
-  span::before {
-    content: '';
-  }
-
   span::before,
   span::after {
+    content: '';
     position: absolute;
     width: 100%;
     height: 1px;
@@ -62,7 +59,6 @@ export const NavBarLink = styled(NavLink)`
   }
 
   span::after {
-    content: '';
     top: calc(100% + 4px);
     transform-origin: 50%;
     transform: scale3d(0, 1, 1);
@@ -134,8 +130,8 @@ export const Link = styled.span`
   display: inline-block;
   transition: color 0.4s ease;
   line-height: 30px;
-  height: 17px;
-  width: 17px;
+  height: 20px;
+  width: 20px;
 
   &:first-of-type {
     transform-origin: right left;

@@ -16,9 +16,11 @@ export interface RowProps {
   lg?: ColumnRange; // 992px
   md?: ColumnRange; // 768px
   sm?: ColumnRange; // 576px
+  textAlign?: 'center' | 'left' | 'right';
   wrap?: 'wrap' | 'nowrap';
-  align?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  justify?: 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'center';
+  align?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch' | 'space-evenly';
+  alignContent?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch' | 'space-evenly';
+  justify?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'center' | 'space-evenly';
   className?: string;
 }
 
@@ -27,8 +29,10 @@ export interface ColProps {
   lg?: ColumnRange; // 992px
   md?: ColumnRange; // 768px
   sm?: ColumnRange; // 576px
-  align?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  justify?: 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'center';
+  textAlign?: 'center' | 'left' | 'right';
+  align?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch' | 'space-evenly';
+  alignContent?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  justify?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'center' | 'space-evenly';
   order?: number;
   orderMd?: number;
   orderSm?: number;
