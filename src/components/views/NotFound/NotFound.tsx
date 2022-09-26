@@ -38,7 +38,6 @@ const NotFound = () => {
     position: 'all',
     color: ['random', '#ff0000'],
     cross: 'dead',
-    // emitter: "follow",
     random: 15,
   };
 
@@ -53,7 +52,5 @@ const NotFound = () => {
     </Row>
   );
 };
-
-//NotFound.propTypes = {};
 
 export default NotFound;
