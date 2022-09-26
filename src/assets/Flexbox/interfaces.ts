@@ -16,6 +16,7 @@ export interface RowProps {
   lg?: ColumnRange; // 992px
   md?: ColumnRange; // 768px
   sm?: ColumnRange; // 576px
+  direction?: 'row' | 'column';
   textAlign?: 'center' | 'left' | 'right';
   wrap?: 'wrap' | 'nowrap';
   align?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch' | 'space-evenly';
