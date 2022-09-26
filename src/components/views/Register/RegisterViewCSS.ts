@@ -2,12 +2,17 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { theme } from 'src/assets/theme/theme';
 
+interface LinkProps {
+  margin?: number;
+}
+
 export const Link = styled(NavLink)`
   position: relative;
   display: inline-block;
   width: fit-content;
   color: ${theme.colors.black};
   line-height: 1.518;
+  margin: ${(props: LinkProps) => props.margin}px;
 
   &::before {
     position: absolute;

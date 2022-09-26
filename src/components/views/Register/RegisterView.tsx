@@ -5,7 +5,7 @@ import { registerUser, createUserDocFromAuth } from 'src/utils/firebase/firebase
 import { Row } from 'src/assets/Flexbox';
 import { Link } from './RegisterViewCSS';
 import { Header } from 'src/components/common/AccountHeader/AccountHeader';
-import { Input } from 'src/components/common/Input/Input';
+import InputComponent from 'src/components/common/Input/Input';
 import ButtonComponent from 'src/components/common/Button/Button';
 import ErrorComponent, { ERROR_TYPES } from 'src/components/common/Error/Error';
 
@@ -77,11 +77,32 @@ const RegisterView = () => {
           If you already have an account with us, please login at the{' '}
           <Link to={`${process.env.PUBLIC_URL}${appRoutes.ACCOUNT}`}>login page</Link>.
         </p>
-        <Input name="firstName" type="text" placeholder="First Name" required value={firstName} onChange={handleChange} />
-        <Input name="lastName" type="text" placeholder="Last Name" required value={lastName} onChange={handleChange} />
-        <Input name="email" type="email" placeholder="E-Mail" required value={email} onChange={handleChange} />
-        <Input name="password" type="password" placeholder="Password" required value={password} onChange={handleChange} />
-        <Input
+        <InputComponent
+          name="firstName"
+          type="text"
+          placeholder="First Name"
+          required
+          value={firstName}
+          onChange={handleChange}
+        />
+        <InputComponent
+          name="lastName"
+          type="text"
+          placeholder="Last Name"
+          required
+          value={lastName}
+          onChange={handleChange}
+        />
+        <InputComponent name="email" type="email" placeholder="E-Mail" required value={email} onChange={handleChange} />
+        <InputComponent
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={handleChange}
+        />
+        <InputComponent
           name="passwordConfirm"
           type="password"
           placeholder="Password Confirm"
@@ -94,7 +115,9 @@ const RegisterView = () => {
         )}
         {!registrationError.valid && <ErrorComponent errorType={ERROR_TYPES.error} error={registrationError.error} />}
         <ButtonComponent width={450} type="submit" text="Continue" />
-        <Link to={`${process.env.PUBLIC_URL}${appRoutes.HOME}`}>Return to Store</Link>
+        <Link to={`${process.env.PUBLIC_URL}${appRoutes.HOME}`} margin={24}>
+          Return to Store
+        </Link>
       </Row>
     </form>
   );

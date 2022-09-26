@@ -4,8 +4,8 @@ import { appRoutes } from 'src/utils/routes';
 import { getRedirectResult } from 'firebase/auth';
 import { signInWithGoogleRedirect, loginUser, auth, createUserDocFromAuth } from 'src/utils/firebase/firebase';
 
-import { Row } from 'src/assets/Flexbox';
-import { Input } from 'src/components/common/Input/Input';
+import { Col, Row } from 'src/assets/Flexbox';
+import InputComponent from 'src/components/common/Input/Input';
 import { Header } from 'src/components/common/AccountHeader/AccountHeader';
 import ButtonComponent from 'src/components/common/Button/Button';
 import ErrorComponent, { ERROR_TYPES } from 'src/components/common/Error/Error';
@@ -95,8 +95,23 @@ const LoginForm = () => {
     <form onSubmit={onSubmit}>
       <Row justify="center" wrap="wrap">
         <Header>Returning customer</Header>
-        <Input name="email" type="email" placeholder="E-Mail Address" value={email} onChange={handleChange} required />
-        <Input name="password" type="password" placeholder="Password" value={password} onChange={handleChange} required />
+        <InputComponent
+          name="email"
+          type="email"
+          placeholder="E-Mail Address"
+          value={email}
+          onChange={handleChange}
+          required
+        />
+
+        <InputComponent
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handleChange}
+          required
+        />
         {!loginError.valid && <ErrorComponent errorType={ERROR_TYPES.error} error={loginError.error} />}
         <ButtonComponent width={212} text="Login" type="submit" />
         <ButtonComponent

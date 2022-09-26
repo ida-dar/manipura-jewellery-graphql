@@ -1,5 +1,9 @@
 /* APP ROUTES */
 
+export interface Links {
+  [key: string]: string;
+}
+
 export const appRoutes = {
   HOME: '/',
   ACCOUNT: '/account',
@@ -12,5 +16,11 @@ export const appRoutes = {
     BRACELETS: '/bracelets',
     EARRINGS: '/earrings',
     RINGS: '/rings',
+  },
+  FOOTER: {
+    CONTACT: '/contact',
+    FAQ: '/faq',
+    TERMS_CONDITIONS: 'terms-conditions',
+    ABOUT: '/about',
   },
 };

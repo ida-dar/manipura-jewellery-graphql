@@ -20,6 +20,7 @@ export const colors: interfaces.Colors = {
   primary: '#d2b976',
   secondary: '#65dac7',
   bgColor: '#eeeeee',
+  bgDarkColor: '#e6e6e6',
   warning: '#b10905',
 };
 

@@ -120,7 +120,7 @@ export const Mask = styled.span`
   }
 `;
 
-export const LinkContainer = styled.div`
+export const LinkContainer = styled.nav`
   transition: transform 0.4s ease;
   display: flex;
   flex-direction: row;

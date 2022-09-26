@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { appRoutes } from 'src/utils/routes';
+import { appRoutes, Links } from 'src/utils/routes';
 
 import Logo from '../../common/Logo/Logo';
 import { Col, Row } from '../../../assets/Flexbox';
@@ -13,10 +13,6 @@ import { faShoppingBag, faSearch } from '@fortawesome/free-solid-svg-icons';
 export interface AccountLinks {
   path: string;
   name: JSX.Element;
-}
-
-export interface Links {
-  [key: string]: string;
 }
 
 const Header = () => {

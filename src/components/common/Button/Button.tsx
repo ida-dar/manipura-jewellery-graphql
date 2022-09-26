@@ -7,6 +7,7 @@ interface ButtonProps {
   icon?: JSX.Element;
   onClick?: any;
   type?: 'button' | 'reset' | 'submit' | undefined;
+  reverseColors?: boolean;
 }
 
 const Span = styled.span`
@@ -16,7 +17,7 @@ const Span = styled.span`
   width: 100%;
   height: 100%;
   margin: 0;
-  background: ${theme.colors.bgColor};
+  background: ${(props: ButtonProps) => (props.reverseColors ? theme.colors.black : theme.colors.bgColor)};
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.1, 0, 0.3, 1);
 
@@ -24,7 +25,7 @@ const Span = styled.span`
   &::after {
     content: '';
     position: absolute;
-    background: ${theme.colors.black};
+    background: ${(props: ButtonProps) => (props.reverseColors ? theme.colors.white : theme.colors.black)};
   }
 
   &::before {
@@ -53,12 +54,12 @@ const Button = styled.button`
   height: 50px;
   pointer-events: auto;
   cursor: pointer;
-  border: 1px solid ${theme.colors.black};
+  border: ${(props: ButtonProps) => `1px solid ${props.reverseColors ? theme.colors.white : theme.colors.black}`};
   width: ${(props: ButtonProps) => props.width || 200}px;
   padding: 0;
   margin: 12px;
   background: none;
-  color: ${theme.colors.white};
+  color: ${(props: ButtonProps) => (props.reverseColors ? theme.colors.black : theme.colors.white)};
   font-weight: bold;
 
   &::before,
@@ -88,13 +89,14 @@ const ButtonContent = styled.p`
   position: relative;
   padding: 1.5rem 3rem;
   mix-blend-mode: difference;
+  ${(props: ButtonProps) => props.reverseColors && `color: ${theme.colors.white}`};
 `;
 
-const ButtonComponent = ({ text, icon, onClick, type, width }: ButtonProps) => {
+const ButtonComponent = ({ text, icon, onClick, type, width, reverseColors = false }: ButtonProps) => {
   return (
-    <Button onClick={onClick} type={type} width={width}>
-      <Span />
-      <ButtonContent>
+    <Button onClick={onClick} type={type} width={width} reverseColors={reverseColors}>
+      <Span reverseColors={reverseColors} />
+      <ButtonContent reverseColors={reverseColors}>
         {text} {icon}
       </ButtonContent>
     </Button>

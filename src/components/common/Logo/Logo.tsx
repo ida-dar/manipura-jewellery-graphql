@@ -1,9 +1,11 @@
 import { Div } from './LogoCSS';
 
-const Logo = () => {
-  return (
-    <Div>Manipura</Div>
-  )
+export interface LogoProps {
+  addDecoration?: boolean;
 }
 
-export default Logo
+const Logo: React.FC<LogoProps> = ({ addDecoration = false }) => {
+  return <Div addDecoration={addDecoration}>Manipura</Div>;
+};
+
+export default Logo;
