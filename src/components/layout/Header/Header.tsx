@@ -58,7 +58,7 @@ const Header = () => {
 
   return (
     <Row lg={10} md={12} align="center" justify="space-between">
-      <Col align="center">
+      <Col>
         <NavLink to={`${process.env.PUBLIC_URL}/`}>
           <Logo />
         </NavLink>
