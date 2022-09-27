@@ -17,8 +17,9 @@ const Logo = styled.p`
   font-family: ${theme.font.fontHighlight};
   font-style: italic;
   font-size: 20rem;
-  background: linear-gradient(#b10905, #000);
+  background: -webkit-linear-gradient(#b10905, #000);
   background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0 0 64px 0;
   padding: 0;
