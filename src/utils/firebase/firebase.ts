@@ -11,6 +11,7 @@ import {
   signOut,
   onAuthStateChanged,
   NextOrObserver,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -82,6 +83,8 @@ export const loginUser = async (email: string, password: string): Promise<UserCr
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const forgotPassword = async (email: string) => sendPasswordResetEmail(auth, email);
 
 export const logoutUser = async () => signOut(auth);
 

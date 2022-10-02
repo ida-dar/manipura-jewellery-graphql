@@ -9,6 +9,7 @@ import Home from './components/views/Home/Home';
 import NotFound from './components/views/NotFound/NotFound';
 import Login from './components/views/Login/Login';
 import Register from './components/views/Register';
+import ForgotPassword from './components/features/ForgotPassword/ForgotPassword';
 
 interface RoutesInterface {
   path: string;
@@ -26,6 +27,10 @@ const routes: RoutesInterface[] = [
   {
     path: appRoutes.ACCOUNT,
     element: <Login />,
+  },
+  {
+    path: appRoutes.FORGOT_PASSWORD,
+    element: <ForgotPassword />,
   },
   {
     path: appRoutes.ACCOUNT_REGISTER,

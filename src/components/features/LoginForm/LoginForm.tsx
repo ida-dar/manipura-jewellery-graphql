@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getRedirectResult, UserCredential } from 'firebase/auth';
 import { signInWithGoogleRedirect, loginUser, auth, createUserDocFromAuth } from 'src/utils/firebase/firebase';
+import { appRoutes } from 'src/utils/routes';
 
 import { Row } from 'src/assets/Flexbox';
+import { Link } from './LoginFormCSS';
 import InputComponent from 'src/components/common/Input/Input';
 import { Header } from 'src/components/common/AccountHeader/AccountHeader';
 import ButtonComponent from 'src/components/common/Button/Button';
-import ErrorComponent, { ERROR_TYPES } from 'src/components/common/Error/Error';
+import MessageComponent, { TYPES } from 'src/components/common/Message/Message';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -88,7 +90,7 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Row justify="center" wrap="wrap">
+      <Row justify="center" direction="column">
         <Header>Returning customer</Header>
         <InputComponent
           name="email"
@@ -106,14 +108,17 @@ const LoginForm = () => {
           onChange={handleChange}
           required
         />
-        {!loginError.valid && <ErrorComponent errorType={ERROR_TYPES.error} error={loginError.error} />}
-        <ButtonComponent width={212} text="Login" type="submit" />
-        <ButtonComponent
-          width={212}
-          text="Login with"
-          icon={<FontAwesomeIcon icon={faGoogle} />}
-          onClick={loginWithGoogle}
-        />
+        <Link to={`${process.env.PUBLIC_URL}${appRoutes.FORGOT_PASSWORD}`}>Forgot password</Link>
+        {!loginError.valid && <MessageComponent messageType={TYPES.error} message={loginError.error} />}
+        <div>
+          <ButtonComponent width={212} text="Login" type="submit" />
+          <ButtonComponent
+            width={212}
+            text="Login with"
+            icon={<FontAwesomeIcon icon={faGoogle} />}
+            onClick={loginWithGoogle}
+          />
+        </div>
       </Row>
     </form>
   );

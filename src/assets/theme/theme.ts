@@ -22,6 +22,7 @@ export const colors: interfaces.Colors = {
   bgColor: '#eeeeee',
   bgDarkColor: '#e6e6e6',
   warning: '#b10905',
+  success: '#228B22',
 };
 
 export const font: interfaces.Font = {

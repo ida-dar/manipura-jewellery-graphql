@@ -9,9 +9,10 @@ export const appRoutes = {
   ACCOUNT: '/account',
   ACCOUNT_REGISTER: '/account/register',
   ACCOUNT_VIEW: {
-    ACCOUNT_DATA: 'account/data',
-    ORDERS: 'account/orders',
+    ACCOUNT_DATA: '/account/data',
+    ORDERS: '/account/orders',
   },
+  FORGOT_PASSWORD: '/account/forgotten',
   CART: '/cart',
   NOT_FOUND: '*',
   PRODUCTS: {
@@ -24,7 +25,7 @@ export const appRoutes = {
   FOOTER: {
     CONTACT: '/contact',
     FAQ: '/faq',
-    TERMS_CONDITIONS: 'terms-conditions',
+    TERMS_CONDITIONS: '/terms-conditions',
     ABOUT: '/about',
   },
 };

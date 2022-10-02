@@ -45,6 +45,7 @@ const GlobalStyle = createGlobalStyle`
 
   a, a:hover, a:visited {
     text-decoration: none;
+    color: ${theme.colors.black};
   }
 `;
 

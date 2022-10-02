@@ -9,7 +9,7 @@ import { Link } from './RegisterViewCSS';
 import { Header } from 'src/components/common/AccountHeader/AccountHeader';
 import InputComponent from 'src/components/common/Input/Input';
 import ButtonComponent from 'src/components/common/Button/Button';
-import ErrorComponent, { ERROR_TYPES } from 'src/components/common/Error/Error';
+import MessageComponent, { TYPES } from 'src/components/common/Message/Message';
 
 const RegisterView = () => {
   const defaultForm = {
@@ -116,9 +116,9 @@ const RegisterView = () => {
           onChange={handleChange}
         />
         {matchedPasswords && (
-          <ErrorComponent errorType={ERROR_TYPES.warning} error={'Your passwords do not match. Please review.'} />
+          <MessageComponent messageType={TYPES.warning} message={'Your passwords do not match. Please review.'} />
         )}
-        {!registrationError.valid && <ErrorComponent errorType={ERROR_TYPES.error} error={registrationError.error} />}
+        {!registrationError.valid && <MessageComponent messageType={TYPES.error} message={registrationError.error} />}
         <ButtonComponent width={450} type="submit" text="Continue" />
         <Link to={`${process.env.PUBLIC_URL}${appRoutes.HOME}`} margin={24}>
           Return to Store
