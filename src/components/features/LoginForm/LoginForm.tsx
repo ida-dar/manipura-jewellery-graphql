@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { appRoutes } from 'src/utils/routes';
-import { getRedirectResult } from 'firebase/auth';
+import { getRedirectResult, UserCredential } from 'firebase/auth';
 import { signInWithGoogleRedirect, loginUser, auth, createUserDocFromAuth } from 'src/utils/firebase/firebase';
 
-import { Col, Row } from 'src/assets/Flexbox';
+import { Row } from 'src/assets/Flexbox';
 import InputComponent from 'src/components/common/Input/Input';
 import { Header } from 'src/components/common/AccountHeader/AccountHeader';
 import ButtonComponent from 'src/components/common/Button/Button';
@@ -30,10 +28,9 @@ const LoginForm = () => {
 
   useEffect(() => {
     const getRedirectSignInData = async () => {
-      const resp = await getRedirectResult(auth);
+      const resp: UserCredential | null = await getRedirectResult(auth);
       if (resp) {
         await createUserDocFromAuth(resp.user);
-        <Navigate to={appRoutes.HOME} replace={true} />;
       } else {
         setLoginError({
           valid: true,
@@ -60,8 +57,7 @@ const LoginForm = () => {
 
   const loginWithGoogle = async () => {
     try {
-      const { user } = await signInWithGoogleRedirect();
-      console.log(user);
+      await signInWithGoogleRedirect();
     } catch (e) {
       console.error('Error: ', e);
     }
@@ -72,8 +68,7 @@ const LoginForm = () => {
     if (!email || !password) return;
 
     try {
-      const resp = await loginUser(email, password);
-      console.log(resp);
+      await loginUser(email, password);
       resetValues();
     } catch (e: any) {
       if (e.code.includes('auth/user-not-found')) {
@@ -103,7 +98,6 @@ const LoginForm = () => {
           onChange={handleChange}
           required
         />
-
         <InputComponent
           name="password"
           type="password"
@@ -118,7 +112,6 @@ const LoginForm = () => {
           width={212}
           text="Login with"
           icon={<FontAwesomeIcon icon={faGoogle} />}
-          type="submit"
           onClick={loginWithGoogle}
         />
       </Row>

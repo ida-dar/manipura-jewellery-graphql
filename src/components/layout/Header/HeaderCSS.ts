@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { theme } from '../../../assets/theme/theme';
 import { NavLink } from 'react-router-dom';
 
@@ -17,6 +17,7 @@ export const NavBarLink = styled(NavLink)`
   color: ${theme.colors.black};
   position: relative;
   text-align: center;
+  text-transform: uppercase;
 
   span {
     position: relative;
@@ -83,70 +84,75 @@ export const NavBarLink = styled(NavLink)`
   }
 `;
 
-export const NavAccountLink = styled(NavLink)`
-  position: relative;
-  display: flex;
-  padding: 10px 0;
-  align-items: center;
-  font-size: ${theme.font.size.paragraph};
-  color: ${theme.colors.black};
-  transition: color 0.4s ease;
-  overflow: hidden;
-
-  &:hover i:first-of-type {
-    transform: translateX(-35px);
-  }
-
-  &:hover i:last-of-type {
-    transform: translateX(0);
-  }
-
-  &.active {
-    transition: color 0.4s ease;
-    color: ${theme.colors.secondary};
-  }
-`;
-
-export const Mask = styled.span`
-  position: relative;
-  padding: 0;
-  height: 30px;
-  width: 30px;
-  display: flex;
-  transition: transform 0.45s ease;
-
-  &:hover {
-    transform: translateX(-45px);
-  }
-`;
-
-export const LinkContainer = styled.nav`
-  transition: transform 0.4s ease;
-  display: flex;
-  flex-direction: row;
-`;
-
-export const Link = styled.span`
-  display: inline-block;
-  transition: color 0.4s ease;
-  line-height: 30px;
-  height: 20px;
-  width: 20px;
-
-  &:first-of-type {
-    transform-origin: right left;
-  }
-
-  &:last-of-type {
-    transform-origin: left right;
-    transform: translateX(35px);
-  }
-`;
-
 export const Button = styled.button`
   background-color: unset;
   border: none;
   cursor: pointer;
   color: ${(props: ButtonProps) => (props.isActive ? theme.colors.secondary : theme.colors.black)};
   transition: color 0.4s ease;
+`;
+
+export const SubMenu = styled.span`
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  opacity: 0;
+  padding-top: 16px;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease-in-out;
+`;
+
+const accountLinkAnimation = keyframes`
+  0% {
+    transform: scale3d(1, 0, 1);
+    transform-origin: 0%;
+  }
+  50% {
+    transform: scale3d(1, 1, 0);
+    transform-origin: 50%;
+  }
+  100% {
+    transform: scale3d(1, 0, 1);
+    transform-origin: 100%;
+  }
+`;
+
+export const AccountLink = styled.p`
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+
+  > * {
+    color: ${theme.colors.black};
+  }
+
+  &:first-of-type::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: transparent;
+  }
+
+  :hover::before {
+    opacity: 1;
+    width: 100%;
+    background-color: ${theme.colors.primary};
+    animation-name: ${accountLinkAnimation};
+    animation-duration: 0.55s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+  }
+
+  :hover ${SubMenu} {
+    opacity: 1;
+    transform: translateY(24px);
+    transition: opacity 1s ease, transform 0.5s ease-in-out;
+  }
 `;

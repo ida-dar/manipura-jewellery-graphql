@@ -1,15 +1,18 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {
+  User,
   getAuth,
   signInWithRedirect,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   UserCredential,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  NextOrObserver,
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { User } from './firebase.interface';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -45,7 +48,7 @@ Initialize Cloud Firestore and get a reference to the service
 */
 export const db = getFirestore(app);
 
-export const createUserDocFromAuth = async (userAuth: any, userInfo: any = {}) => {
+export const createUserDocFromAuth = async (userAuth: User, userInfo: any = {}) => {
   if (!userAuth) return;
 
   const docRef = doc(db, 'users', userAuth.uid);
@@ -67,6 +70,7 @@ export const createUserDocFromAuth = async (userAuth: any, userInfo: any = {}) =
       console.log('Firebase error: ', e);
     }
   }
+  return docRef;
 };
 
 export const registerUser = async (email: string, password: string): Promise<UserCredential | undefined> => {
@@ -78,3 +82,7 @@ export const loginUser = async (email: string, password: string): Promise<UserCr
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const logoutUser = async () => signOut(auth);
+
+export const authStateListener = (cb: NextOrObserver<User>) => onAuthStateChanged(auth, cb);

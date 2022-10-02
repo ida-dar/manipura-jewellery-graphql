@@ -10,12 +10,11 @@ import NotFound from './components/views/NotFound/NotFound';
 import Login from './components/views/Login/Login';
 import Register from './components/views/Register';
 
-export interface RoutesInterface {
+interface RoutesInterface {
   path: string;
   element: JSX.Element;
 }
-
-export const routes: RoutesInterface[] = [
+const routes: RoutesInterface[] = [
   {
     path: appRoutes.HOME,
     element: <Home />,

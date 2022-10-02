@@ -13,6 +13,11 @@ const Text = styled.p`
   font-family: ${theme.font.fontHeader};
 `;
 
+const Link = styled(NavLink)`
+  width: fit-content;
+  margin: 0 auto;
+`;
+
 const Logo = styled.p`
   font-family: ${theme.font.fontHighlight};
   font-style: italic;
@@ -46,9 +51,9 @@ const NotFound = () => {
     <Row lg={10} textAlign="center" direction="column" justify="center">
       <Text>We lost this page</Text>
       <Logo>404</Logo>
-      <NavLink to={`${process.env.PUBLIC_URL}${appRoutes.HOME}`}>
+      <Link to={`${process.env.PUBLIC_URL}${appRoutes.HOME}`}>
         <ButtonComponent width={250} text="Return to homepage" />
-      </NavLink>
+      </Link>
       <ParticlesBg type="custom" config={config} bg={true} />
     </Row>
   );

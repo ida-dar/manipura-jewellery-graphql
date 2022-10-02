@@ -39,6 +39,7 @@ export const Motto = styled.p`
 export const Container = styled.div`
   margin-bottom: 128px;
   position: relative;
+  height: 70vh;
 
   &:after {
     content: '';

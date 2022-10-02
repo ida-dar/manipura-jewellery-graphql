@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { appRoutes } from 'src/utils/routes';
+import { UserContext } from 'src/store/UserStore';
+import { User, UserCredential } from 'firebase/auth';
 import { registerUser, createUserDocFromAuth } from 'src/utils/firebase/firebase';
 
 import { Row } from 'src/assets/Flexbox';
@@ -28,6 +30,8 @@ const RegisterView = () => {
   const [registrationError, setRegistrationError] = useState(errors);
   const { firstName, lastName, email, password, passwordConfirm } = formFields;
 
+  const { setCurrUser } = useContext(UserContext);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
@@ -49,10 +53,11 @@ const RegisterView = () => {
       return;
     }
     try {
-      const resp = await registerUser(email, password);
+      const resp: UserCredential | undefined = await registerUser(email, password);
       const displayName = `${firstName} ${lastName}`;
-      await createUserDocFromAuth(resp?.user, { displayName });
+      await createUserDocFromAuth(resp?.user as User, { displayName });
       resetValues();
+      setCurrUser(resp?.user as User);
     } catch (e: any) {
       if (e.code.includes('auth/email-already-in-use')) {
         setRegistrationError({

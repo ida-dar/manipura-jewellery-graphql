@@ -6,6 +6,7 @@ import GlobalStyle from '../../../assets/theme/GlobalStyle';
 import { theme } from '../../../assets/theme/theme';
 import { Container } from '../../../assets/Flexbox/index';
 import Footer from '../Footer/Footer';
+import UserStore from 'src/store/UserStore';
 
 export interface Props {
   children: React.ReactNode | JSX.Element | JSX.Element[]; // best, accepts everything React can render
@@ -29,13 +30,15 @@ const MainLayout = ({ children }: Props) => {
         />
       </Helmet>
       <GlobalStyle />
-      <Header />
-      <Container>
-        <ThemeProvider theme={theme}>
-          <main>{children}</main>
-        </ThemeProvider>
-      </Container>
-      <Footer />
+      <UserStore>
+        <Header />
+        <Container>
+          <ThemeProvider theme={theme}>
+            <main>{children}</main>
+          </ThemeProvider>
+        </Container>
+        <Footer />
+      </UserStore>
     </>
   );
 };

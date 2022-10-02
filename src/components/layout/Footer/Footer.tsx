@@ -1,4 +1,7 @@
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { appRoutes, Links } from 'src/utils/routes';
+import { Col, Row } from 'src/assets/Flexbox';
 import {
   Contact,
   Developer,
@@ -16,8 +19,6 @@ import InputComponent from 'src/components/common/Input/Input';
 import Logo from 'src/components/common/Logo/Logo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaypal, faGooglePay, faApplePay, faCcMastercard, faCcVisa } from '@fortawesome/free-brands-svg-icons';
-import { Col, Row } from 'src/assets/Flexbox';
-import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   const currYear = new Date().getFullYear();
@@ -41,6 +42,21 @@ const Footer = () => {
     },
   ];
 
+  const paymentForms = [
+    { name: 'Apple Pay', icon: faApplePay },
+    { name: 'PayPal', icon: faPaypal },
+    { name: 'Google Pay', icon: faGooglePay },
+    { name: 'Mastercard', icon: faCcMastercard },
+    { name: 'Visa', icon: faCcVisa },
+  ];
+
+  const [newsletter, setNewsletter] = useState(false);
+
+  const newsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setNewsletter(true);
+  };
+
   return (
     <FooterContainer>
       <Col align="center">
@@ -50,13 +66,17 @@ const Footer = () => {
       </Col>
       <Contact>
         <a href="tel:+48123456789">+(48) 123 456 789</a>
-        <a href="mailto:test.account@mail.pl">test.account@mail.pl</a>
+        <a href="mailto:test.account@mail.com">test.account@mail.com</a>
       </Contact>
-      <Newsletter>Subscribe now to our newsletter. Don't miss out on news, events and discounts!</Newsletter>
-      <Form>
+      <Newsletter>
+        {newsletter
+          ? `You subscribed to our newsletter. Please check your email`
+          : `Subscribe now to our newsletter. Don't miss out on news, events and discounts!`}
+      </Newsletter>
+      <Form onSubmit={newsletterSubmit}>
         <Row wrap="wrap" justify="center" alignContent="center" sm={10}>
           <InputComponent name="newsletter" type="email" placeholder="Email" />
-          <ButtonComponent text="Submit" reverseColors />
+          <ButtonComponent type="submit" text="Submit" reverseColors />
         </Row>
       </Form>
       <NavLinkConatiner>
@@ -77,11 +97,9 @@ const Footer = () => {
         </Row>
       </NavLinkConatiner>
       <Payments>
-        <FontAwesomeIcon icon={faApplePay} />
-        <FontAwesomeIcon icon={faPaypal} />
-        <FontAwesomeIcon icon={faGooglePay} />
-        <FontAwesomeIcon icon={faCcMastercard} />
-        <FontAwesomeIcon icon={faCcVisa} />
+        {paymentForms.map((p, i) => (
+          <FontAwesomeIcon icon={p.icon} key={i} title={p.name} />
+        ))}
       </Payments>
       <RightsReserved>
         @{currYear} Manipura. All rights reserved | developed by <Developer>ID</Developer>

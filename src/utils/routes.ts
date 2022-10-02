@@ -8,6 +8,10 @@ export const appRoutes = {
   HOME: '/',
   ACCOUNT: '/account',
   ACCOUNT_REGISTER: '/account/register',
+  ACCOUNT_VIEW: {
+    ACCOUNT_DATA: 'account/data',
+    ORDERS: 'account/orders',
+  },
   CART: '/cart',
   NOT_FOUND: '*',
   PRODUCTS: {
