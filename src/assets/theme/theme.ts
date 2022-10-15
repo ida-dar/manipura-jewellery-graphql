@@ -1,4 +1,4 @@
-import * as interfaces from './theme.interface';
+import * as interfaces from '../../interfaces/theme.interface';
 
 export const breakpoints: interfaces.Breakpoints = {
   xs: '0',

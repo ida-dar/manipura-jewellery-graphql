@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ProdContext } from 'src/store/ProductStore';
-import { Product } from 'src/components/layout/FeaturedProducts/interfaces';
+import { Product } from 'src/interfaces/Product.interface';
 
 import { Row, Col } from 'src/assets/Flexbox';
 import { Header } from 'src/components/common/AccountHeader/AccountHeader';

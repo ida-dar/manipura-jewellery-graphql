@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ProdContext } from 'src/store/ProductStore';
-import { Product } from './interfaces';
+import { Product } from '../../../interfaces/Product.interface';
 
 import { Col, Row } from '../../../assets/Flexbox';
 import ProductItem from '../../features/ProductItem';
