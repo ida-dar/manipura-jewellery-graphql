@@ -22,7 +22,7 @@ const Header = () => {
   const { currUser } = useContext(UserContext);
   const accountLinks: AccountLink[] = [
     {
-      path: appRoutes.ACCOUNT,
+      path: currUser ? appRoutes.ACCOUNT : appRoutes.LOGIN,
       name: currUser ? 'Account' : 'Login',
       submenu: true,
     },

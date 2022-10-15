@@ -12,20 +12,25 @@ interface Props {
   message: string;
 }
 
+interface MessageProps {
+  messageColor: boolean;
+}
+
 const Message = styled.p`
   text-transform: capitalize;
   padding: 12px;
   width: 80%;
+  text-align: center;
 
   span {
     text-transform: uppercase;
-    color: ${TYPES.success ? theme.colors.success : theme.colors.warning};
+    color: ${(props: MessageProps) => (props.messageColor ? theme.colors.success : theme.colors.warning)};
   }
 `;
 
 const MessageComponent = ({ messageType, message }: Props) => {
   return (
-    <Message>
+    <Message messageColor={messageType === TYPES.success}>
       <span>{messageType}: </span>
       {message}
     </Message>

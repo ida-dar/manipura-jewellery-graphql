@@ -6,6 +6,7 @@ export interface Links {
 
 export const appRoutes = {
   HOME: '/',
+  LOGIN: '/login',
   ACCOUNT: '/account',
   ACCOUNT_REGISTER: '/account/register',
   ACCOUNT_VIEW: {
@@ -16,12 +17,13 @@ export const appRoutes = {
   CART: '/cart',
   NOT_FOUND: '*',
   PRODUCTS: {
-    JEWELLERY: '/jewellery',
-    NECKLACES: '/necklaces',
-    BRACELETS: '/bracelets',
-    EARRINGS: '/earrings',
-    RINGS: '/rings',
+    JEWELLERY: '/products/jewellery',
+    NECKLACES: '/products/necklaces',
+    BRACELETS: '/products/bracelets',
+    EARRINGS: '/products/earrings',
+    RINGS: '/products/rings',
   },
+  SINGLE_PRODUCT: '/product/:name',
   FOOTER: {
     CONTACT: '/contact',
     FAQ: '/faq',

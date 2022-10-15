@@ -1,13 +1,13 @@
-import Intro from '../../layout/Intro'
-import Products from '../../layout/Products'
+import Intro from '../../layout/Intro';
+import FeaturedProducts from '../../layout/FeaturedProducts';
 
 const Home = () => {
   return (
     <div>
       <Intro />
-      <Products />
+      <FeaturedProducts />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

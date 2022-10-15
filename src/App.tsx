@@ -7,9 +7,13 @@ import PageToTop from './components/common/PageToTop/PageToTop';
 import { appRoutes } from './utils/routes';
 import Home from './components/views/Home/Home';
 import NotFound from './components/views/NotFound/NotFound';
+import AccountView from './components/views/AccountView/AccountView';
 import Login from './components/views/Login/Login';
 import Register from './components/views/Register';
 import ForgotPassword from './components/features/ForgotPassword/ForgotPassword';
+
+// Products
+import { Jewellery, ProductView } from './components/views/Products';
 
 interface RoutesInterface {
   path: string;
@@ -25,8 +29,12 @@ const routes: RoutesInterface[] = [
     element: <NotFound />,
   },
   {
-    path: appRoutes.ACCOUNT,
+    path: appRoutes.LOGIN,
     element: <Login />,
+  },
+  {
+    path: appRoutes.ACCOUNT,
+    element: <AccountView />,
   },
   {
     path: appRoutes.FORGOT_PASSWORD,
@@ -35,6 +43,14 @@ const routes: RoutesInterface[] = [
   {
     path: appRoutes.ACCOUNT_REGISTER,
     element: <Register />,
+  },
+  {
+    path: appRoutes.SINGLE_PRODUCT,
+    element: <ProductView />,
+  },
+  {
+    path: appRoutes.PRODUCTS.JEWELLERY,
+    element: <Jewellery />,
   },
 ];
 

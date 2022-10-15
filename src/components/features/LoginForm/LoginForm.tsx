@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getRedirectResult, UserCredential } from 'firebase/auth';
 import { signInWithGoogleRedirect, loginUser, auth, createUserDocFromAuth } from 'src/utils/firebase/firebase';
 import { appRoutes } from 'src/utils/routes';
@@ -24,6 +25,7 @@ const LoginForm = () => {
     error: '',
   };
 
+  const navigate = useNavigate();
   const [formFields, setFormFields] = useState(defaultForm);
   const [loginError, setLoginError] = useState(errors);
   const { email, password } = formFields;
@@ -33,6 +35,7 @@ const LoginForm = () => {
       const resp: UserCredential | null = await getRedirectResult(auth);
       if (resp) {
         await createUserDocFromAuth(resp.user);
+        navigate(-3); // if set to "-1" it redirects to google login page
       } else {
         setLoginError({
           valid: true,
@@ -72,6 +75,7 @@ const LoginForm = () => {
     try {
       await loginUser(email, password);
       resetValues();
+      navigate(-1); // redirect to previous page, e.g. watched product
     } catch (e: any) {
       if (e.code.includes('auth/user-not-found')) {
         setLoginError({
