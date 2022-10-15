@@ -28,7 +28,7 @@ export const colors: interfaces.Colors = {
 export const font: interfaces.Font = {
   size: {
     header: '4rem',
-    highlight: '2.8rem',
+    highlight: '3rem',
     subheader: '2rem',
     paragraph: '1.7rem',
     button: '1.5rem',

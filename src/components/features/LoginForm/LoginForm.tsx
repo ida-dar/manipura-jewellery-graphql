@@ -7,7 +7,7 @@ import { appRoutes } from 'src/utils/routes';
 import { Row } from 'src/assets/Flexbox';
 import { Link } from './LoginFormCSS';
 import InputComponent from 'src/components/common/Input/Input';
-import { Header } from 'src/components/common/AccountHeader/AccountHeader';
+import Header from 'src/components/common/Header/Header';
 import ButtonComponent from 'src/components/common/Button/Button';
 import MessageComponent, { TYPES } from 'src/components/common/Message/Message';
 
@@ -95,7 +95,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <Row justify="center" direction="column">
-        <Header>Returning customer</Header>
+        <Header text="Returning customer" />
         <InputComponent
           name="email"
           type="email"

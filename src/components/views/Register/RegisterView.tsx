@@ -6,7 +6,7 @@ import { registerUser, createUserDocFromAuth } from 'src/utils/firebase/firebase
 
 import { Row } from 'src/assets/Flexbox';
 import { Link } from './RegisterViewCSS';
-import { Header } from 'src/components/common/AccountHeader/AccountHeader';
+import Header from 'src/components/common/Header/Header';
 import InputComponent from 'src/components/common/Input/Input';
 import ButtonComponent from 'src/components/common/Button/Button';
 import MessageComponent, { TYPES } from 'src/components/common/Message/Message';
@@ -77,7 +77,7 @@ const RegisterView = () => {
   return (
     <form onSubmit={onSubmit}>
       <Row lg={5} justify="center" wrap="wrap" textAlign="center">
-        <Header>Create Account</Header>
+        <Header text="Create Account" />
         <p>
           If you already have an account with us, please login at the{' '}
           <Link to={`${process.env.PUBLIC_URL}${appRoutes.ACCOUNT}`}>login page</Link>.

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { forgotPassword } from 'src/utils/firebase/firebase';
 
 import { Row } from 'src/assets/Flexbox';
-import { Header } from 'src/components/common/AccountHeader/AccountHeader';
+import Header from 'src/components/common/Header/Header';
 import ButtonComponent from 'src/components/common/Button/Button';
 import InputComponent from 'src/components/common/Input/Input';
 import MessageComponent, { TYPES } from 'src/components/common/Message/Message';
@@ -43,7 +43,7 @@ const ForgotPassword = () => {
   return (
     <Form onSubmit={onSubmit}>
       <Row justify="center" direction="column" align="center">
-        <Header>Reset your password</Header>
+        <Header text="Reset your password" />
         <Emailinfo>
           Enter your e-mail address associated with your account. Click submit to have a password reset link e-mailed to you.
         </Emailinfo>
