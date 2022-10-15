@@ -70,11 +70,11 @@ const Footer = () => {
       </Contact>
       <Newsletter>
         {newsletter
-          ? `You subscribed to our newsletter. Please check your email`
+          ? `You subscribed to our newsletter. Please check your email.`
           : `Subscribe now to our newsletter. Don't miss out on news, events and discounts!`}
       </Newsletter>
       <Form onSubmit={newsletterSubmit}>
-        <Row wrap="wrap" justify="center" alignContent="center" sm={10}>
+        <Row wrap="wrap" justify="center" alignContent="center" align="center" sm={10}>
           <InputComponent name="newsletter" type="email" placeholder="Email" />
           <ButtonComponent type="submit" text="Submit" reverseColors />
         </Row>

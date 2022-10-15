@@ -9,9 +9,9 @@ const after = css`
     background-color: ${theme.colors.primary};
     height: 1px;
     width: 250px;
-    bottom: 15px;
-    left: 9%;
-    transform: skew(0, 6deg);
+    bottom: 12px;
+    left: 3%;
+    transform: skew(0, 5deg);
   }
 `;
 

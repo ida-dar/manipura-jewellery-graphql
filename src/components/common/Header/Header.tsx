@@ -16,7 +16,7 @@ export const HeaderComponent = styled.h3`
   font-weight: 100;
   line-height: 143.3%;
   letter-spacing: 0;
-  margin: 0 auto clamp(40px, 3.6458vw, 70px);
+  margin: 0 auto clamp(40px, 3.5vw, 70px);
   color: ${theme.colors.primary};
   text-transform: ${(props: HeaderProps) => (props.transform ? props.transform : 'none')};
 `;

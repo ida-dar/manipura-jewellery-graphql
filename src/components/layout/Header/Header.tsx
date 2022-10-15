@@ -6,11 +6,12 @@ import { UserContext } from 'src/store/UserStore';
 import { logoutUser } from 'src/utils/firebase/firebase';
 
 import Logo from '../../common/Logo/Logo';
+import Cart from 'src/components/common/Cart/Cart';
 import { Col, Row } from '../../../assets/Flexbox';
 import { AccountLink, Button, NavBar, NavBarLink, SubMenu } from './HeaderCSS';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingBag, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export interface AccountLink {
   path: string;
@@ -30,7 +31,7 @@ const Header = () => {
       path: appRoutes.CART,
       name: (
         <Button>
-          <FontAwesomeIcon icon={faShoppingBag} />
+          <Cart />
         </Button>
       ),
       submenu: false,

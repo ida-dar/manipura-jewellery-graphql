@@ -1,6 +1,6 @@
+import { NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '../../../assets/theme/theme';
-import { NavLink } from 'react-router-dom';
 
 interface ButtonProps {
   isActive?: boolean;
@@ -19,68 +19,68 @@ export const NavBarLink = styled(NavLink)`
   text-align: center;
   text-transform: uppercase;
 
+  &::before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+    transform: skew(0, 3deg);
+    background: linear-gradient(#65dac7, #65dac7); // secondary colour
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 0 100%;
+    transition: background-size 0.5s ease;
+  }
+
   span {
     position: relative;
     white-space: nowrap;
   }
 
-  span::before,
-  span::after {
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: ${theme.colors.secondary};
-    top: 100%;
-    left: 0;
-    pointer-events: none;
-  }
+  :not(.active) {
+    span::before,
+    span::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: ${theme.colors.secondary};
+      top: 100%;
+      left: 0;
+      pointer-events: none;
+    }
 
-  span::before,
-  span::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: ${theme.colors.secondary};
-    top: 100%;
-    left: 0;
-    pointer-events: none;
-  }
+    span::before {
+      transform-origin: 50%;
+      transform: scale3d(0, 1, 1);
+      transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+    }
 
-  span::before {
-    transform-origin: 50%;
-    transform: scale3d(0, 1, 1);
-    transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
-  }
+    span:hover::before {
+      transform-origin: 0% 50%;
+      transform: scale3d(1, 1.5, 1);
+      transition-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
+    }
 
-  span:hover::before {
-    transform-origin: 0% 50%;
-    transform: scale3d(1, 1.5, 1);
-    transition-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
-  }
+    span::after {
+      top: calc(100% + 4px);
+      transform-origin: 50%;
+      transform: scale3d(0, 1, 1);
+      transition: transform 0.4s 0.1s cubic-bezier(0.2, 1, 0.8, 1);
+    }
 
-  span::after {
-    top: calc(100% + 4px);
-    transform-origin: 50%;
-    transform: scale3d(0, 1, 1);
-    transition: transform 0.4s 0.1s cubic-bezier(0.2, 1, 0.8, 1);
-  }
-
-  span:hover::after {
-    transform-origin: 50% 0%;
-    transform: scale3d(1, 1, 1);
-    transition-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
+    span:hover::after {
+      transform-origin: 50% 0%;
+      transform: scale3d(1, 1, 1);
+      transition-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
+    }
   }
 
   &.active::before {
-    content: '';
-    position: absolute;
-    height: 3px;
-    width: 75%;
-    bottom: -5px;
-    left: 13%;
-    background-color: ${theme.colors.secondary};
-    transition: background-color 1s ease;
+    background-size: 100% 100%;
+    transition: background-size 0.5s ease;
   }
 `;
 
@@ -104,16 +104,23 @@ export const SubMenu = styled.span`
 
 const accountLinkAnimation = keyframes`
   0% {
-    transform: scale3d(1, 0, 1);
-    transform-origin: 0%;
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: 50% 100%;
   }
+
   50% {
-    transform: scale3d(1, 1, 0);
-    transform-origin: 50%;
+    transform: scale3d(1, 1, 1);
+    transform-origin: 50% 100%;
   }
+
+  51% {
+    transform: scale3d(1, 1, 1);
+    transform-origin: 50% 0%;
+  }
+
   100% {
-    transform: scale3d(1, 0, 1);
-    transform-origin: 100%;
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: 50% 0%;
   }
 `;
 
@@ -141,7 +148,7 @@ export const AccountLink = styled.p`
     width: 100%;
     background-color: ${theme.colors.primary};
     animation-name: ${accountLinkAnimation};
-    animation-duration: 0.55s;
+    animation-duration: 0.45s;
     animation-timing-function: ease;
     animation-delay: 0s;
     animation-iteration-count: 1;

@@ -4,8 +4,7 @@ import { getRedirectResult, UserCredential } from 'firebase/auth';
 import { signInWithGoogleRedirect, loginUser, auth, createUserDocFromAuth } from 'src/utils/firebase/firebase';
 import { appRoutes } from 'src/utils/routes';
 
-import { Row } from 'src/assets/Flexbox';
-import { Link } from './LoginFormCSS';
+import { Form, Link } from './LoginFormCSS';
 import InputComponent from 'src/components/common/Input/Input';
 import Header from 'src/components/common/Header/Header';
 import ButtonComponent from 'src/components/common/Button/Button';
@@ -13,6 +12,7 @@ import MessageComponent, { TYPES } from 'src/components/common/Message/Message';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Row } from 'src/assets/Flexbox';
 
 const LoginForm = () => {
   const defaultForm = {
@@ -93,7 +93,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       <Row justify="center" direction="column">
         <Header text="Returning customer" />
         <InputComponent
@@ -124,7 +124,7 @@ const LoginForm = () => {
           />
         </div>
       </Row>
-    </form>
+    </Form>
   );
 };
 

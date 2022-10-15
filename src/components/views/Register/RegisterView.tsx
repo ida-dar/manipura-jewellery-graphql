@@ -80,7 +80,7 @@ const RegisterView = () => {
         <Header text="Create Account" />
         <p>
           If you already have an account with us, please login at the{' '}
-          <Link to={`${process.env.PUBLIC_URL}${appRoutes.ACCOUNT}`}>login page</Link>.
+          <Link to={`${process.env.PUBLIC_URL}${appRoutes.LOGIN}`}>login page</Link>.
         </p>
         <InputComponent
           name="firstName"
