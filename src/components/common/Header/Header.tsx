@@ -5,25 +5,34 @@ interface HeaderProps {
   text: string;
   textAlign?: string | undefined;
   transform?: string | undefined;
-  style?: string | undefined;
+  fontStyle?: string | undefined;
+  color?: string | undefined;
+  fontSize?: string | undefined;
 }
 
 export const HeaderComponent = styled.h3`
-  font-size: ${theme.font.size.highlight};
+  font-size: ${(props: HeaderProps) => (props.fontSize ? props.fontSize : theme.font.size.highlight)};
   font-family: ${theme.font.fontHighlight};
-  font-style: ${(props: HeaderProps) => (props.style ? props.style : 'normal')};
+  font-style: ${(props: HeaderProps) => (props.fontStyle ? props.fontStyle : 'normal')};
   text-align: ${(props: HeaderProps) => (props.textAlign ? props.textAlign : 'center')};
   font-weight: 100;
   line-height: 143.3%;
   letter-spacing: 0;
   margin: 0 auto clamp(40px, 3.5vw, 70px);
-  color: ${theme.colors.primary};
+  color: ${(props: HeaderProps) => (props.color ? props.color : theme.colors.primary)};
   text-transform: ${(props: HeaderProps) => (props.transform ? props.transform : 'none')};
 `;
 
-const Header = ({ text, textAlign, transform, style }: HeaderProps) => {
+const Header = ({ text, textAlign, transform, fontStyle, fontSize, color }: HeaderProps) => {
   return (
-    <HeaderComponent text={text} transform={transform} style={style} textAlign={textAlign}>
+    <HeaderComponent
+      text={text}
+      transform={transform}
+      fontStyle={fontStyle}
+      fontSize={fontSize}
+      color={color}
+      textAlign={textAlign}
+    >
       {text}
     </HeaderComponent>
   );

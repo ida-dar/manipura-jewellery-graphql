@@ -14,7 +14,7 @@ export const appRoutes = {
     ORDERS: '/account/orders',
   },
   FORGOT_PASSWORD: '/account/forgotten',
-  CART: '/cart',
+  CHECKOUT: '/checkout',
   NOT_FOUND: '*',
   PRODUCTS: {
     JEWELLERY: '/products/jewellery',

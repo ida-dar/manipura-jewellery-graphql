@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { appRoutes, Links } from 'src/utils/routes';
 
@@ -6,12 +6,13 @@ import { UserContext } from 'src/store/UserStore';
 import { logoutUser } from 'src/utils/firebase/firebase';
 
 import Logo from '../../common/Logo/Logo';
-import Cart from 'src/components/common/Cart/Cart';
+import CartButton from 'src/components/common/CartButton/CartButton';
+import MiniCart from 'src/components/features/MiniCart/MiniCart';
 import { Col, Row } from '../../../assets/Flexbox';
-import { AccountLink, Button, NavBar, NavBarLink, SubMenu } from './HeaderCSS';
+import { AccountLink, Button, CartBtnClose, NavBar, NavBarLink, SubMenu } from './HeaderCSS';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export interface AccountLink {
   path: string;
@@ -21,20 +22,14 @@ export interface AccountLink {
 
 const Header = () => {
   const { currUser } = useContext(UserContext);
+  const [active, setActive] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
+
   const accountLinks: AccountLink[] = [
     {
       path: currUser ? appRoutes.ACCOUNT : appRoutes.LOGIN,
       name: currUser ? 'Account' : 'Login',
       submenu: true,
-    },
-    {
-      path: appRoutes.CART,
-      name: (
-        <Button>
-          <Cart />
-        </Button>
-      ),
-      submenu: false,
     },
   ];
 
@@ -61,8 +56,6 @@ const Header = () => {
     },
   ];
 
-  const [active, setActive] = useState(false);
-
   const buttonOnClick = () => {
     setActive(!active);
   };
@@ -76,35 +69,48 @@ const Header = () => {
   };
 
   return (
-    <Row lg={10} md={12} align="center" justify="space-between">
-      <Col lg={4}>
-        <NavLink to={`${process.env.PUBLIC_URL}/`}>
-          <Logo />
-        </NavLink>
-      </Col>
-      <Col lg={7} align="center" justify="flex-end">
-        <NavBar>
-          {links.map((link) => (
-            <NavBarLink key={link.path} to={`${process.env.PUBLIC_URL}${link.path}`}>
-              <span>{link.name}</span>
-            </NavBarLink>
-          ))}
-          <Button onClick={buttonOnClick} isActive={active}>
-            <FontAwesomeIcon icon={faSearch} />
-          </Button>
-          {accountLinks.map((link) => (
-            <AccountLink key={link.path}>
-              <NavLink to={`${process.env.PUBLIC_URL}${link.path}`}>{link.name}</NavLink>
-              {link.submenu && currUser && (
-                <SubMenu>
-                  <Button onClick={logout}>Logout</Button>
-                </SubMenu>
-              )}
-            </AccountLink>
-          ))}
-        </NavBar>
-      </Col>
-    </Row>
+    <>
+      <Row lg={10} md={12} align="center" justify="space-between">
+        <Col lg={4}>
+          <NavLink to={`${process.env.PUBLIC_URL}/`}>
+            <Logo />
+          </NavLink>
+        </Col>
+        <Col lg={7} align="center" justify="flex-end">
+          <NavBar>
+            {links.map((link) => (
+              <NavBarLink key={link.path} to={`${process.env.PUBLIC_URL}${link.path}`}>
+                <span>{link.name}</span>
+              </NavBarLink>
+            ))}
+            <Button onClick={buttonOnClick} isActive={active}>
+              <FontAwesomeIcon icon={faSearch} />
+            </Button>
+            {accountLinks.map((link) => (
+              <AccountLink key={link.path}>
+                <NavLink to={`${process.env.PUBLIC_URL}${link.path}`}>{link.name}</NavLink>
+                {link.submenu && currUser && (
+                  <SubMenu>
+                    <Button onClick={logout}>Logout</Button>
+                  </SubMenu>
+                )}
+              </AccountLink>
+            ))}
+            <Button onClick={() => setOpenCart(true)}>
+              <CartButton />
+            </Button>
+          </NavBar>
+        </Col>
+      </Row>
+      <>
+        {
+          <CartBtnClose open={openCart} onClick={() => setOpenCart(false)}>
+            <FontAwesomeIcon icon={faClose} />
+          </CartBtnClose>
+        }
+        <MiniCart open={openCart} />
+      </>
+    </>
   );
 };
 

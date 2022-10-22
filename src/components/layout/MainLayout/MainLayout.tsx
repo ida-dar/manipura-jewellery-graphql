@@ -8,6 +8,7 @@ import { Container } from '../../../assets/Flexbox/index';
 import Footer from '../Footer/Footer';
 import UserStore from 'src/store/UserStore';
 import ProductStore from 'src/store/ProductStore';
+import CartStore from 'src/store/CartStore';
 
 export interface Props {
   children: React.ReactNode | JSX.Element | JSX.Element[]; // best, accepts everything React can render
@@ -33,13 +34,15 @@ const MainLayout = ({ children }: Props) => {
       <GlobalStyle />
       <UserStore>
         <ProductStore>
-          <Header />
-          <Container>
-            <ThemeProvider theme={theme}>
-              <main>{children}</main>
-            </ThemeProvider>
-          </Container>
-          <Footer />
+          <CartStore>
+            <Header />
+            <Container>
+              <ThemeProvider theme={theme}>
+                <main>{children}</main>
+              </ThemeProvider>
+            </Container>
+            <Footer />
+          </CartStore>
         </ProductStore>
       </UserStore>
     </>

@@ -2,6 +2,7 @@ export interface Product {
   name: string;
   descr: string;
   price: number;
-  categories: String[];
+  categories: string[];
   img: string;
+  size?: string[];
 }

@@ -4,7 +4,20 @@ import { theme } from '../../../assets/theme/theme';
 
 interface ButtonProps {
   isActive?: boolean;
+  open?: boolean;
 }
+
+export const CartBtnClose = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2.5rem;
+  margin: 12px;
+  z-index: 10000000000;
+  visibility: ${(props: ButtonProps) => (props.open ? `visible` : `hidden`)};
+  border: none;
+  background-color: transparent;
+`;
 
 export const NavBar = styled.nav`
   display: flex;

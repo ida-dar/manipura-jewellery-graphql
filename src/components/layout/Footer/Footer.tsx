@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { appRoutes, Links } from 'src/utils/routes';
 import { Col, Row } from 'src/assets/Flexbox';
@@ -50,11 +50,26 @@ const Footer = () => {
     { name: 'Visa', icon: faCcVisa },
   ];
 
-  const [newsletter, setNewsletter] = useState(false);
+  const defaultForm = {
+    email: '' as string,
+  };
 
-  const newsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [newsletter, setNewsletter] = useState(defaultForm);
+  const { email } = newsletter;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewsletter({ ...defaultForm, [name]: value });
+  };
+
+  const newsletterSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setNewsletter(true);
+    if (!email) return;
+
+    try {
+    } catch (e: any) {
+      console.log('Login error', e);
+    }
   };
 
   return (
@@ -69,13 +84,20 @@ const Footer = () => {
         <a href="mailto:test.account@mail.com">test.account@mail.com</a>
       </Contact>
       <Newsletter>
-        {newsletter
+        {newsletter.email
           ? `You subscribed to our newsletter. Please check your email.`
           : `Subscribe now to our newsletter. Don't miss out on news, events and discounts!`}
       </Newsletter>
-      <Form onSubmit={newsletterSubmit}>
+      <Form onSubmit={(e) => newsletterSubmit(e)}>
         <Row wrap="wrap" justify="center" alignContent="center" align="center" sm={10}>
-          <InputComponent name="newsletter" type="email" placeholder="Email" />
+          <InputComponent
+            name="newsletter"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleChange}
+            required
+          />
           <ButtonComponent type="submit" text="Submit" reverseColors />
         </Row>
       </Form>
