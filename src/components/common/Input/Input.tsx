@@ -10,16 +10,15 @@ interface InputProps {
   pattern?: string;
   onChange?: any;
   required?: boolean;
+  margin?: string;
 }
 
 export const Input = styled.input`
   display: inline-block;
   min-height: 50px;
-  min-width: 350px;
-  width: 450px;
-  max-width: 450px;
+  width: 100%;
   padding: 18px 24px;
-  margin: 10px;
+  margin: ${(props: InputProps) => (props.margin ? props.margin : '10px 0')};
   outline-style: none;
   color: ${theme.colors.black};
   line-height: 2.3rem;
@@ -31,7 +30,7 @@ export const Input = styled.input`
   border-radius: 0;
 `;
 
-const InputComponent = ({ id, name, type, placeholder, value, onChange, pattern, required = false }: InputProps) => {
+const InputComponent = ({ id, name, type, placeholder, value, onChange, pattern, required = false, margin }: InputProps) => {
   return (
     <Input
       id={id}
@@ -42,6 +41,7 @@ const InputComponent = ({ id, name, type, placeholder, value, onChange, pattern,
       pattern={pattern}
       required={required}
       placeholder={placeholder}
+      margin={margin}
     />
   );
 };

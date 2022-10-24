@@ -2,12 +2,14 @@ import { theme } from 'src/assets/theme/theme';
 import styled from 'styled-components';
 
 interface ButtonProps {
-  width?: number;
+  width?: number | string;
   text?: string;
   icon?: JSX.Element;
   onClick?: any;
   type?: 'button' | 'reset' | 'submit' | undefined;
   reverseColors?: boolean;
+  margin?: string;
+  textTransform?: string;
 }
 
 const Span = styled.span`
@@ -55,12 +57,13 @@ const Button = styled.button`
   pointer-events: auto;
   cursor: pointer;
   border: ${(props: ButtonProps) => `1px solid ${props.reverseColors ? theme.colors.white : theme.colors.black}`};
-  width: ${(props: ButtonProps) => props.width || 200}px;
+  width: ${(props: ButtonProps) => (typeof props.width === 'number' ? `${props.width}px` : props.width) || '200px'};
   padding: 0;
-  margin: 12px;
+  margin: ${(props: ButtonProps) => (props.margin ? props.margin : '12px')};
   background: none;
   color: ${(props: ButtonProps) => (props.reverseColors ? theme.colors.black : theme.colors.white)};
   font-weight: bold;
+  text-transform: ${(props: ButtonProps) => (props.textTransform ? props.textTransform : 'normal')};
 
   &::before,
   &::after {
@@ -92,9 +95,25 @@ const ButtonContent = styled.p`
   ${(props: ButtonProps) => props.reverseColors && `color: ${theme.colors.white}`};
 `;
 
-const ButtonComponent = ({ text, icon, onClick, type, width, reverseColors = false }: ButtonProps) => {
+const ButtonComponent = ({
+  text,
+  icon,
+  onClick,
+  type,
+  width,
+  reverseColors = false,
+  margin,
+  textTransform,
+}: ButtonProps) => {
   return (
-    <Button onClick={onClick} type={type} width={width} reverseColors={reverseColors}>
+    <Button
+      onClick={onClick}
+      type={type}
+      width={width}
+      reverseColors={reverseColors}
+      margin={margin}
+      textTransform={textTransform}
+    >
       <Span reverseColors={reverseColors} />
       <ButtonContent reverseColors={reverseColors}>
         {text} {icon}

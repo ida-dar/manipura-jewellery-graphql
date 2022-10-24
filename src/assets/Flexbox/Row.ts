@@ -3,8 +3,8 @@ import { RowProps } from '../../interfaces/Flexbox.interfaces';
 
 const Row = styled.div<RowProps>`
   display: flex;
-  margin: 10px auto;
-  padding: 10px 0;
+  margin: ${({ noGutters }) => (noGutters ? '10px 0' : '10px auto')};
+  padding: ${({ noGutters }) => (noGutters ? '0' : '10px 0')};
   ${({ direction }) => (direction ? `flex-direction: ${direction}` : `flex-direction: row`)};
   ${({ textAlign }) => textAlign && `text-align: ${textAlign}`};
   ${({ wrap }) => wrap && `flex-wrap: ${wrap}`};

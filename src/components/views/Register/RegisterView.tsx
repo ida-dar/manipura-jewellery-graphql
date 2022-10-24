@@ -131,7 +131,7 @@ const RegisterView = () => {
           <MessageComponent messageType={TYPES.warning} message={'Your passwords do not match. Please review.'} />
         )}
         {!registrationError.valid && <MessageComponent messageType={TYPES.error} message={registrationError.error} />}
-        <ButtonComponent width={450} type="submit" text="Continue" />
+        <ButtonComponent width="100%" margin="24px 0" type="submit" text="Continue" />
         <Link to={`${process.env.PUBLIC_URL}${appRoutes.HOME}`} margin={24}>
           Return to Store
         </Link>

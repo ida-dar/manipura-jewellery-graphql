@@ -94,7 +94,7 @@ const LoginForm = () => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <Row justify="center" direction="column">
+      <Row justify="space-between" direction="column">
         <Header text="Returning customer" />
         <InputComponent
           id="email"
@@ -116,15 +116,16 @@ const LoginForm = () => {
         />
         <Link to={`${process.env.PUBLIC_URL}${appRoutes.FORGOT_PASSWORD}`}>Forgot password</Link>
         {!loginError.valid && <MessageComponent messageType={TYPES.error} message={loginError.error} />}
-        <div>
-          <ButtonComponent width={212} text="Login" type="submit" />
+        <Row justify="space-between" lg={12}>
+          <ButtonComponent width={200} margin="12px 12px 12px 0" text="Login" type="submit" />
           <ButtonComponent
-            width={212}
+            width={200}
+            margin="12px 0 12px 12px"
             text="Login with"
             icon={<FontAwesomeIcon icon={faGoogle} />}
             onClick={loginWithGoogle}
           />
-        </div>
+        </Row>
       </Row>
     </Form>
   );

@@ -12,6 +12,7 @@ export interface RowProps {
   gapLg?: number;
   gapMd?: number;
   gapSm?: number;
+  noGutters?: boolean; // with/without margin
   xl?: ColumnRange; // 1200px
   lg?: ColumnRange; // 992px
   md?: ColumnRange; // 768px
@@ -19,8 +20,28 @@ export interface RowProps {
   direction?: 'row' | 'column';
   textAlign?: 'center' | 'left' | 'right';
   wrap?: 'wrap' | 'nowrap';
-  align?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch' | 'space-evenly';
-  alignContent?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch' | 'space-evenly';
+  align?:
+    | 'start'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'baseline'
+    | 'stretch'
+    | 'space-evenly'
+    | 'space-around'
+    | 'space-between';
+  alignContent?:
+    | 'start'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'baseline'
+    | 'stretch'
+    | 'space-evenly'
+    | 'space-around'
+    | 'space-between';
   justify?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'center' | 'space-evenly';
   className?: string;
 }
@@ -30,9 +51,29 @@ export interface ColProps {
   lg?: ColumnRange; // 992px
   md?: ColumnRange; // 768px
   sm?: ColumnRange; // 576px
+  noGutters?: boolean; // with/without margin
   textAlign?: 'center' | 'left' | 'right';
-  align?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch' | 'space-evenly';
-  alignContent?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  align?:
+    | 'start'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'baseline'
+    | 'stretch'
+    | 'space-evenly'
+    | 'space-around'
+    | 'space-between';
+  alignContent?:
+    | 'start'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'baseline'
+    | 'stretch'
+    | 'space-around'
+    | 'space-between';
   justify?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'center' | 'space-evenly';
   order?: number;
   orderMd?: number;

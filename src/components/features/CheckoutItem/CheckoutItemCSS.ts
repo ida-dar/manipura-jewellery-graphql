@@ -3,7 +3,7 @@ import { theme } from 'src/assets/theme/theme';
 import styled from 'styled-components';
 
 export const Header = styled.h4`
-  font-size: 2.4rem;
+  font-size: 1.65rem;
   font-family: ${theme.font.fontHighlight};
   font-style: italic;
   text-align: left;
@@ -19,11 +19,11 @@ export const ButtonContainer = styled(Row)`
 `;
 
 export const Price = styled(Col)`
-  font-size: 1.75rem;
+  font-size: 1.7rem;
 `;
 
-export const Input = styled.input`
-  width: 25px;
+export const Qty = styled.p`
+  width: 10px;
   border: none;
   background: transparent;
   margin: 0 24px;

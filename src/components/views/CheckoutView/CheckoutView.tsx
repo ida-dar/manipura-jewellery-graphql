@@ -8,7 +8,7 @@ import CheckoutCart from 'src/components/layout/CheckoutCart/CheckoutCart';
 import ButtonComponent from 'src/components/common/Button/Button';
 import Header from 'src/components/common/Header/Header';
 import CheckoutForm from 'src/components/layout/CheckoutForm/CheckoutForm';
-// import MiniCartItem from 'src/components/features/MiniCartItem/MiniCartItem';
+import { Form, Textarea } from './CheckoutViewCSS';
 
 const CheckoutView = () => {
   const { cartItems } = useContext(CartContext);
@@ -16,13 +16,16 @@ const CheckoutView = () => {
   return (
     <Row>
       {cartItems.length ? (
-        <>
-          <CheckoutForm />
-          {/* {cartItems.map((el, i) => (
-            <MiniCartItem key={i} item={el} />
-          ))} */}
-          <CheckoutCart cartItems={cartItems as CartItem[]} />
-        </>
+        <Form>
+          <Row lg={5} align="center" alignContent="center" direction="column">
+            <CheckoutForm />
+          </Row>
+          <Row lg={5} align="center" alignContent="center" direction="column">
+            <CheckoutCart cartItems={cartItems as CartItem[]} />
+            <Textarea id="orderInfo" name="orderInfo" placeholder="Add Comments About Your Order" />
+            <ButtonComponent text="Confirm order" width="100%" reverseColors textTransform="uppercase" />
+          </Row>
+        </Form>
       ) : (
         <Row lg={10} textAlign="center" direction="column" justify="center">
           <Header text="Nothing in cart" />
