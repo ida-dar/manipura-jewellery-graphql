@@ -11,7 +11,7 @@ import AccountView from './components/views/AccountView/AccountView';
 import Login from './components/views/Login/Login';
 import Register from './components/views/Register';
 import ForgotPassword from './components/features/ForgotPassword/ForgotPassword';
-import Checkout from './components/views/Checkout/Checkout';
+import CheckoutView from './components/views/CheckoutView/CheckoutView';
 
 // Products
 import { Jewellery, ProductView } from './components/views/Products';
@@ -55,7 +55,7 @@ const routes: RoutesInterface[] = [
   },
   {
     path: appRoutes.CHECKOUT,
-    element: <Checkout />,
+    element: <CheckoutView />,
   },
 ];
 

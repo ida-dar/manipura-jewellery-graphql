@@ -7,8 +7,6 @@ import MiniCartItem from '../MiniCartItem/MiniCartItem';
 const MiniCart = ({ open }: any) => {
   const { cartItems } = useContext(CartContext);
 
-  console.log('cartItems', cartItems);
-
   return (
     <CartContainer open={open}>
       {cartItems.length === 0 ? (

@@ -83,6 +83,7 @@ const RegisterView = () => {
           <Link to={`${process.env.PUBLIC_URL}${appRoutes.LOGIN}`}>login page</Link>.
         </p>
         <InputComponent
+          id="firstName"
           name="firstName"
           type="text"
           placeholder="First Name"
@@ -91,6 +92,7 @@ const RegisterView = () => {
           onChange={handleChange}
         />
         <InputComponent
+          id="lastName"
           name="lastName"
           type="text"
           placeholder="Last Name"
@@ -98,8 +100,17 @@ const RegisterView = () => {
           value={lastName}
           onChange={handleChange}
         />
-        <InputComponent name="email" type="email" placeholder="E-Mail" required value={email} onChange={handleChange} />
         <InputComponent
+          id="email"
+          name="email"
+          type="email"
+          placeholder="E-Mail"
+          required
+          value={email}
+          onChange={handleChange}
+        />
+        <InputComponent
+          id="password"
           name="password"
           type="password"
           placeholder="Password"
@@ -108,6 +119,7 @@ const RegisterView = () => {
           onChange={handleChange}
         />
         <InputComponent
+          id="passwordConfirm"
           name="passwordConfirm"
           type="password"
           placeholder="Password Confirm"

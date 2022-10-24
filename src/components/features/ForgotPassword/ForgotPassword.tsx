@@ -48,6 +48,7 @@ const ForgotPassword = () => {
           Enter your e-mail address associated with your account. Click submit to have a password reset link e-mailed to you.
         </Emailinfo>
         <InputComponent
+          id="email"
           name="email"
           type="email"
           placeholder="E-Mail Address"

@@ -1,7 +1,7 @@
 
 module.exports = {
   extends: ['prettier'],
-  plugins: ['babel', 'react-hooks'],
+  plugins: ['babel', 'react-hooks', 'react'],
   parser: '@babel/eslint-parser',
   parserOptions: {
     requireConfigFile: false,
@@ -9,10 +9,12 @@ module.exports = {
     sourceType: 'module',
   },
   env: {
+    browser: true,
+    es6: true,
     jest: true,
+    node: true
   },
   globals: {
-
     window: true,
     document: true,
     localStorage: true,
@@ -20,6 +22,7 @@ module.exports = {
   rules: {
     'import/no-absolute-path': 0,
     'global-require': 0,
+    "no-console": "warn",
     'no-useless-catch': 0,
     'lines-between-class-members': 0,
     'eol-last': 'error',

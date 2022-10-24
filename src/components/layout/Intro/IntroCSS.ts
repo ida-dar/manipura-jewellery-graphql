@@ -27,7 +27,7 @@ export const ImageWrapper = styled.div`
 
 export const Motto = styled.p`
   font-family: ${theme.font.fontHighlight};
-  font-size: ${theme.font.size.highlight};
+  font-size: calc(14px + ((36 * (100vw - 720px)) / 2040)); // magic number
   text-transform: capitalize;
   color: ${theme.colors.primary};
   margin-bottom: 128px;

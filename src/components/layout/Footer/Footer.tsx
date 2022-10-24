@@ -91,6 +91,7 @@ const Footer = () => {
       <Form onSubmit={(e) => newsletterSubmit(e)}>
         <Row wrap="wrap" justify="center" alignContent="center" align="center" sm={10}>
           <InputComponent
+            id="newsletter"
             name="newsletter"
             type="email"
             placeholder="Email"

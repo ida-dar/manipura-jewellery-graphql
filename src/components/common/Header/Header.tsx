@@ -11,7 +11,8 @@ interface HeaderProps {
 }
 
 export const HeaderComponent = styled.h3`
-  font-size: ${(props: HeaderProps) => (props.fontSize ? props.fontSize : theme.font.size.highlight)};
+  font-size: ${(props: HeaderProps) =>
+    props.fontSize ? props.fontSize : 'calc(16px + ((36 * (100vw - 720px)) / 2040))'}; // magic number
   font-family: ${theme.font.fontHighlight};
   font-style: ${(props: HeaderProps) => (props.fontStyle ? props.fontStyle : 'normal')};
   text-align: ${(props: HeaderProps) => (props.textAlign ? props.textAlign : 'center')};

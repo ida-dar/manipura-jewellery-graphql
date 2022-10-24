@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { appRoutes, Links } from 'src/utils/routes';
 
 import { UserContext } from 'src/store/UserStore';
@@ -24,6 +24,7 @@ const Header = () => {
   const { currUser } = useContext(UserContext);
   const [active, setActive] = useState(false);
   const [openCart, setOpenCart] = useState(false);
+  const location = useLocation();
 
   const accountLinks: AccountLink[] = [
     {
@@ -55,6 +56,10 @@ const Header = () => {
       name: 'Rings',
     },
   ];
+
+  useEffect(() => {
+    setOpenCart(false);
+  }, [location]);
 
   const buttonOnClick = () => {
     setActive(!active);

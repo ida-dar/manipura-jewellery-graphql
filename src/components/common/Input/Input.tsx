@@ -2,10 +2,12 @@ import { theme } from 'src/assets/theme/theme';
 import styled from 'styled-components';
 
 interface InputProps {
+  id: string;
   name: string;
   type: string;
   placeholder: string;
   value?: any;
+  pattern?: string;
   onChange?: any;
   required?: boolean;
 }
@@ -29,8 +31,19 @@ export const Input = styled.input`
   border-radius: 0;
 `;
 
-const InputComponent = ({ name, type, placeholder, value, onChange, required = false }: InputProps) => {
-  return <Input name={name} type={type} value={value} onChange={onChange} required={required} placeholder={placeholder} />;
+const InputComponent = ({ id, name, type, placeholder, value, onChange, pattern, required = false }: InputProps) => {
+  return (
+    <Input
+      id={id}
+      name={name}
+      type={type}
+      value={value}
+      onChange={onChange}
+      pattern={pattern}
+      required={required}
+      placeholder={placeholder}
+    />
+  );
 };
 
 export default InputComponent;

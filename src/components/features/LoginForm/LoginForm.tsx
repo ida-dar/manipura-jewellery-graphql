@@ -97,6 +97,7 @@ const LoginForm = () => {
       <Row justify="center" direction="column">
         <Header text="Returning customer" />
         <InputComponent
+          id="email"
           name="email"
           type="email"
           placeholder="E-Mail Address"
@@ -105,6 +106,7 @@ const LoginForm = () => {
           required
         />
         <InputComponent
+          id="password"
           name="password"
           type="password"
           placeholder="Password"

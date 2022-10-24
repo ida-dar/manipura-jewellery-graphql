@@ -2,31 +2,6 @@ import { Col, Row } from 'src/assets/Flexbox';
 import { theme } from 'src/assets/theme/theme';
 import styled from 'styled-components';
 
-export const ItemContainer = styled(Row)`
-  height: 175px;
-  margin: 24px;
-`;
-
-export const ImageContainer = styled(Col)`
-  width: 32.5%;
-  height: 100%;
-`;
-
-export const Img = styled.img`
-  height: 100%;
-  min-width: 100%;
-  object-fit: cover;
-`;
-
-export const InfoContainer = styled(Col)`
-  width: 55%;
-  height: 100%;
-
-  > p {
-    margin: 6px;
-  }
-`;
-
 export const Header = styled.h4`
   font-size: 2.4rem;
   font-family: ${theme.font.fontHighlight};
@@ -39,30 +14,36 @@ export const Header = styled.h4`
   text-transform: capitalize;
 `;
 
-export const Price = styled.p`
-  font-weight: bold;
-`;
-
 export const ButtonContainer = styled(Row)`
   margin: 0;
+`;
 
-  > p {
-    margin: 0;
-  }
+export const Price = styled(Col)`
+  font-size: 1.75rem;
+`;
+
+export const Input = styled.input`
+  width: 25px;
+  border: none;
+  background: transparent;
+  margin: 0 24px;
+  outline-style: none;
+  color: ${theme.colors.black};
+  text-align: center;
 `;
 
 export const Button = styled.button`
   border: none;
   background: transparent;
-  margin: 0 24px;
+  margin: 0;
   font-size: 2.5rem;
 `;
 
 export const RemoveBtn = styled.button`
   border: none;
   background: transparent;
-  margin: 0 24px;
-  font-size: 1.5rem;
+  margin: 0;
+  font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;
   color: ${theme.colors.grey100};

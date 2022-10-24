@@ -4,13 +4,14 @@ import { createContext, useState } from 'react';
 interface Props {
   children: React.ReactNode;
 }
-
-interface CartItem {
+export interface CartItem {
   name: string;
   price: string;
   img: string;
   quantity: number;
 }
+
+const shipping = 25;
 
 const initialState = {
   cartItems: [] as CartItem[],
@@ -18,17 +19,8 @@ const initialState = {
   removeItemFromCart: (() => {}) as any,
   quantityDown: (() => {}) as any,
   cartCount: 0 as number,
-};
-
-const addCartItem = (cartItems: CartItem[], product: CartItem) => {
-  const prodExists = cartItems.find((el) => el.name === product.name);
-  if (prodExists) {
-    return cartItems.map((cartItem) =>
-      cartItem.name === product.name ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
-    );
-  }
-
-  return [...cartItems, { ...product, quantity: 1 }];
+  cartTotal: 0 as number,
+  shippingPrice: shipping as number,
 };
 
 export const CartContext = createContext(initialState);
@@ -36,14 +28,36 @@ export const CartContext = createContext(initialState);
 const CartStore = ({ children }: Props) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
+  const [shippingPrice, setShippingPrice] = useState(shipping);
 
+  // cart count
   useEffect(() => {
     const currCartCount = cartItems.reduce((total, cartItems) => total + cartItems.quantity, 0); // (prevValue, currValue) => prevValue + currValue, intialValue
     setCartCount(currCartCount);
   }, [cartItems]);
 
+  // cart total price
+  useEffect(() => {
+    const currCartTotal = cartItems.reduce((total, cartItems) => total + cartItems.quantity * parseInt(cartItems.price), 0);
+    setCartTotal(currCartTotal);
+
+    if (currCartTotal >= 500) setShippingPrice(0);
+    else setShippingPrice(shipping);
+  }, [cartItems]);
+
+  // cart actions
   const addItemToCart = (product: CartItem) => {
-    setCartItems(addCartItem(cartItems, product));
+    const prodExists = cartItems.find((el) => el.name === product.name);
+    if (prodExists) {
+      return setCartItems(
+        cartItems.map((cartItem) =>
+          cartItem.name === product.name ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        )
+      );
+    }
+
+    return setCartItems([...cartItems, { ...product, quantity: 1 }]);
   };
 
   const removeItemFromCart = (product: CartItem) => {
@@ -80,6 +94,10 @@ const CartStore = ({ children }: Props) => {
     quantityDown,
     cartCount,
     setCartCount,
+    cartTotal,
+    setCartTotal,
+    shippingPrice,
+    setShippingPrice,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

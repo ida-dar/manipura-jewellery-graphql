@@ -8,7 +8,7 @@ interface ButtonProps {
 }
 
 export const CartBtnClose = styled.button`
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   font-size: 2.5rem;
