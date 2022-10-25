@@ -23,7 +23,7 @@ export const appRoutes = {
     EARRINGS: '/products/earrings',
     RINGS: '/products/rings',
   },
-  SINGLE_PRODUCT: '/product/:name',
+  SINGLE_PRODUCT: '/product/:name/:id',
   FOOTER: {
     CONTACT: '/contact',
     FAQ: '/faq',

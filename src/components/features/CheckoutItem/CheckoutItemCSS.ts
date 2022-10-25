@@ -22,6 +22,10 @@ export const Price = styled(Col)`
   font-size: 1.7rem;
 `;
 
+export const RefId = styled.p`
+  font-size: 1rem;
+`;
+
 export const Qty = styled.p`
   width: 10px;
   border: none;

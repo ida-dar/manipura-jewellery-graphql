@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { appRoutes } from 'src/utils/routes';
-import { CartContext, CartItem } from 'src/store/CartStore';
+import { CartContext } from 'src/store/CartStore';
+import { CartItem } from 'src/interfaces/Cart.interface';
 
 import { Row } from 'src/assets/Flexbox';
 import CheckoutCart from 'src/components/layout/CheckoutCart/CheckoutCart';

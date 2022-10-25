@@ -1,8 +1,8 @@
 import { Link, Image, Figure, Figcaption, Name, Price } from './ProductsCSS';
 
-const ProductItem = ({ name, price, img }: any) => {
+const ProductItem = ({ id, name, price, img }: any) => {
   return (
-    <Link to={`${process.env.PUBLIC_URL}/product/${name.toLowerCase().replaceAll(' ', '-')}`}>
+    <Link to={`${process.env.PUBLIC_URL}/product/${name.toLowerCase().replaceAll(' ', '-')}/${id}`}>
       <Figure>
         <Image src={img ? `/img/products/${img}` : '/img/products/default.jpg'} alt={name} />
         <Figcaption>

@@ -14,7 +14,7 @@ import ForgotPassword from './components/features/ForgotPassword/ForgotPassword'
 import CheckoutView from './components/views/CheckoutView/CheckoutView';
 
 // Products
-import { Jewellery, ProductView } from './components/views/Products';
+import { Products, ProductView } from './components/views/Products';
 
 interface RoutesInterface {
   path: string;
@@ -51,7 +51,23 @@ const routes: RoutesInterface[] = [
   },
   {
     path: appRoutes.PRODUCTS.JEWELLERY,
-    element: <Jewellery />,
+    element: <Products />,
+  },
+  {
+    path: appRoutes.PRODUCTS.BRACELETS,
+    element: <Products />,
+  },
+  {
+    path: appRoutes.PRODUCTS.EARRINGS,
+    element: <Products />,
+  },
+  {
+    path: appRoutes.PRODUCTS.NECKLACES,
+    element: <Products />,
+  },
+  {
+    path: appRoutes.PRODUCTS.RINGS,
+    element: <Products />,
   },
   {
     path: appRoutes.CHECKOUT,

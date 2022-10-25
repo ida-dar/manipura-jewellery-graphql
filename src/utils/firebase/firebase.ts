@@ -13,7 +13,7 @@ import {
   NextOrObserver,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, Firestore, query, getDocs } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -49,6 +49,39 @@ Initialize Cloud Firestore and get a reference to the service
 */
 export const db = getFirestore(app);
 
+// Unnecessary code, was needed only for uploading data from js file to Firestore, left for a future reference
+// export const addCollectionAndDocs = async (key: string, objects: any) => {
+//   const collRef = collection(db, key);
+//   const batch = writeBatch(db);
+
+//   objects.forEach((el: any) => {
+//     const docRef = doc(collRef);
+//     batch.set(docRef, el);
+//   });
+
+//   await batch.commit();
+//   console.log('done');
+// };
+
+export const getCollectionAndDocs = async () => {
+  const collRef = collection(db, 'products');
+  const q = query(collRef);
+
+  const querySnapshot = await getDocs(q);
+  const collMap = querySnapshot.docs.reduce((acc: any, docSnapshot: any) => {
+    const { ...rest } = docSnapshot.data();
+    const obj = {
+      id: docSnapshot.id,
+      ...rest,
+    };
+    acc.push(obj);
+    return acc;
+  }, []);
+
+  return collMap;
+};
+
+// User auth
 export const createUserDocFromAuth = async (userAuth: User, userInfo: any = {}) => {
   if (!userAuth) return;
 

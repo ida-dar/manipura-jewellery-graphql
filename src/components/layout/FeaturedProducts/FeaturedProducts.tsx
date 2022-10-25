@@ -15,6 +15,7 @@ const FeaturedProducts = () => {
       <Row wrap={'wrap'}>
         {products
           .filter((el: Product) => el.categories.includes('featured'))
+          .slice(0, 9)
           .map((el: Product, i: number) => (
             <Col key={i} lg={4} md={6} sm={12}>
               <ProductItem {...el} />

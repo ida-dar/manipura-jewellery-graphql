@@ -10,10 +10,12 @@ import {
   ButtonContainer,
   RemoveBtn,
   ImageContainer,
+  RefId,
+  PriceRef,
 } from './MiniCartItemCSS';
 
 const MiniCartItem = ({ item }: any) => {
-  const { name, price, img, quantity } = item;
+  const { id, name, price, img, quantity } = item;
   const { addItemToCart, removeItemFromCart, quantityDown } = useContext(CartContext);
 
   return (
@@ -23,7 +25,10 @@ const MiniCartItem = ({ item }: any) => {
       </ImageContainer>
       <InfoContainer>
         <Header>{name}</Header>
-        <Price>${price}</Price>
+        <PriceRef>
+          <RefId>Ref.{id}</RefId>
+          <Price>${price}</Price>
+        </PriceRef>
         <ButtonContainer justify="flex-start" align="center" alignContent="center">
           <Button onClick={() => quantityDown(item)}>-</Button>
           <p>{quantity}</p>

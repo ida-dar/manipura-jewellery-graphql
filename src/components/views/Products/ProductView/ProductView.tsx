@@ -16,9 +16,10 @@ const ProductView = () => {
   const { addItemToCart } = useContext(CartContext);
 
   const urlId = useLocation().pathname.split('/').at(-1) as string;
-  const currProd = products.find((prod) => prod.name.toLowerCase().replaceAll(' ', '-') === urlId) as Product;
+  const currProd = products.find((prod) => prod.id === urlId) as Product;
 
   const cartProd = {
+    id: currProd.id,
     name: currProd.name,
     price: currProd.price,
     img: currProd.img,

@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { font, theme } from 'src/assets/theme/theme';
+import InputComponent from 'src/components/common/Input/Input';
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`

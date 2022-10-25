@@ -1,2 +1,2 @@
-export { default as Jewellery } from './Jewellery/Jewellery';
+export { default as Products } from './Products/Products';
 export { default as ProductView } from './ProductView/ProductView';

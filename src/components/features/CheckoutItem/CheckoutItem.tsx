@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { CartContext } from 'src/store/CartStore';
 import { Col, Row } from 'src/assets/Flexbox';
-import { Button, ButtonContainer, Header, Qty, RemoveBtn, Price } from './CheckoutItemCSS';
+import { Button, ButtonContainer, Header, Qty, RemoveBtn, Price, RefId } from './CheckoutItemCSS';
 
 const CheckoutItem = ({ item }: any) => {
-  let { name, price, img, quantity } = item;
+  let { id, name, price, img, quantity } = item;
 
   const { addItemToCart, removeItemFromCart, quantityDown } = useContext(CartContext);
 
@@ -15,6 +15,7 @@ const CheckoutItem = ({ item }: any) => {
       </Col>
       <Col noGutters lg={3}>
         <Header>{name}</Header>
+        <RefId>Ref.{id}</RefId>
       </Col>
       <Col lg={2} noGutters textAlign="center" justify="center">
         <ButtonContainer justify="center" align="center" alignContent="center">

@@ -1,14 +1,9 @@
 import React, { useEffect } from 'react';
 import { createContext, useState } from 'react';
+import { CartItem } from 'src/interfaces/Cart.interface';
 
 interface Props {
   children: React.ReactNode;
-}
-export interface CartItem {
-  name: string;
-  price: string;
-  img: string;
-  quantity: number;
 }
 
 const shipping = 25;
@@ -48,11 +43,11 @@ const CartStore = ({ children }: Props) => {
 
   // cart actions
   const addItemToCart = (product: CartItem) => {
-    const prodExists = cartItems.find((el) => el.name === product.name);
+    const prodExists = cartItems.find((el) => el.id === product.id);
     if (prodExists) {
       return setCartItems(
         cartItems.map((cartItem) =>
-          cartItem.name === product.name ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+          cartItem.id === product.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
         )
       );
     }
@@ -61,15 +56,15 @@ const CartStore = ({ children }: Props) => {
   };
 
   const removeItemFromCart = (product: CartItem) => {
-    const prodExists = cartItems.find((el) => el.name === product.name);
+    const prodExists = cartItems.find((el) => el.id === product.id);
     if (!prodExists) return;
     else {
-      return setCartItems([...cartItems.filter((prod) => prod.name !== product.name)]);
+      return setCartItems([...cartItems.filter((prod) => prod.id !== product.id)]);
     }
   };
 
   const quantityDown = (product: CartItem) => {
-    const prodExists = cartItems.find((el) => el.name === product.name);
+    const prodExists = cartItems.find((el) => el.id === product.id);
     if (!prodExists) return;
     else {
       const productIdx = cartItems.indexOf(product);

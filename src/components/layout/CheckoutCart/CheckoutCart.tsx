@@ -1,8 +1,9 @@
 import { useContext } from 'react';
-import { Row } from 'src/assets/Flexbox';
+import { CartContext } from 'src/store/CartStore';
+import { CartItem } from 'src/interfaces/Cart.interface';
+
 import Header from 'src/components/common/Header/Header';
 import CheckoutItem from 'src/components/features/CheckoutItem/CheckoutItem';
-import { CartContext, CartItem } from 'src/store/CartStore';
 import { CartCounts, CartParts } from './CheckoutCartCSS';
 
 const CheckoutCart: React.FC<{ cartItems: CartItem[] }> = ({ cartItems }) => {

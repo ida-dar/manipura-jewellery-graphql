@@ -89,7 +89,7 @@ const Footer = () => {
           : `Subscribe now to our newsletter. Don't miss out on news, events and discounts!`}
       </Newsletter>
       <Form onSubmit={(e) => newsletterSubmit(e)}>
-        <Row wrap="wrap" justify="center" alignContent="center" align="center" sm={10}>
+        <Row justify="center" alignContent="center" align="center" sm={12}>
           <InputComponent
             id="newsletter"
             name="newsletter"

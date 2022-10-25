@@ -28,7 +28,7 @@ export const InfoContainer = styled(Col)`
 `;
 
 export const Header = styled.h4`
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-family: ${theme.font.fontHighlight};
   font-style: italic;
   text-align: left;
@@ -39,8 +39,22 @@ export const Header = styled.h4`
   text-transform: capitalize;
 `;
 
+export const PriceRef = styled.div`
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  width: 80%;
+`;
+
 export const Price = styled.p`
   font-weight: bold;
+  margin: 0;
+`;
+
+export const RefId = styled.p`
+  font-size: 1.15rem;
 `;
 
 export const ButtonContainer = styled(Row)`
