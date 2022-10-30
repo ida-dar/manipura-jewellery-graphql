@@ -4,8 +4,8 @@ import { authStateListener, createUserDocFromAuth } from 'src/utils/firebase/fir
 import { User } from 'firebase/auth';
 
 import { userReducer } from 'src/redux';
-import { UserState } from 'src/utils/redux/statusActions';
-import { endRequest, errorRequest, loginUser, startRequest } from 'src/redux/userRedux';
+import { UserState, USER_ACTION_TYPES } from 'src/utils/redux/statusActions';
+import { createAction, endRequest, errorRequest, startRequest } from 'src/utils/redux/createAction';
 
 import { ContextProps } from 'src/interfaces';
 
@@ -35,7 +35,7 @@ const UserStore = ({ children }: ContextProps) => {
   const setCurrUser = (user: User | null): void => {
     dispatch(startRequest({ name: 'GET_USER' }));
     try {
-      dispatch(loginUser(user));
+      dispatch(createAction(user, USER_ACTION_TYPES.SET_USER));
     } catch (e: any | Error) {
       dispatch(errorRequest(e.message));
     }

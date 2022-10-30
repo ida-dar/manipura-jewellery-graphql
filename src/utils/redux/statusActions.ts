@@ -1,7 +1,7 @@
 import { User } from 'firebase/auth';
 import { CartItem } from 'src/interfaces';
 
-/* status */
+/* request status */
 export enum STATUS_ACTION_TYPES {
   START_REQUEST = 'START_REQUEST',
   END_REQUEST = 'END_REQUEST',
@@ -18,19 +18,16 @@ export type CartState = {
   cartCount: number;
   cartTotal: number;
   shippingPrice: number;
+  readonly request: {
+    readonly pending: boolean;
+    readonly error: Error | null;
+    readonly success: null;
+  };
 };
-
-interface setCartAction {
-  type: USER_ACTION_TYPES.LOGIN_USER;
-  payload: User | null;
-  error?: Error | boolean;
-}
-
-export type CartAction = setCartAction;
 
 /* user */
 export enum USER_ACTION_TYPES {
-  LOGIN_USER = 'LOGIN_USER',
+  SET_USER = 'SET_USER',
 }
 
 export type UserState = {
@@ -41,11 +38,3 @@ export type UserState = {
     readonly success: null;
   };
 };
-
-interface setUserAction {
-  type: USER_ACTION_TYPES.LOGIN_USER;
-  payload: User | null;
-  error?: Error | boolean;
-}
-
-export type UserAction = setUserAction;

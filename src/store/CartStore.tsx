@@ -1,6 +1,7 @@
 import { createContext, useState, Reducer, useReducer } from 'react';
-import cartReducer, { endRequest, errorRequest, setCartItems, startRequest } from 'src/redux/cartRedux';
-import { CartState } from 'src/utils/redux/statusActions';
+import cartReducer from 'src/redux/cartRedux';
+import { CartState, CART_ACTION_TYPES } from 'src/utils/redux/statusActions';
+import { createAction, endRequest, errorRequest, startRequest } from 'src/utils/redux/createAction';
 import { addItem, reduceQty, removeItem } from 'src/utils/cartUtils';
 import { CartItem, ContextProps } from 'src/interfaces';
 
@@ -11,6 +12,11 @@ const initialState: CartState = {
   cartCount: 0 as number,
   cartTotal: 0 as number,
   shippingPrice: shipping as number,
+  request: {
+    pending: false as boolean,
+    error: null as Error | null,
+    success: null,
+  },
 };
 
 export const CartContext = createContext({
@@ -48,7 +54,7 @@ const CartStore = ({ children }: ContextProps) => {
     // dispatch cart update
     dispatch(startRequest({ name: 'UPDATE_CART' }));
     try {
-      dispatch(setCartItems(payload));
+      dispatch(createAction(payload, CART_ACTION_TYPES.SET_CART_ITEMS));
     } catch (e: any | Error) {
       dispatch(errorRequest(e.message));
     }
