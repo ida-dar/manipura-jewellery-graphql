@@ -1,22 +1,46 @@
-import React, { useEffect } from 'react';
-import { createContext, useState } from 'react';
-import { User } from 'firebase/auth';
+import { useEffect, createContext, useReducer, Reducer } from 'react';
+
 import { authStateListener, createUserDocFromAuth } from 'src/utils/firebase/firebase';
+import { User } from 'firebase/auth';
 
-interface Props {
-  children: React.ReactNode;
-}
+import { userReducer } from 'src/redux';
+import { UserState } from 'src/utils/redux/statusActions';
+import { endRequest, errorRequest, loginUser, startRequest } from 'src/redux/userRedux';
 
-const initialState = {
+import { ContextProps } from 'src/interfaces';
+
+const initialState: UserState = {
   currUser: null as User | null,
-  setCurrUser: (() => null) as React.Dispatch<React.SetStateAction<User | null>>,
+  request: {
+    pending: false as boolean,
+    error: null as Error | null,
+    success: null,
+  },
 };
 
-export const UserContext = createContext(initialState);
+export const UserContext = createContext({
+  currUser: null as User | null,
+  setCurrUser: (user: User | null) => {},
+  request: {
+    pending: false as boolean,
+    error: null as Error | null,
+    success: null,
+  },
+});
 
-const UserStore = ({ children }: Props) => {
-  const [currUser, setCurrUser] = useState<User | null>(null);
-  const value = { currUser, setCurrUser };
+const UserStore = ({ children }: ContextProps) => {
+  const [state, dispatch] = useReducer<Reducer<UserState, any>>(userReducer, initialState);
+  const { currUser, request } = state;
+
+  const setCurrUser = (user: User | null): void => {
+    dispatch(startRequest({ name: 'GET_USER' }));
+    try {
+      dispatch(loginUser(user));
+    } catch (e: any | Error) {
+      dispatch(errorRequest(e.message));
+    }
+    dispatch(endRequest({ name: 'GET_USER' }));
+  };
 
   useEffect(() => {
     const observer = authStateListener((user: User | null) => {
@@ -27,6 +51,8 @@ const UserStore = ({ children }: Props) => {
     });
     return observer;
   }, []);
+
+  const value = { currUser, request, setCurrUser };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

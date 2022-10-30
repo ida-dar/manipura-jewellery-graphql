@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ColProps } from '../../interfaces/Flexbox.interfaces';
+import ColProps from '../../interfaces/Flexbox.interfaces';
 
 const Col = styled.div<ColProps>`
   display: flex;

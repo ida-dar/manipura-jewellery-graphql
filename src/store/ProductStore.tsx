@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext, useState, useEffect } from 'react';
-import { Product } from 'src/interfaces/Product.interface';
+import { Product } from 'src/interfaces';
 import { getCollectionAndDocs } from 'src/utils/firebase/firebase';
 // import { addCollectionAndDocs } from 'src/utils/firebase/firebase'; // Unnecessary, was needed only for uploading data from js file to Firestore, left for a future reference
 

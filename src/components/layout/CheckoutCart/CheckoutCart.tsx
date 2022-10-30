@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { CartContext } from 'src/store/CartStore';
-import { CartItem } from 'src/interfaces/Cart.interface';
+import { CartItem } from 'src/interfaces';
 
 import Header from 'src/components/common/Header/Header';
 import CheckoutItem from 'src/components/features/CheckoutItem/CheckoutItem';
@@ -18,7 +18,7 @@ const CheckoutCart: React.FC<{ cartItems: CartItem[] }> = ({ cartItems }) => {
       <CartCounts>
         <CartParts noGutters justify="space-between" align="center" alignContent="center">
           <span>Subtotal</span>
-          <span>${cartTotal - shippingPrice}</span>
+          <span>${cartTotal}</span>
         </CartParts>
         <CartParts noGutters justify="space-between" align="center" alignContent="center">
           <span>Shipping rate</span>
@@ -26,7 +26,7 @@ const CheckoutCart: React.FC<{ cartItems: CartItem[] }> = ({ cartItems }) => {
         </CartParts>
         <CartParts noGutters justify="space-between" align="center" alignContent="center">
           <span>Total</span>
-          <span>${cartTotal}</span>
+          <span>${cartTotal + shippingPrice}</span>
         </CartParts>
       </CartCounts>
     </>

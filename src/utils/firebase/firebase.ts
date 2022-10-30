@@ -119,6 +119,6 @@ export const loginUser = async (email: string, password: string): Promise<UserCr
 
 export const forgotPassword = async (email: string) => sendPasswordResetEmail(auth, email);
 
-export const logoutUser = async () => signOut(auth);
+export const logoutUser = async (): Promise<void> => signOut(auth);
 
 export const authStateListener = (cb: NextOrObserver<User>) => onAuthStateChanged(auth, cb);

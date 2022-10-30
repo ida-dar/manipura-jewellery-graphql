@@ -7,7 +7,7 @@ type Range<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate
 type ColumnRange = Range<1, 13>;
 
 /* felxbox interfaces */
-export interface RowProps {
+export default interface RowProps {
   gapXl?: number;
   gapLg?: number;
   gapMd?: number;
@@ -46,7 +46,7 @@ export interface RowProps {
   className?: string;
 }
 
-export interface ColProps {
+export default interface ColProps {
   xl?: ColumnRange; // 1200px
   lg?: ColumnRange; // 992px
   md?: ColumnRange; // 768px
@@ -72,6 +72,7 @@ export interface ColProps {
     | 'center'
     | 'baseline'
     | 'stretch'
+    | 'space-evenly'
     | 'space-around'
     | 'space-between';
   justify?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'center' | 'space-evenly';

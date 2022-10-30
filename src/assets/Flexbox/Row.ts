@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { RowProps } from '../../interfaces/Flexbox.interfaces';
+import RowProps from '../../interfaces/Flexbox.interfaces';
 
 const Row = styled.div<RowProps>`
   display: flex;

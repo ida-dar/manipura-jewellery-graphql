@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { ProdContext } from 'src/store/ProductStore';
-import { Product } from 'src/interfaces/Product.interface';
+import { Product } from 'src/interfaces';
 
 import Header from 'src/components/common/Header/Header';
 import { Col, Row } from 'src/assets/Flexbox';
