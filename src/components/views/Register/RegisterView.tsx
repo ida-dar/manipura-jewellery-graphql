@@ -1,8 +1,10 @@
-import { useContext, useState } from 'react';
-import { appRoutes } from 'src/utils/routes';
-import { UserContext } from 'src/store/UserStore';
+import { useState } from 'react';
 import { User, UserCredential } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+
+import { appRoutes } from 'src/utils/routes';
 import { registerUser, createUserDocFromAuth } from 'src/utils/firebase/firebase';
+import { setCurrUser } from 'src/redux/userRedux';
 
 import { Row } from 'src/assets/Flexbox';
 import { Link } from './RegisterViewCSS';
@@ -25,12 +27,12 @@ const RegisterView = () => {
     error: '',
   };
 
+  const dispatch = useDispatch();
+
   const [formFields, setFormFields] = useState(defaultForm);
   const [matchedPasswords, setMatchedPasswords] = useState(false);
   const [registrationError, setRegistrationError] = useState(errors);
   const { firstName, lastName, email, password, passwordConfirm } = formFields;
-
-  const { setCurrUser } = useContext(UserContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

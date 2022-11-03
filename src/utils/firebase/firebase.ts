@@ -13,7 +13,7 @@ import {
   NextOrObserver,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, Firestore, query, getDocs } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -89,11 +89,8 @@ export const createUserDocFromAuth = async (userAuth: User, userInfo: any = {}) 
   const userSnapshot = await getDoc(docRef);
 
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
     const created = new Date();
     const user: User = {
-      displayName,
-      email,
       created,
       ...userInfo,
     };

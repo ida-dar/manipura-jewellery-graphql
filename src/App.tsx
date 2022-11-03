@@ -1,5 +1,13 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getAuth, User } from 'firebase/auth';
+
+import { auth, authStateListener, createUserDocFromAuth } from './utils/firebase/firebase';
+
+// redux
+import { setCurrUser } from './redux/userRedux';
+
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import PageToTop from './components/common/PageToTop/PageToTop';
 
@@ -15,6 +23,8 @@ import CheckoutView from './components/views/CheckoutView/CheckoutView';
 
 // Products
 import { Products, ProductView } from './components/views/Products';
+import CartStore from './store/CartStore';
+import ProductStore from './store/ProductStore';
 
 interface RoutesInterface {
   path: string;
@@ -75,21 +85,39 @@ const routes: RoutesInterface[] = [
   },
 ];
 
-class App extends React.Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <PageToTop />
-        <MainLayout>
-          <Routes>
-            {routes.map((route) => (
-              <Route key={route.path} path={`${process.env.PUBLIC_URL}${route.path}`} element={route.element} />
-            ))}
-          </Routes>
-        </MainLayout>
-      </BrowserRouter>
-    );
-  }
-}
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const observer = authStateListener((user: any) => {
+      if (user) {
+        createUserDocFromAuth(user);
+      }
+      const auth = getAuth();
+      console.log('auth', auth.currentUser?.displayName);
+
+      dispatch(setCurrUser(user));
+    });
+
+    return observer;
+  }, [dispatch]); // Safe to add dispatch to the dependencies array
+
+  return (
+    <ProductStore>
+      <CartStore>
+        <BrowserRouter>
+          <PageToTop />
+          <MainLayout>
+            <Routes>
+              {routes.map((route) => (
+                <Route key={route.path} path={`${process.env.PUBLIC_URL}${route.path}`} element={route.element} />
+              ))}
+            </Routes>
+          </MainLayout>
+        </BrowserRouter>
+      </CartStore>
+    </ProductStore>
+  );
+};
 
 export default App;

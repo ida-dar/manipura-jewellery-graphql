@@ -1,4 +1,4 @@
-import { CART_ACTION_TYPES, STATUS_ACTION_TYPES } from 'src/utils/redux/statusActions';
+import { CART_ACTION_TYPES, STATUS_ACTION_TYPES } from 'src/utils/reduxUtils/reduxTypes';
 
 /* reducer */
 const cartReducer = (state: any, action = {} as any) => {
@@ -39,7 +39,7 @@ const cartReducer = (state: any, action = {} as any) => {
         },
       };
     default:
-      throw new Error(`Unhandled action ${type} in cartReducer`);
+      return state;
   }
 };
 

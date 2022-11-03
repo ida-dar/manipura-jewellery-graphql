@@ -1,7 +1,8 @@
-import { STATUS_ACTION_TYPES } from './statusActions';
+import { AnyAction } from '@reduxjs/toolkit';
+import { STATUS_ACTION_TYPES } from './reduxTypes';
 
 /* generic action */
-export const createAction = (payload: any, type: string) => ({ payload, type });
+export const createAction = (type: any, payload: any): AnyAction => ({ payload, type });
 
 /* request status actions */
 export const startRequest = (payload: any) => ({ payload, type: STATUS_ACTION_TYPES.START_REQUEST });

@@ -1,13 +1,14 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
+
 import { appRoutes, Links } from 'src/utils/routes';
+import { selectCurrUser } from 'src/redux/userRedux';
 
 import { Col, Row } from 'src/assets/Flexbox';
-import { UserContext } from 'src/store/UserStore';
 import { Link, NavBar } from './AccountViewCSS';
 
 const AccountView = () => {
-  const { currUser } = useContext(UserContext);
+  const currUser = useSelector(selectCurrUser);
 
   const accountLinks: Links[] = [
     {

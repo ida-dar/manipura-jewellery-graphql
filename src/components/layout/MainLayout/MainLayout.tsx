@@ -1,12 +1,14 @@
 import React from 'react';
-import Header from '../Header/Header';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
+
 import GlobalStyle from '../../../assets/theme/GlobalStyle';
 import { theme } from '../../../assets/theme/theme';
+
 import { Container } from '../../../assets/Flexbox/index';
+import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import UserStore from 'src/store/UserStore';
+
 import ProductStore from 'src/store/ProductStore';
 import CartStore from 'src/store/CartStore';
 
@@ -32,19 +34,13 @@ const MainLayout = ({ children }: Props) => {
         />
       </Helmet>
       <GlobalStyle />
-      <UserStore>
-        <ProductStore>
-          <CartStore>
-            <Header />
-            <Container>
-              <ThemeProvider theme={theme}>
-                <main>{children}</main>
-              </ThemeProvider>
-            </Container>
-            <Footer />
-          </CartStore>
-        </ProductStore>
-      </UserStore>
+      <Header />
+      <Container>
+        <ThemeProvider theme={theme}>
+          <main>{children}</main>
+        </ThemeProvider>
+      </Container>
+      <Footer />
     </>
   );
 };

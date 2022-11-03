@@ -1,14 +1,42 @@
-import { STATUS_ACTION_TYPES, USER_ACTION_TYPES } from 'src/utils/redux/statusActions';
+import { AnyAction } from '@reduxjs/toolkit';
+import { User } from 'firebase/auth';
+import { get } from 'lodash';
+import { UserData } from 'src/interfaces';
+import { createAction } from 'src/utils/reduxUtils/createAction';
+import { STATUS_ACTION_TYPES, UserState, USER_ACTION_TYPES } from 'src/utils/reduxUtils/reduxTypes';
+
+const initialState: UserState = {
+  currUser: null as UserData | null,
+  // TODO: add request to state
+  // request: {
+  //   pending: false as boolean,
+  //   error: null as Error | null,
+  //   success: null,
+  // },
+};
+
+/* actions */
+export const setCurrUser = (user: User | null) => createAction(USER_ACTION_TYPES.SET_USER, user);
+
+export const selectCurrUser = (state: any) => {
+  return state.user.currUser;
+};
 
 /* reducer */
-const userReducer = (state: any, action = {} as any) => {
+const userReducer = (state: UserState = initialState, action = {} as AnyAction) => {
   const { type, payload, error } = action;
 
   switch (type) {
     case USER_ACTION_TYPES.SET_USER: {
+      const createdAt = new Date(parseInt(get(payload, 'metadata.createdAt'))).toDateString();
+      const user = {
+        displayName: get(payload, 'displayName'),
+        email: get(payload, 'email'),
+        createdAt: createdAt,
+      };
       return {
         ...state,
-        currUser: payload,
+        currUser: payload !== null ? user : payload,
       };
     }
     case STATUS_ACTION_TYPES.START_REQUEST:
@@ -39,7 +67,7 @@ const userReducer = (state: any, action = {} as any) => {
         },
       };
     default:
-      throw new Error(`Unhandled action ${type} in userReducer`);
+      return state;
   }
 };
 
