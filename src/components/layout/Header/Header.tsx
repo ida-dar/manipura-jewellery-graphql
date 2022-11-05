@@ -24,8 +24,6 @@ export interface AccountLink {
 const Header = () => {
   const currUser = useSelector(selectCurrUser);
 
-  console.log(currUser);
-
   const [active, setActive] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const location = useLocation();

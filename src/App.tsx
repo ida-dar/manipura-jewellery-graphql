@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getAuth, User } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
-import { auth, authStateListener, createUserDocFromAuth } from './utils/firebase/firebase';
+import { authStateListener, createUserDocFromAuth, getCollectionAndDocs } from './utils/firebase/firebase';
 
 // redux
 import { setCurrUser } from './redux/userRedux';
@@ -23,8 +23,6 @@ import CheckoutView from './components/views/CheckoutView/CheckoutView';
 
 // Products
 import { Products, ProductView } from './components/views/Products';
-import CartStore from './store/CartStore';
-import ProductStore from './store/ProductStore';
 
 interface RoutesInterface {
   path: string;
@@ -93,9 +91,6 @@ const App = () => {
       if (user) {
         createUserDocFromAuth(user);
       }
-      const auth = getAuth();
-      console.log('auth', auth.currentUser?.displayName);
-
       dispatch(setCurrUser(user));
     });
 
@@ -103,20 +98,16 @@ const App = () => {
   }, [dispatch]); // Safe to add dispatch to the dependencies array
 
   return (
-    <ProductStore>
-      <CartStore>
-        <BrowserRouter>
-          <PageToTop />
-          <MainLayout>
-            <Routes>
-              {routes.map((route) => (
-                <Route key={route.path} path={`${process.env.PUBLIC_URL}${route.path}`} element={route.element} />
-              ))}
-            </Routes>
-          </MainLayout>
-        </BrowserRouter>
-      </CartStore>
-    </ProductStore>
+    <BrowserRouter>
+      <PageToTop />
+      <MainLayout>
+        <Routes>
+          {routes.map((route) => (
+            <Route key={route.path} path={`${process.env.PUBLIC_URL}${route.path}`} element={route.element} />
+          ))}
+        </Routes>
+      </MainLayout>
+    </BrowserRouter>
   );
 };
 

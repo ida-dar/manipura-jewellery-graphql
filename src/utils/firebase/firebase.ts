@@ -68,16 +68,13 @@ export const getCollectionAndDocs = async () => {
   const q = query(collRef);
 
   const querySnapshot = await getDocs(q);
-  const collMap = querySnapshot.docs.reduce((acc: any, docSnapshot: any) => {
-    const { ...rest } = docSnapshot.data();
-    const obj = {
-      id: docSnapshot.id,
-      ...rest,
+  const collMap = querySnapshot.docs.map((docSnapshot) => {
+    const finalObj = {
+      id: docSnapshot.id, // get product id given by Firebase
+      data: docSnapshot.data(), // get the rest of products data
     };
-    acc.push(obj);
-    return acc;
-  }, []);
-
+    return finalObj;
+  });
   return collMap;
 };
 

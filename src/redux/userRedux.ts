@@ -18,6 +18,7 @@ const initialState: UserState = {
 /* actions */
 export const setCurrUser = (user: User | null) => createAction(USER_ACTION_TYPES.SET_USER, user);
 
+/* selector */
 export const selectCurrUser = (state: any) => {
   return state.user.currUser;
 };

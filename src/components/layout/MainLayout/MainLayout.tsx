@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 import GlobalStyle from '../../../assets/theme/GlobalStyle';
 import { theme } from '../../../assets/theme/theme';
+import { setProducts } from 'src/redux/productRedux';
+import { getCollectionAndDocs } from 'src/utils/firebase/firebase';
 
 import { Container } from '../../../assets/Flexbox/index';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-
-import ProductStore from 'src/store/ProductStore';
-import CartStore from 'src/store/CartStore';
 
 export interface Props {
   children: React.ReactNode | JSX.Element | JSX.Element[]; // best, accepts everything React can render
@@ -20,6 +20,17 @@ export interface Props {
 
 const MainLayout = ({ children }: Props) => {
   const lang = 'en';
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getCollectionAndDocs();
+      dispatch(setProducts(data));
+    };
+
+    getData();
+  }, [dispatch]);
 
   return (
     <>

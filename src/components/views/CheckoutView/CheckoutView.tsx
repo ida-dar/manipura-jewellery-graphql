@@ -1,7 +1,8 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { selectCartItems } from 'src/redux/cartRedux';
 import { appRoutes } from 'src/utils/routes';
-import { CartContext } from 'src/store/CartStore';
 import { CartItem } from 'src/interfaces';
 
 import { Row } from 'src/assets/Flexbox';
@@ -12,7 +13,7 @@ import CheckoutForm from 'src/components/layout/CheckoutForm/CheckoutForm';
 import { Form, Textarea } from './CheckoutViewCSS';
 
 const CheckoutView = () => {
-  const { cartItems } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
 
   return (
     <Row>

@@ -1,22 +1,23 @@
-import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { ProdContext } from 'src/store/ProductStore';
 import { Product } from 'src/interfaces';
+import { selectProducts } from 'src/redux/productRedux';
 
 import Header from 'src/components/common/Header/Header';
 import { Col, Row } from 'src/assets/Flexbox';
 import ButtonComponent from 'src/components/common/Button/Button';
 import { theme } from 'src/assets/theme/theme';
 import { Image } from './ProductViewCSS';
-import { CartContext } from 'src/store/CartStore';
+import { addItemToCart, selectCartItems } from 'src/redux/cartRedux';
 
 const ProductView = () => {
-  const { products } = useContext(ProdContext);
-  const { addItemToCart } = useContext(CartContext);
+  const products = useSelector(selectProducts);
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
 
   const urlId = useLocation().pathname.split('/').at(-1) as string;
-  const currProd = products.find((prod) => prod.id === urlId) as Product;
+  const currProd = products.find((prod: Product) => prod.id === urlId) as Product;
 
   const cartProd = {
     id: currProd.id,
@@ -25,7 +26,7 @@ const ProductView = () => {
     img: currProd.img,
   };
 
-  const addProductToCart = () => addItemToCart(cartProd);
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, cartProd));
 
   return (
     <div>

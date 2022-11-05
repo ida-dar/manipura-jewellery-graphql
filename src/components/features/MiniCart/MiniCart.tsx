@@ -1,11 +1,12 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { appRoutes } from 'src/utils/routes';
-import { CartContext } from 'src/store/CartStore';
+import { selectCartItems } from 'src/redux/cartRedux';
 import { Button, CartButton, CartContainer, CartDiv, CartItems, EmptyCartText } from './MiniCartCSS';
 import MiniCartItem from '../MiniCartItem/MiniCartItem';
+import { CartItem } from 'src/interfaces';
 
 const MiniCart = ({ open }: any) => {
-  const { cartItems } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
 
   return (
     <CartContainer open={open}>
@@ -13,7 +14,7 @@ const MiniCart = ({ open }: any) => {
         <EmptyCartText>Your shopping cart is empty</EmptyCartText>
       ) : (
         <CartItems>
-          {cartItems.map((el, i) => (
+          {cartItems.map((el: CartItem, i: number) => (
             <MiniCartItem key={i} item={el} />
           ))}
         </CartItems>

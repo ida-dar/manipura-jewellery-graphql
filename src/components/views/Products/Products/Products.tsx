@@ -1,7 +1,8 @@
-import { useContext } from 'react';
 import { useLocation } from 'react-router';
-import { ProdContext } from 'src/store/ProductStore';
+import { useSelector } from 'react-redux';
+
 import { appRoutes } from 'src/utils/routes';
+import { selectProducts } from 'src/redux/productRedux';
 import { Product } from 'src/interfaces/Product.interface';
 
 import { Row, Col } from 'src/assets/Flexbox';
@@ -17,7 +18,9 @@ enum ProductNames {
 }
 
 const Products = () => {
-  const { products } = useContext(ProdContext);
+  const products = useSelector(selectProducts);
+
+  console.log(products);
 
   const location = useLocation();
   let data;
@@ -27,16 +30,16 @@ const Products = () => {
       data = products;
       break;
     case appRoutes.PRODUCTS.BRACELETS:
-      data = products.filter((el) => el.categories.includes(ProductNames.BRACELETS));
+      data = products?.filter((el: Product) => el.categories.includes(ProductNames.BRACELETS));
       break;
     case appRoutes.PRODUCTS.EARRINGS:
-      data = products.filter((el) => el.categories.includes(ProductNames.EARRINGS));
+      data = products?.filter((el: Product) => el.categories.includes(ProductNames.EARRINGS));
       break;
     case appRoutes.PRODUCTS.NECKLACES:
-      data = products.filter((el) => el.categories.includes(ProductNames.NECKLACES));
+      data = products?.filter((el: Product) => el.categories.includes(ProductNames.NECKLACES));
       break;
     case appRoutes.PRODUCTS.RINGS:
-      data = products.filter((el) => el.categories.includes(ProductNames.RINGS));
+      data = products?.filter((el: Product) => el.categories.includes(ProductNames.RINGS));
       break;
     default:
       data = products;

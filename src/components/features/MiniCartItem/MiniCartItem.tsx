@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { CartContext } from 'src/store/CartStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems, quantityDown, addItemToCart, removeItemFromCart } from 'src/redux/cartRedux';
 import {
   Img,
   InfoContainer,
@@ -16,7 +16,8 @@ import {
 
 const MiniCartItem = ({ item }: any) => {
   const { id, name, price, img, quantity } = item;
-  const { addItemToCart, removeItemFromCart, quantityDown } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
 
   return (
     <ItemContainer justify="space-between" align="center" alignContent="center">
@@ -30,10 +31,10 @@ const MiniCartItem = ({ item }: any) => {
           <Price>${price}</Price>
         </PriceRef>
         <ButtonContainer justify="flex-start" align="center" alignContent="center">
-          <Button onClick={() => quantityDown(item)}>-</Button>
+          <Button onClick={() => dispatch(quantityDown(cartItems, item))}>-</Button>
           <p>{quantity}</p>
-          <Button onClick={() => addItemToCart(item)}>+</Button>
-          <RemoveBtn onClick={() => removeItemFromCart(item)}>Remove</RemoveBtn>
+          <Button onClick={() => dispatch(addItemToCart(cartItems, item))}>+</Button>
+          <RemoveBtn onClick={() => dispatch(removeItemFromCart(cartItems, item))}>Remove</RemoveBtn>
         </ButtonContainer>
       </InfoContainer>
     </ItemContainer>

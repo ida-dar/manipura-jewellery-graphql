@@ -1,6 +1,6 @@
 import { CartItem } from 'src/interfaces';
 
-export const addItem = (cartItems: CartItem[], prod: CartItem) => {
+export const addItem = (cartItems: CartItem[], prod: any) => {
   const prodExists = cartItems.find((el: CartItem) => el.id === prod.id);
   if (prodExists) {
     return cartItems.map((cartItem: CartItem) =>

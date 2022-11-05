@@ -1,6 +1,6 @@
-import { useContext } from 'react';
-import { CartContext } from 'src/store/CartStore';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { selectCartCount } from 'src/redux/cartRedux';
 import { ReactComponent as CartIcon } from '../../../assets/icons/cart.svg';
 
 const CartComponent = styled.div`
@@ -25,7 +25,7 @@ const CartCount = styled.span`
 `;
 
 const Cart = () => {
-  const { cartCount } = useContext(CartContext);
+  const cartCount = useSelector(selectCartCount);
 
   return (
     <CartComponent>
