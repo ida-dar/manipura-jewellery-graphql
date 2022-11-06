@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
-import { useDispatch } from 'react-redux';
 
 import GlobalStyle from '../../../assets/theme/GlobalStyle';
 import { theme } from '../../../assets/theme/theme';
-import { setProducts } from 'src/redux/productRedux';
-import { getCollectionAndDocs } from 'src/utils/firebase/firebase';
+import { fetchProducts } from 'src/redux/productRedux';
+import { useAppDispatch } from 'src/utils/hooks';
 
 import { Container } from '../../../assets/Flexbox/index';
 import Header from '../Header/Header';
@@ -21,15 +20,10 @@ export interface Props {
 const MainLayout = ({ children }: Props) => {
   const lang = 'en';
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await getCollectionAndDocs();
-      dispatch(setProducts(data));
-    };
-
-    getData();
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   return (

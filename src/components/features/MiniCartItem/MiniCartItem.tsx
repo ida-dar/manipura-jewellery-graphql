@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems, quantityDown, addItemToCart, removeItemFromCart } from 'src/redux/cartRedux';
+import { useAppSelector, useAppDispatch } from 'src/utils/hooks';
 import {
   Img,
   InfoContainer,
@@ -16,8 +16,8 @@ import {
 
 const MiniCartItem = ({ item }: any) => {
   const { id, name, price, img, quantity } = item;
-  const cartItems = useSelector(selectCartItems);
-  const dispatch = useDispatch();
+  const cartItems = useAppSelector(selectCartItems);
+  const dispatch = useAppDispatch();
 
   return (
     <ItemContainer justify="space-between" align="center" alignContent="center">

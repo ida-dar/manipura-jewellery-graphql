@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { selectCartItems } from 'src/redux/cartRedux';
+import { useAppSelector } from 'src/utils/hooks';
 import { appRoutes } from 'src/utils/routes';
 import { CartItem } from 'src/interfaces';
 
@@ -13,7 +13,7 @@ import CheckoutForm from 'src/components/layout/CheckoutForm/CheckoutForm';
 import { Form, Textarea } from './CheckoutViewCSS';
 
 const CheckoutView = () => {
-  const cartItems = useSelector(selectCartItems);
+  const cartItems = useAppSelector(selectCartItems);
 
   return (
     <Row>

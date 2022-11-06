@@ -1,12 +1,13 @@
-import { useSelector } from 'react-redux';
 import { appRoutes } from 'src/utils/routes';
 import { selectCartItems } from 'src/redux/cartRedux';
-import { Button, CartButton, CartContainer, CartDiv, CartItems, EmptyCartText } from './MiniCartCSS';
-import MiniCartItem from '../MiniCartItem/MiniCartItem';
+import { useAppSelector } from 'src/utils/hooks';
 import { CartItem } from 'src/interfaces';
 
+import { Button, CartButton, CartContainer, CartDiv, CartItems, EmptyCartText } from './MiniCartCSS';
+import MiniCartItem from '../MiniCartItem/MiniCartItem';
+
 const MiniCart = ({ open }: any) => {
-  const cartItems = useSelector(selectCartItems);
+  const cartItems = useAppSelector(selectCartItems);
 
   return (
     <CartContainer open={open}>

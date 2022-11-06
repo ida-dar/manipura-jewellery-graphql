@@ -49,7 +49,7 @@ Initialize Cloud Firestore and get a reference to the service
 */
 export const db = getFirestore(app);
 
-// Unnecessary code, was needed only for uploading data from js file to Firestore, left for a future reference
+// Unnecessary code, was needed only for uploading data from js file to Firestore, left for future reference
 // export const addCollectionAndDocs = async (key: string, objects: any) => {
 //   const collRef = collection(db, key);
 //   const batch = writeBatch(db);
@@ -63,8 +63,8 @@ export const db = getFirestore(app);
 //   console.log('done');
 // };
 
-export const getCollectionAndDocs = async () => {
-  const collRef = collection(db, 'products');
+export const getCollectionAndDocs = async (dbName: string) => {
+  const collRef = collection(db, dbName);
   const q = query(collRef);
 
   const querySnapshot = await getDocs(q);

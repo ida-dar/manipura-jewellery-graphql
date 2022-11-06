@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { Product } from 'src/interfaces';
 import { selectProducts } from 'src/redux/productRedux';
+import { useAppDispatch, useAppSelector } from 'src/utils/hooks';
 
 import Header from 'src/components/common/Header/Header';
 import { Col, Row } from 'src/assets/Flexbox';
@@ -12,9 +12,9 @@ import { Image } from './ProductViewCSS';
 import { addItemToCart, selectCartItems } from 'src/redux/cartRedux';
 
 const ProductView = () => {
-  const products = useSelector(selectProducts);
-  const cartItems = useSelector(selectCartItems);
-  const dispatch = useDispatch();
+  const products = useAppSelector(selectProducts);
+  const cartItems = useAppSelector(selectCartItems);
+  const dispatch = useAppDispatch();
 
   const urlId = useLocation().pathname.split('/').at(-1) as string;
   const currProd = products.find((prod: Product) => prod.id === urlId) as Product;

@@ -1,4 +1,3 @@
-import { User } from 'firebase/auth';
 import { CartItem, Product, UserData } from 'src/interfaces';
 
 /* request status */
@@ -14,14 +13,8 @@ export enum CART_ACTION_TYPES {
 }
 
 export type CartState = {
-  cartItems: CartItem[];
-  shippingPrice: number;
-  // TODO: add request to state
-  // readonly request: {
-  //   readonly pending: boolean;
-  //   readonly error: Error | null;
-  //   readonly success: null;
-  // };
+  readonly cartItems: CartItem[];
+  readonly shippingPrice: number;
 };
 
 /* user */
@@ -46,10 +39,9 @@ export enum PRODUCT_ACTION_TYPES {
 
 export type ProdState = {
   readonly products: Product[];
-  // TODO: add request to state
-  // readonly request: {
-  //   readonly pending: boolean;
-  //   readonly error: Error | null;
-  //   readonly success: null;
-  // };
+  readonly request: {
+    readonly pending: boolean;
+    readonly error: Error | null;
+    readonly success: null;
+  };
 };

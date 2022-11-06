@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import { appRoutes, Links } from 'src/utils/routes';
 import { selectCurrUser } from 'src/redux/userRedux';
+import { useAppSelector } from 'src/utils/hooks';
 import { logoutUser } from 'src/utils/firebase/firebase';
 
 import Logo from '../../common/Logo/Logo';
@@ -22,7 +22,7 @@ export interface AccountLink {
 }
 
 const Header = () => {
-  const currUser = useSelector(selectCurrUser);
+  const currUser = useAppSelector(selectCurrUser);
 
   const [active, setActive] = useState(false);
   const [openCart, setOpenCart] = useState(false);

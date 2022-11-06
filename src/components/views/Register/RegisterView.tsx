@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { User, UserCredential } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
 
 import { appRoutes } from 'src/utils/routes';
 import { registerUser, createUserDocFromAuth } from 'src/utils/firebase/firebase';
 import { setCurrUser } from 'src/redux/userRedux';
+import { useAppDispatch } from 'src/utils/hooks';
 
 import { Row } from 'src/assets/Flexbox';
 import { Link } from './RegisterViewCSS';
@@ -27,7 +27,7 @@ const RegisterView = () => {
     error: '',
   };
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [formFields, setFormFields] = useState(defaultForm);
   const [matchedPasswords, setMatchedPasswords] = useState(false);

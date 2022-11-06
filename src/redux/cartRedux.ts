@@ -9,12 +9,6 @@ const shipping = 25;
 const initialState: CartState = {
   cartItems: [] as CartItem[],
   shippingPrice: shipping as number,
-  // TODO: add request to state
-  // request: {
-  //   pending: false as boolean,
-  //   error: null as Error | null,
-  //   success: null,
-  // },
 };
 
 /* actions */

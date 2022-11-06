@@ -1,17 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 import { selectCartTotal } from 'src/redux/cartRedux';
+import { useAppSelector } from 'src/utils/hooks';
 import { CartItem } from 'src/interfaces';
 
 import Header from 'src/components/common/Header/Header';
 import CheckoutItem from 'src/components/features/CheckoutItem/CheckoutItem';
 import { CartCounts, CartParts } from './CheckoutCartCSS';
-import { useEffect, useState } from 'react';
 
 const CheckoutCart: React.FC<{ cartItems: CartItem[] }> = ({ cartItems }) => {
   const shipping = 25;
   const [shippingPrice, setShippingPrice] = useState(shipping);
-  const cartTotal = useSelector(selectCartTotal);
+  const cartTotal = useAppSelector(selectCartTotal);
 
   useEffect(() => {
     if (cartTotal >= 500) setShippingPrice(0);

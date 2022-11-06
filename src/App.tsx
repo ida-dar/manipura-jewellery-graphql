@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getAuth } from 'firebase/auth';
 
-import { authStateListener, createUserDocFromAuth, getCollectionAndDocs } from './utils/firebase/firebase';
-
+import { authStateListener, createUserDocFromAuth } from './utils/firebase/firebase';
+import { useAppDispatch } from './utils/hooks';
 // redux
 import { setCurrUser } from './redux/userRedux';
 
@@ -84,7 +82,7 @@ const routes: RoutesInterface[] = [
 ];
 
 const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const observer = authStateListener((user: any) => {

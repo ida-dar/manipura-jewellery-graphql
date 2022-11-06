@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { quantityDown, addItemToCart, removeItemFromCart, selectCartItems } from 'src/redux/cartRedux';
+import { useAppDispatch, useAppSelector } from 'src/utils/hooks';
 import { Col, Row } from 'src/assets/Flexbox';
 import { Button, ButtonContainer, Header, Qty, RemoveBtn, Price, RefId } from './CheckoutItemCSS';
 
 const CheckoutItem = ({ item }: any) => {
   let { id, name, price, img, quantity } = item;
-  const cartItems = useSelector(selectCartItems);
-  const dispatch = useDispatch();
+  const cartItems = useAppSelector(selectCartItems);
+  const dispatch = useAppDispatch();
 
   return (
     <Row justify="space-between" align="center" alignContent="center" lg={12}>

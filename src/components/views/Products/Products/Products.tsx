@@ -1,13 +1,14 @@
-import { useLocation } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useLocation, useParams } from 'react-router';
 
 import { appRoutes } from 'src/utils/routes';
-import { selectProducts } from 'src/redux/productRedux';
+import { useAppSelector } from 'src/utils/hooks';
+import { productsLoading, selectProducts } from 'src/redux/productRedux';
 import { Product } from 'src/interfaces/Product.interface';
 
 import { Row, Col } from 'src/assets/Flexbox';
 import Header from 'src/components/common/Header/Header';
 import ProductItem from '../../../features/ProductItem';
+import Loader from 'src/components/common/Loader/Loader';
 
 enum ProductNames {
   JEWELLERY = 'jewellery',
@@ -18,9 +19,8 @@ enum ProductNames {
 }
 
 const Products = () => {
-  const products = useSelector(selectProducts);
-
-  console.log(products);
+  const products = useAppSelector(selectProducts);
+  const pending = useAppSelector(productsLoading);
 
   const location = useLocation();
   let data;
@@ -49,11 +49,15 @@ const Products = () => {
     <div>
       <Header text="Our Collection" />
       <Row wrap={'wrap'}>
-        {data.map((el: Product, i: number) => (
-          <Col key={i} lg={4} md={6} sm={12}>
-            <ProductItem {...el} />
-          </Col>
-        ))}
+        {pending ? (
+          <Loader />
+        ) : (
+          data.map((el: Product, i: number) => (
+            <Col key={i} lg={4} md={6} sm={12}>
+              <ProductItem {...el} />
+            </Col>
+          ))
+        )}
       </Row>
     </div>
   );

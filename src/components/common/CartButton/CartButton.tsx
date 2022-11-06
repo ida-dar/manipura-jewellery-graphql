@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { selectCartCount } from 'src/redux/cartRedux';
 import { ReactComponent as CartIcon } from '../../../assets/icons/cart.svg';
+import { useAppSelector } from 'src/utils/hooks';
 
 const CartComponent = styled.div`
   position: relative;
@@ -25,7 +25,7 @@ const CartCount = styled.span`
 `;
 
 const Cart = () => {
-  const cartCount = useSelector(selectCartCount);
+  const cartCount = useAppSelector(selectCartCount);
 
   return (
     <CartComponent>
