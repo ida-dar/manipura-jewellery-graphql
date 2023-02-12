@@ -1,8 +1,9 @@
-import { useLocation, useParams } from 'react-router';
+import { useLocation } from 'react-router';
+import { filter, includes, map } from 'lodash';
 
 import { appRoutes } from 'src/utils/routes';
 import { useAppSelector } from 'src/utils/hooks';
-import { productsLoading, selectProducts } from 'src/redux/productRedux';
+import { selectProducts, productsLoading } from 'src/redux/products/productSelector';
 import { Product } from 'src/interfaces/Product.interface';
 
 import { Row, Col } from 'src/assets/Flexbox';
@@ -30,16 +31,16 @@ const Products = () => {
       data = products;
       break;
     case appRoutes.PRODUCTS.BRACELETS:
-      data = products?.filter((el: Product) => el.categories.includes(ProductNames.BRACELETS));
+      data = filter(products, (prod: Product) => includes(prod.categories, ProductNames.BRACELETS));
       break;
     case appRoutes.PRODUCTS.EARRINGS:
-      data = products?.filter((el: Product) => el.categories.includes(ProductNames.EARRINGS));
+      data = filter(products, (prod: Product) => includes(prod.categories, ProductNames.EARRINGS));
       break;
     case appRoutes.PRODUCTS.NECKLACES:
-      data = products?.filter((el: Product) => el.categories.includes(ProductNames.NECKLACES));
+      data = filter(products, (prod: Product) => includes(prod.categories, ProductNames.NECKLACES));
       break;
     case appRoutes.PRODUCTS.RINGS:
-      data = products?.filter((el: Product) => el.categories.includes(ProductNames.RINGS));
+      data = filter(products, (prod: Product) => includes(prod.categories, ProductNames.RINGS));
       break;
     default:
       data = products;
@@ -52,7 +53,7 @@ const Products = () => {
         {pending ? (
           <Loader />
         ) : (
-          data.map((el: Product, i: number) => (
+          map(data, (el: Product, i: number) => (
             <Col key={i} lg={4} md={6} sm={12}>
               <ProductItem {...el} />
             </Col>

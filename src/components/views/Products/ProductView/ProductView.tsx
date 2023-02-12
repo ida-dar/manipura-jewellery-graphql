@@ -1,15 +1,16 @@
 import { useLocation } from 'react-router-dom';
 
 import { Product } from 'src/interfaces';
-import { selectProducts } from 'src/redux/productRedux';
+import { selectProducts } from 'src/redux/products/productSelector';
 import { useAppDispatch, useAppSelector } from 'src/utils/hooks';
+import { selectCartItems } from 'src/redux/cart/cartSelector';
+import { addItemToCart } from 'src/redux/cart/cartActions';
 
 import Header from 'src/components/common/Header/Header';
 import { Col, Row } from 'src/assets/Flexbox';
 import ButtonComponent from 'src/components/common/Button/Button';
 import { theme } from 'src/assets/theme/theme';
 import { Image } from './ProductViewCSS';
-import { addItemToCart, selectCartItems } from 'src/redux/cartRedux';
 
 const ProductView = () => {
   const products = useAppSelector(selectProducts);

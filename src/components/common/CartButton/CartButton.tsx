@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { selectCartCount } from 'src/redux/cartRedux';
+import { selectCartCount } from 'src/redux/cart/cartSelector';
 import { ReactComponent as CartIcon } from '../../../assets/icons/cart.svg';
 import { useAppSelector } from 'src/utils/hooks';
 

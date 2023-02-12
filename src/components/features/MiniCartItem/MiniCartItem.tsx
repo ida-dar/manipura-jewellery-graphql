@@ -1,4 +1,5 @@
-import { selectCartItems, quantityDown, addItemToCart, removeItemFromCart } from 'src/redux/cartRedux';
+import { quantityDown, addItemToCart, removeItemFromCart } from 'src/redux/cart/cartActions';
+import { selectCartItems } from 'src/redux/cart/cartSelector';
 import { useAppSelector, useAppDispatch } from 'src/utils/hooks';
 import {
   Img,

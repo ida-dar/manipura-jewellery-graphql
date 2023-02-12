@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { selectCartItems } from 'src/redux/cartRedux';
+import { selectCartItems } from 'src/redux/cart/cartSelector';
 import { useAppSelector } from 'src/utils/hooks';
 import { appRoutes } from 'src/utils/routes';
 import { CartItem } from 'src/interfaces';

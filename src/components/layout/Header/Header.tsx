@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import { appRoutes, Links } from 'src/utils/routes';
-import { selectCurrUser } from 'src/redux/userRedux';
+import { selectCurrUser } from 'src/redux/user/userSelector';
 import { useAppSelector } from 'src/utils/hooks';
 import { logoutUser } from 'src/utils/firebase/firebase';
 

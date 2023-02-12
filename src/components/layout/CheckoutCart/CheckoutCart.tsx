@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { selectCartTotal } from 'src/redux/cartRedux';
+import { selectCartTotal } from 'src/redux/cart/cartSelector';
 import { useAppSelector } from 'src/utils/hooks';
 import { CartItem } from 'src/interfaces';
 

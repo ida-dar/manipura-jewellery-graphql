@@ -1,4 +1,4 @@
-import { productsLoading, selectProducts } from 'src/redux/productRedux';
+import { selectProducts, productsLoading } from 'src/redux/products/productSelector';
 import { Product } from '../../../interfaces/Product.interface';
 import { useAppSelector } from 'src/utils/hooks';
 

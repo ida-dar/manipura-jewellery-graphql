@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router';
 
 import { appRoutes, Links } from 'src/utils/routes';
-import { selectCurrUser } from 'src/redux/userRedux';
+import { selectCurrUser } from 'src/redux/user/userSelector';
 import { useAppSelector } from 'src/utils/hooks';
 
 import { Col, Row } from 'src/assets/Flexbox';

@@ -1,4 +1,5 @@
-import { quantityDown, addItemToCart, removeItemFromCart, selectCartItems } from 'src/redux/cartRedux';
+import { quantityDown, addItemToCart, removeItemFromCart } from 'src/redux/cart/cartActions';
+import { selectCartItems } from 'src/redux/cart/cartSelector';
 import { useAppDispatch, useAppSelector } from 'src/utils/hooks';
 import { Col, Row } from 'src/assets/Flexbox';
 import { Button, ButtonContainer, Header, Qty, RemoveBtn, Price, RefId } from './CheckoutItemCSS';

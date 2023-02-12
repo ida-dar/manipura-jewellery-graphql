@@ -12,6 +12,7 @@ import {
   onAuthStateChanged,
   NextOrObserver,
   sendPasswordResetEmail,
+  signInWithPopup,
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore';
 
@@ -41,13 +42,14 @@ provider.setCustomParameters({
 /*
 Initialize Firebase Authentication and get a reference to the service
 */
-export const auth = getAuth(app);
+export const auth = getAuth();
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
+export const signInWithGooglePopup = (): any => signInWithPopup(auth, provider);
 
 /*
 Initialize Cloud Firestore and get a reference to the service
 */
-export const db = getFirestore(app);
+export const db = getFirestore();
 
 // Unnecessary code, was needed only for uploading data from js file to Firestore, left for future reference
 // export const addCollectionAndDocs = async (key: string, objects: any) => {
@@ -87,7 +89,10 @@ export const createUserDocFromAuth = async (userAuth: User, userInfo: any = {}) 
 
   if (!userSnapshot.exists()) {
     const created = new Date();
+    const { displayName, email } = userAuth;
     const user: User = {
+      displayName,
+      email,
       created,
       ...userInfo,
     };
@@ -98,7 +103,7 @@ export const createUserDocFromAuth = async (userAuth: User, userInfo: any = {}) 
       console.log('Firebase error: ', e);
     }
   }
-  return docRef;
+  return userSnapshot;
 };
 
 export const registerUser = async (email: string, password: string): Promise<UserCredential | undefined> => {
@@ -113,6 +118,19 @@ export const loginUser = async (email: string, password: string): Promise<UserCr
 
 export const forgotPassword = async (email: string) => sendPasswordResetEmail(auth, email);
 
-export const logoutUser = async (): Promise<void> => signOut(auth);
+export const logoutUser = async (): Promise<void> => await signOut(auth);
 
 export const authStateListener = (cb: NextOrObserver<User>) => onAuthStateChanged(auth, cb);
+
+export const getCurrUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};

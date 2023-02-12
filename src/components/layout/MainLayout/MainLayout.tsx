@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from '../../../assets/theme/GlobalStyle';
 import { theme } from '../../../assets/theme/theme';
-import { fetchProducts } from 'src/redux/productRedux';
+import { startRequest } from 'src/utils/reduxUtils/createAction';
 import { useAppDispatch } from 'src/utils/hooks';
 
 import { Container } from '../../../assets/Flexbox/index';
@@ -23,7 +23,7 @@ const MainLayout = ({ children }: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(startRequest('products'));
   }, [dispatch]);
 
   return (

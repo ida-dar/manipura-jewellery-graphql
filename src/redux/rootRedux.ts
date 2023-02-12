@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 // reducers
-import userReducer from './userRedux';
-import productRedux from './productRedux';
-import cartReducer from './cartRedux';
+import userReducer from './user/userRedux';
+import productRedux from './products/productRedux';
+import cartReducer from './cart/cartRedux';
 
 const rootReducer = combineReducers({
   user: userReducer,

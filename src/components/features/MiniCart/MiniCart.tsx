@@ -1,5 +1,5 @@
 import { appRoutes } from 'src/utils/routes';
-import { selectCartItems } from 'src/redux/cartRedux';
+import { selectCartItems } from 'src/redux/cart/cartSelector';
 import { useAppSelector } from 'src/utils/hooks';
 import { CartItem } from 'src/interfaces';
 

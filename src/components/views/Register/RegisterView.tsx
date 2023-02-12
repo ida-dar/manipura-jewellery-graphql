@@ -3,7 +3,7 @@ import { User, UserCredential } from 'firebase/auth';
 
 import { appRoutes } from 'src/utils/routes';
 import { registerUser, createUserDocFromAuth } from 'src/utils/firebase/firebase';
-import { setCurrUser } from 'src/redux/userRedux';
+import { setCurrUser } from 'src/redux/user/userActions';
 import { useAppDispatch } from 'src/utils/hooks';
 
 import { Row } from 'src/assets/Flexbox';

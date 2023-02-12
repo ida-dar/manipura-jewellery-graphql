@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { authStateListener, createUserDocFromAuth } from './utils/firebase/firebase';
 import { useAppDispatch } from './utils/hooks';
 // redux
-import { setCurrUser } from './redux/userRedux';
+import { checkUserSession } from './redux/user/userActions';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import PageToTop from './components/common/PageToTop/PageToTop';
@@ -85,14 +84,7 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const observer = authStateListener((user: any) => {
-      if (user) {
-        createUserDocFromAuth(user);
-      }
-      dispatch(setCurrUser(user));
-    });
-
-    return observer;
+    dispatch(checkUserSession());
   }, [dispatch]); // Safe to add dispatch to the dependencies array
 
   return (
