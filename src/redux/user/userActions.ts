@@ -10,7 +10,7 @@ export const checkUserSession = () => createAction(USER_ACTION_TYPES.CHECK_USER_
 // login
 export const googleSignIn = () => createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START);
 
-export const emailSignIn = ({ email, password }: any) =>
+export const emailSignIn = ({ email, password }: { email: string; password: string }) =>
   createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, { email, password });
 
 export const signInSuccess = (user: any) => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user);
@@ -18,12 +18,17 @@ export const signInSuccess = (user: any) => createAction(USER_ACTION_TYPES.SIGN_
 export const signInFail = (error: any) => createAction(USER_ACTION_TYPES.SIGN_IN_FAIL, error);
 
 // logout
+export const signOutStart = () => createAction(USER_ACTION_TYPES.SIGN_OUT_START);
+
 export const signOutSuccess = () => createAction(USER_ACTION_TYPES.SIGN_OUT_SUCCESS);
 
 export const signOutFailed = (error: any) => createAction(USER_ACTION_TYPES.SIGN_OUT_FAIL, error);
 
 //register
-export const signUpUser = (email: string, password: string, displayName: string) =>
-  createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, { email, password, displayName });
+export const signUpStart = (email: string, password: string, displayName: string) =>
+  createAction(USER_ACTION_TYPES.SIGN_UP_START, { email, password, displayName });
+
+export const signUpSucces = (user: any, { additionalDetails }: any) =>
+  createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, { user, additionalDetails });
 
 export const signUpFail = (error: any) => createAction(USER_ACTION_TYPES.SIGN_UP_FAIL, error);

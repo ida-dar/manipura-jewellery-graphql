@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { User, UserCredential } from 'firebase/auth';
 
 import { appRoutes } from 'src/utils/routes';
-import { registerUser, createUserDocFromAuth } from 'src/utils/firebase/firebase';
-import { setCurrUser } from 'src/redux/user/userActions';
+import { signUpStart } from 'src/redux/user/userActions';
 import { useAppDispatch } from 'src/utils/hooks';
 
 import { Row } from 'src/assets/Flexbox';
@@ -55,16 +53,14 @@ const RegisterView = () => {
       return;
     }
     try {
-      const resp: UserCredential | undefined = await registerUser(email, password);
       const displayName = `${firstName} ${lastName}`;
-      await createUserDocFromAuth(resp?.user as User, { displayName });
+      dispatch(signUpStart(email, password, displayName));
       resetValues();
-      setCurrUser(resp?.user as User);
     } catch (e: any) {
       if (e.code.includes('auth/email-already-in-use')) {
         setRegistrationError({
           valid: false,
-          error: 'User with given email address is already registered. Please try again.',
+          error: 'User with given email address is already registered. Please use different credentials.',
         });
       } else {
         setRegistrationError({

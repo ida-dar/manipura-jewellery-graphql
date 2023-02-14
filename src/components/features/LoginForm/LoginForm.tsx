@@ -5,6 +5,7 @@ import { getRedirectResult, UserCredential } from 'firebase/auth';
 import { auth, createUserDocFromAuth } from 'src/utils/firebase/firebase';
 import { appRoutes } from 'src/utils/routes';
 import { useAppDispatch } from 'src/utils/hooks';
+import { emailSignIn, googleSignIn } from 'src/redux/user/userActions';
 
 import { Row } from 'src/assets/Flexbox';
 import { Form, Link } from './LoginFormCSS';
@@ -15,7 +16,6 @@ import MessageComponent, { TYPES } from 'src/components/common/Message/Message';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { emailSignIn, googleSignIn } from 'src/redux/user/userActions';
 
 const LoginForm = () => {
   const defaultForm = {

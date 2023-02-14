@@ -11,25 +11,20 @@ const initialState: UserState = {
   },
 };
 
-const reducerName = 'user';
-
 /* reducer */
 const userReducer = (state: UserState = initialState, action = {} as AnyAction) => {
   const { type, payload, error } = action;
-
-  console.log('userReducer_payload', action);
 
   switch (type) {
     case USER_ACTION_TYPES.SIGN_IN_SUCCESS: {
       return {
         ...state,
         currUser: payload,
-      };
-    }
-    case USER_ACTION_TYPES.SIGN_OUT_SUCCESS: {
-      return {
-        ...state,
-        currUser: null,
+        request: {
+          pending: false,
+          error: null,
+          success: true,
+        },
       };
     }
     case USER_ACTION_TYPES.SIGN_IN_FAIL: {
@@ -37,39 +32,34 @@ const userReducer = (state: UserState = initialState, action = {} as AnyAction) 
         ...state,
         currUser: null,
         request: {
-          pending: true,
+          pending: false,
           error: error,
           success: false,
         },
       };
     }
-    case `${reducerName}/${STATUS_ACTION_TYPES.START_REQUEST}`:
+    case USER_ACTION_TYPES.SIGN_OUT_SUCCESS: {
       return {
         ...state,
-        request: {
-          pending: true,
-          error: null,
-          success: false,
-        },
-      };
-    case `${reducerName}/${STATUS_ACTION_TYPES.END_REQUEST}`:
-      return {
-        ...state,
+        currUser: null,
         request: {
           pending: false,
           error: null,
           success: true,
         },
       };
-    case `${reducerName}/${STATUS_ACTION_TYPES.ERROR_REQUEST}`:
+    }
+    case USER_ACTION_TYPES.SIGN_OUT_FAIL: {
       return {
         ...state,
+        currUser: null,
         request: {
           pending: false,
           error: error,
           success: false,
         },
       };
+    }
     default:
       return state;
   }

@@ -3,8 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import { appRoutes, Links } from 'src/utils/routes';
 import { selectCurrUser } from 'src/redux/user/userSelector';
-import { useAppSelector } from 'src/utils/hooks';
-import { logoutUser } from 'src/utils/firebase/firebase';
+import { useAppDispatch, useAppSelector } from 'src/utils/hooks';
 
 import Logo from '../../common/Logo/Logo';
 import CartButton from 'src/components/common/CartButton/CartButton';
@@ -14,6 +13,7 @@ import { AccountLink, Button, CartBtnClose, NavBar, NavBarLink, SubMenu } from '
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { signOutStart } from 'src/redux/user/userActions';
 
 export interface AccountLink {
   path: string;
@@ -27,6 +27,7 @@ const Header = () => {
   const [active, setActive] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   const accountLinks: AccountLink[] = [
     {
@@ -67,9 +68,9 @@ const Header = () => {
     setActive(!active);
   };
 
-  const logout = async () => {
+  const logout = () => {
     try {
-      await logoutUser();
+      dispatch(signOutStart());
     } catch (e) {
       console.log('Logout error: ', e);
     }
