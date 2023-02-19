@@ -18,16 +18,16 @@ const CheckoutView = () => {
   return (
     <Row>
       {cartItems.length ? (
-        <Form>
+        <>
           <Row lg={5} align="center" alignContent="center" direction="column">
             <CheckoutForm />
           </Row>
           <Row lg={5} align="center" alignContent="center" direction="column">
             <CheckoutCart cartItems={cartItems as CartItem[]} />
             <Textarea id="orderInfo" name="orderInfo" placeholder="Add Comments About Your Order" />
-            <ButtonComponent text="Confirm order" width="100%" reverseColors textTransform="uppercase" />
+            <ButtonComponent text="Confirm order" width="100%" reverseColors textTransform="uppercase" type="submit" />
           </Row>
-        </Form>
+        </>
       ) : (
         <Row lg={10} textAlign="center" direction="column" justify="center">
           <Header text="Nothing in cart" />
