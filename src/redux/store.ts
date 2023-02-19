@@ -18,7 +18,7 @@ export type AppDispatch = typeof store.dispatch;
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart', 'products'],
+  blacklist: ['user'],
 };
 
 /* middleware */

@@ -1,6 +1,7 @@
-import { AnyAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartItem } from 'src/interfaces';
-import { CartState, CART_ACTION_TYPES } from 'src/utils/reduxUtils/reduxTypes';
+import { addItem, removeItem, reduceQty } from 'src/utils/cartUtils';
+import { CartState } from 'src/utils/reduxUtils/reduxTypes';
 
 const shipping = 25;
 
@@ -9,20 +10,25 @@ const initialState: CartState = {
   shippingPrice: shipping as number,
 };
 
-/* reducer */
-const cartReducer = (state: CartState = initialState, action = {} as AnyAction) => {
-  const { type, payload, error } = action;
+/* slice */
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: initialState,
+  reducers: {
+    addItemToCart(state, action: PayloadAction<CartItem>) {
+      state.cartItems = addItem(state.cartItems, action.payload);
+    },
+    removeItemFromCart(state, action: PayloadAction<CartItem>) {
+      state.cartItems = removeItem(state.cartItems, action.payload);
+    },
+    quantityDown(state, action: PayloadAction<CartItem>) {
+      state.cartItems = reduceQty(state.cartItems, action.payload);
+    },
+  },
+});
 
-  switch (type) {
-    case CART_ACTION_TYPES.SET_CART_ITEMS: {
-      return {
-        ...state,
-        cartItems: payload,
-      };
-    }
-    default:
-      return state;
-  }
-};
+export const { addItemToCart, removeItemFromCart, quantityDown } = cartSlice.actions;
+
+const cartReducer = cartSlice.reducer;
 
 export default cartReducer;

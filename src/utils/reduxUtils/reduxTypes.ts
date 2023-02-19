@@ -7,11 +7,6 @@ export enum STATUS_ACTION_TYPES {
   ERROR_REQUEST = 'ERROR_REQUEST',
 }
 
-/* cart */
-export enum CART_ACTION_TYPES {
-  SET_CART_ITEMS = 'cart/SET_CART_ITEMS',
-}
-
 export type CartState = {
   readonly cartItems: CartItem[];
   readonly shippingPrice: number;

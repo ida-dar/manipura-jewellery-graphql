@@ -1,6 +1,6 @@
 import { AnyAction } from '@reduxjs/toolkit';
 import { UserData } from 'src/interfaces';
-import { STATUS_ACTION_TYPES, UserState, USER_ACTION_TYPES } from 'src/utils/reduxUtils/reduxTypes';
+import { UserState, USER_ACTION_TYPES } from 'src/utils/reduxUtils/reduxTypes';
 
 const initialState: UserState = {
   currUser: null as UserData | null,

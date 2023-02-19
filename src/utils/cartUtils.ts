@@ -1,6 +1,7 @@
+import { current } from '@reduxjs/toolkit';
 import { CartItem } from 'src/interfaces';
 
-export const addItem = (cartItems: CartItem[], prod: any) => {
+export const addItem = (cartItems: CartItem[], prod: CartItem) => {
   const prodExists = cartItems.find((el: CartItem) => el.id === prod.id);
   if (prodExists) {
     return cartItems.map((cartItem: CartItem) =>
@@ -11,7 +12,7 @@ export const addItem = (cartItems: CartItem[], prod: any) => {
   return [...cartItems, { ...prod, quantity: 1 }];
 };
 
-export const removeItem = (cartItems: CartItem[], prod: CartItem) => {
+export const removeItem = (cartItems: CartItem[], prod: CartItem): any => {
   const prodExists = cartItems.find((el: CartItem) => el.id === prod.id);
   if (!prodExists) return;
   else {
@@ -19,20 +20,14 @@ export const removeItem = (cartItems: CartItem[], prod: CartItem) => {
   }
 };
 
-export const reduceQty = (cartItems: CartItem[], prod: CartItem) => {
+export const reduceQty = (cartItems: CartItem[], prod: CartItem): any => {
   const prodExists = cartItems.find((el: CartItem) => el.id === prod.id);
   if (!prodExists) return;
   else {
-    const prodIdx: number = cartItems.indexOf(prod);
-    const prodsFront = cartItems.slice(0, prodIdx);
-    const prodsBack = cartItems.slice(prodIdx + 1, cartItems.length);
-    return [
-      ...prodsFront,
-      {
-        ...prod,
-        quantity: prod.quantity > 1 ? prod.quantity - 1 : prod.quantity,
-      },
-      ...prodsBack,
-    ];
+    if (prod.quantity === 1) {
+      return cartItems;
+    }
+
+    return cartItems.map((item) => (item.id === prod.id ? { ...item, quantity: item.quantity - 1 } : item));
   }
 };

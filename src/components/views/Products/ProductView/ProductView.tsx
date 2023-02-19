@@ -3,8 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Product } from 'src/interfaces';
 import { selectProducts } from 'src/redux/products/productSelector';
 import { useAppDispatch, useAppSelector } from 'src/utils/hooks';
-import { selectCartItems } from 'src/redux/cart/cartSelector';
-import { addItemToCart } from 'src/redux/cart/cartActions';
+import { addItemToCart } from 'src/redux/cart/cartRedux';
 
 import Header from 'src/components/common/Header/Header';
 import { Col, Row } from 'src/assets/Flexbox';
@@ -14,7 +13,6 @@ import { Image } from './ProductViewCSS';
 
 const ProductView = () => {
   const products = useAppSelector(selectProducts);
-  const cartItems = useAppSelector(selectCartItems);
   const dispatch = useAppDispatch();
 
   const urlId = useLocation().pathname.split('/').at(-1) as string;
@@ -25,9 +23,10 @@ const ProductView = () => {
     name: currProd.name,
     price: currProd.price,
     img: currProd.img,
+    quantity: 0,
   };
 
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, cartProd));
+  const addProductToCart = () => dispatch(addItemToCart(cartProd));
 
   return (
     <div>
