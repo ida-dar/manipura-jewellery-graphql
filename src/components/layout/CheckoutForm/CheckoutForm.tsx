@@ -9,35 +9,8 @@ import AccountData from './AccountData/AccountData';
 import ShippingData from './ShippingData/ShippingData';
 import PaymentData from './PaymentData/PaymentData';
 
-const CheckoutForm = () => {
-  const defaultForm = {
-    // account
-    firstName: '' as string,
-    lastName: '' as string,
-    email: '' as string,
-    // address
-    tel: '' as string,
-    street: '' as string,
-    city: '' as string,
-    zip: '' as string,
-  };
-
-  const errors = {
-    valid: true,
-    error: '',
-  };
+const CheckoutForm = ({ form, handleChange }: any) => {
   const currUser = useAppSelector(selectCurrUser);
-  const [formFields, setFormFields] = useState(defaultForm);
-  const { firstName, lastName, email, tel, street, city, zip } = formFields;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setFormFields({ ...formFields, [name]: value });
-  };
-
-  const resetValues = () => {
-    setFormFields(defaultForm);
-  };
 
   return (
     <Wrapper>
@@ -50,7 +23,7 @@ const CheckoutForm = () => {
 
       {/* Account data */}
       <>
-        <AccountData firstName={firstName} lastName={lastName} email={email} tel={tel} handleChange={handleChange} />
+        <AccountData form={form} handleChange={handleChange} />
       </>
 
       {/* Payment data */}
@@ -60,7 +33,7 @@ const CheckoutForm = () => {
 
       {/* Shipping data */}
       <>
-        <ShippingData street={street} city={city} zip={zip} handleChange={handleChange} />
+        <ShippingData form={form} handleChange={handleChange} />
       </>
     </Wrapper>
   );

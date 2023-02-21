@@ -3,15 +3,21 @@ import InputComponent from 'src/components/common/Input/Input';
 import Header from 'src/components/common/Header/Header';
 import { NextInputs } from '../CheckoutFormCSS';
 
+type Form = {
+  accountData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+  };
+};
+
 interface PropTypes {
-  firstName: string;
-  lastName: string;
-  email: string;
-  tel: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  form: Form;
+  handleChange: (e: ChangeEvent<HTMLInputElement>, form: string) => void;
 }
 
-const AccountData = ({ firstName, lastName, email, tel, handleChange }: PropTypes) => {
+const AccountData = ({ form, handleChange }: PropTypes) => {
   return (
     <>
       <Header text="Account data" textAlign="left" />
@@ -22,8 +28,8 @@ const AccountData = ({ firstName, lastName, email, tel, handleChange }: PropType
           type="text"
           placeholder="*First Name"
           required
-          value={firstName}
-          onChange={handleChange}
+          value={form.accountData.firstName}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'accountData')}
           margin="10px 10px 10px 0"
         />
         <InputComponent
@@ -32,8 +38,8 @@ const AccountData = ({ firstName, lastName, email, tel, handleChange }: PropType
           type="text"
           placeholder="*Last Name"
           required
-          value={lastName}
-          onChange={handleChange}
+          value={form.accountData.lastName}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'accountData')}
           margin="10px 0 10px 10px"
         />
       </NextInputs>
@@ -42,17 +48,17 @@ const AccountData = ({ firstName, lastName, email, tel, handleChange }: PropType
         name="email"
         type="email"
         placeholder="*E-Mail Address"
-        value={email}
-        onChange={handleChange}
+        value={form.accountData.email}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'accountData')}
         required
       />
       <InputComponent
-        id="tel"
-        name="tel"
-        type="tel"
+        id="phone"
+        name="phone"
+        type="phone"
         placeholder="+48123456789"
-        value={tel}
-        onChange={handleChange}
+        value={form.accountData.phone}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'accountData')}
         required
       />
     </>

@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartItem } from 'src/interfaces';
 import { addItem, removeItem, reduceQty } from 'src/utils/cartUtils';
+import globalValues from 'src/stores/globalValues';
 import { CartState } from 'src/utils/reduxUtils/reduxTypes';
-
-const shipping = 25;
 
 const initialState: CartState = {
   cartItems: [] as CartItem[],
-  shippingPrice: shipping as number,
+  shippingPrice: globalValues.shipping as number,
 };
 
 /* slice */
@@ -24,10 +23,13 @@ const cartSlice = createSlice({
     quantityDown(state, action: PayloadAction<CartItem>) {
       state.cartItems = reduceQty(state.cartItems, action.payload);
     },
+    setShippingPrice(state, action: PayloadAction<number>) {
+      state.shippingPrice = action.payload;
+    },
   },
 });
 
-export const { addItemToCart, removeItemFromCart, quantityDown } = cartSlice.actions;
+export const { addItemToCart, removeItemFromCart, quantityDown, setShippingPrice } = cartSlice.actions;
 
 const cartReducer = cartSlice.reducer;
 

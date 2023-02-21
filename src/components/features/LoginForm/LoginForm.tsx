@@ -42,7 +42,7 @@ const LoginForm = () => {
         navigate(-3); // if set to "-1" it redirects to google login page
       } else {
         setLoginError({
-          valid: true,
+          valid: false,
           error: 'Login was unsuccessful. Please try again.',
         });
       }

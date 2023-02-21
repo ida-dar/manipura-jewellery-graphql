@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { selectCartTotal } from 'src/redux/cart/cartSelector';
-import { useAppSelector } from 'src/utils/hooks';
+import { selectCartTotal, shippingPrice } from 'src/redux/cart/cartSelector';
+import { setShippingPrice } from 'src/redux/cart/cartRedux';
+import { useAppDispatch, useAppSelector } from 'src/utils/hooks';
 import { CartItem } from 'src/interfaces';
+import globalValues from 'src/stores/globalValues';
 
 import Header from 'src/components/common/Header/Header';
 import CheckoutItem from 'src/components/features/CheckoutItem/CheckoutItem';
 import { CartCounts, CartParts } from './CheckoutCartCSS';
 
 const CheckoutCart: React.FC<{ cartItems: CartItem[] }> = ({ cartItems }) => {
-  const shipping = 25;
-  const [shippingPrice, setShippingPrice] = useState(shipping);
   const cartTotal = useAppSelector(selectCartTotal);
+  const shipping = useAppSelector(shippingPrice);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (cartTotal >= 500) setShippingPrice(0);
-    else setShippingPrice(shipping);
-  }, [cartTotal]);
+    if (cartTotal >= 500) dispatch(setShippingPrice(0));
+    else dispatch(setShippingPrice(globalValues.shipping));
+  }, [cartTotal, shipping]);
 
   return (
     <>
@@ -27,15 +29,15 @@ const CheckoutCart: React.FC<{ cartItems: CartItem[] }> = ({ cartItems }) => {
       <CartCounts>
         <CartParts noGutters justify="space-between" align="center" alignContent="center">
           <span>Subtotal</span>
-          <span>${cartTotal}</span>
+          <>${cartTotal}</>
         </CartParts>
         <CartParts noGutters justify="space-between" align="center" alignContent="center">
           <span>Shipping rate</span>
-          <span>${shippingPrice}</span>
+          <span>${shipping}</span>
         </CartParts>
         <CartParts noGutters justify="space-between" align="center" alignContent="center">
           <span>Total</span>
-          <span>${cartTotal + shippingPrice}</span>
+          <>${cartTotal}</>
         </CartParts>
       </CartCounts>
     </>

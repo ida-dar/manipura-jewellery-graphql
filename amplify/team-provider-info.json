@@ -13,7 +13,10 @@
     },
     "categories": {
       "function": {
-        "createPaymentIntent": {}
+        "createPaymentIntent": {
+          "deploymentBucketName": "amplify-amplify8a428ab98eab4-staging-171026-deployment",
+          "s3Key": "amplify-builds/createPaymentIntent-6f32672f634f744e382b-build.zip"
+        }
       }
     }
   }

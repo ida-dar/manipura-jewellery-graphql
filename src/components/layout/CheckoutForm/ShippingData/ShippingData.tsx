@@ -4,14 +4,22 @@ import Header from 'src/components/common/Header/Header';
 import { NextInputs, Select } from '../CheckoutFormCSS';
 import _countries from '../../../../data/countries.json';
 
+type Form = {
+  shippingData: {
+    street: string;
+    city: string;
+    country: string;
+    postcode: string;
+    company: string;
+  };
+};
+
 interface PropTypes {
-  street: string;
-  city: string;
-  zip: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  form: Form;
+  handleChange: (e: ChangeEvent<HTMLInputElement>, form: string) => void;
 }
 
-const ShippingData = ({ street, city, zip, handleChange }: PropTypes): any => {
+const ShippingData = ({ form, handleChange }: PropTypes): any => {
   return (
     <>
       <Header text="Shipping data" textAlign="left" />
@@ -21,8 +29,8 @@ const ShippingData = ({ street, city, zip, handleChange }: PropTypes): any => {
         type="text"
         placeholder="*Street"
         required
-        value={street}
-        onChange={handleChange}
+        value={form.shippingData.street}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'shippingData')}
       />
       <InputComponent
         id="city"
@@ -30,32 +38,32 @@ const ShippingData = ({ street, city, zip, handleChange }: PropTypes): any => {
         type="text"
         placeholder="*City"
         required
-        value={street}
-        onChange={handleChange}
+        value={form.shippingData.city}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'shippingData')}
       />
       <InputComponent
         id="company"
         name="company"
         type="text"
         placeholder="Company (optional)"
-        value={city}
-        onChange={handleChange}
+        value={form.shippingData.company}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'shippingData')}
       />
       <NextInputs>
         <InputComponent
-          id="zip"
-          name="zip"
+          id="postcode"
+          name="postcode"
           type="text"
           placeholder="*Post Code"
-          value={zip}
-          onChange={handleChange}
+          value={form.shippingData.postcode}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'shippingData')}
           pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$"
           required
           margin="10px 10px 10px 0"
         />
-        <Select>
+        <Select id="country" name="country" onChange={(e: any) => handleChange(e, 'shippingData')}>
           {_countries.map((el) => (
-            <option key={el.code} value={el.code} selected={el.code === 'PL'}>
+            <option key={el.code} value={el.name} selected={el.code === 'PL'}>
               {el.name}
             </option>
           ))}

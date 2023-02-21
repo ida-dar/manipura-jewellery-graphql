@@ -5,5 +5,23 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "parameters": {
+    "AMPLIFY_function_createPaymentIntent_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPaymentIntent"
+        }
+      ]
+    },
+    "AMPLIFY_function_createPaymentIntent_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPaymentIntent"
+        }
+      ]
+    }
   }
 }

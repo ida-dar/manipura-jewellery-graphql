@@ -1,7 +1,7 @@
 import { theme } from 'src/assets/theme/theme';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.form`
   position: relative;
 
   ::after {

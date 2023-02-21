@@ -1,4 +1,3 @@
-import { current } from '@reduxjs/toolkit';
 import { CartItem } from 'src/interfaces';
 
 export const addItem = (cartItems: CartItem[], prod: CartItem) => {

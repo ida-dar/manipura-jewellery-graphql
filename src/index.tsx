@@ -11,11 +11,6 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const options = {
-  // passing the client secret obtained from the server
-  clientSecret: `{{${process.env.STRIPE_SECRET_KEY}}}`,
-};
-
 root.render(
   <React.StrictMode>
     <Provider store={store}>

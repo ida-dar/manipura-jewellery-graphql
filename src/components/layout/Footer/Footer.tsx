@@ -80,7 +80,7 @@ const Footer = () => {
         </NavLink>
       </Col>
       <Contact>
-        <a href="tel:+48123456789">+(48) 123 456 789</a>
+        <a href="phone:+48123456789">+(48) 123 456 789</a>
         <a href="mailto:test.account@mail.com">test.account@mail.com</a>
       </Contact>
       <Newsletter>
