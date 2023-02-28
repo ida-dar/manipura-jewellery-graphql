@@ -10,6 +10,7 @@ interface ButtonProps {
   reverseColors?: boolean;
   margin?: string;
   textTransform?: string;
+  disabled?: boolean;
 }
 
 const Span = styled.span`
@@ -104,6 +105,7 @@ const ButtonComponent = ({
   reverseColors = false,
   margin,
   textTransform,
+  disabled,
 }: ButtonProps) => {
   return (
     <Button
@@ -113,6 +115,7 @@ const ButtonComponent = ({
       reverseColors={reverseColors}
       margin={margin}
       textTransform={textTransform}
+      disabled={disabled}
     >
       <Span reverseColors={reverseColors} />
       <ButtonContent reverseColors={reverseColors}>

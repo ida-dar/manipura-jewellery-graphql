@@ -32,7 +32,6 @@ const ForgotPassword = () => {
 
     try {
       const resp = await forgotPassword(email);
-      console.log('resp', resp, email);
       setEmailSent(true);
       resetValues();
     } catch (e) {

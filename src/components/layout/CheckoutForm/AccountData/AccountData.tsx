@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 import InputComponent from 'src/components/common/Input/Input';
 import Header from 'src/components/common/Header/Header';
 import { NextInputs } from '../CheckoutFormCSS';
+import { FORM_TYPES } from '../../../views/CheckoutView/CheckoutView';
 
 type Form = {
   accountData: {
@@ -29,7 +30,7 @@ const AccountData = ({ form, handleChange }: PropTypes) => {
           placeholder="*First Name"
           required
           value={form.accountData.firstName}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'accountData')}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, FORM_TYPES.ACCOUNT_DATA)}
           margin="10px 10px 10px 0"
         />
         <InputComponent
@@ -39,7 +40,7 @@ const AccountData = ({ form, handleChange }: PropTypes) => {
           placeholder="*Last Name"
           required
           value={form.accountData.lastName}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'accountData')}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, FORM_TYPES.ACCOUNT_DATA)}
           margin="10px 0 10px 10px"
         />
       </NextInputs>
@@ -49,7 +50,7 @@ const AccountData = ({ form, handleChange }: PropTypes) => {
         type="email"
         placeholder="*E-Mail Address"
         value={form.accountData.email}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'accountData')}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, FORM_TYPES.ACCOUNT_DATA)}
         required
       />
       <InputComponent
@@ -58,7 +59,7 @@ const AccountData = ({ form, handleChange }: PropTypes) => {
         type="phone"
         placeholder="+48123456789"
         value={form.accountData.phone}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'accountData')}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, FORM_TYPES.ACCOUNT_DATA)}
         required
       />
     </>

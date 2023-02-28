@@ -20,6 +20,12 @@ import PopUp from 'src/components/features/PopUp/PopUp';
 
 type HandleChangeEvent = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>;
 
+export enum FORM_TYPES {
+  ACCOUNT_DATA = 'accountData',
+  SHIPPING_DATA = 'shippingData',
+  ORDER_INFO = 'orderInfo',
+}
+
 const CheckoutView = () => {
   const cartItems = useAppSelector(selectCartItems);
 
@@ -57,21 +63,23 @@ const CheckoutView = () => {
   const [formFields, setFormFields] = useState(defaultForm);
   const [error, setError] = useState(errors);
   const [openModal, setOpenModal] = useState(false);
+  const [paymentPending, setPaymentPending] = useState(false);
+  const [customerName, setCustomerName] = useState('');
 
   const handleChange = (e: HandleChangeEvent, form: string): void => {
     const { name, value } = e.target;
 
-    if (form === 'accountData') {
+    if (form === FORM_TYPES.ACCOUNT_DATA) {
       setFormFields((prevState: any) => {
         prevState.accountData[name] = value;
         return { ...prevState };
       });
-    } else if (form === 'shippingData') {
+    } else if (form === FORM_TYPES.SHIPPING_DATA) {
       setFormFields((prevState: any) => {
         prevState.shippingData[name] = value;
         return { ...prevState };
       });
-    } else if (form === 'orderInfo') {
+    } else if (form === FORM_TYPES.ORDER_INFO) {
       setFormFields((prevState: any) => {
         prevState.orderInfo[name] = value;
         return { ...prevState };
@@ -89,6 +97,13 @@ const CheckoutView = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    // reset errors and modal in case of second click on submit button
+    setError({
+      valid: true,
+      error: '',
+    });
+    setOpenModal(false);
+
     try {
       if (
         !_.values(formFields.accountData).every(_.isEmpty) &&
@@ -97,23 +112,32 @@ const CheckoutView = () => {
         if (!stripe && !elements) {
           return;
         } else {
+          setPaymentPending(true);
           const resp = await fetch('https://5zfcaeaj3gzefxheryhe2mublq0fdshk.lambda-url.eu-west-2.on.aws', {
             method: 'post',
             headers: {
+              Origin: '*',
               'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers': '*',
+              'Access-Control-Allow-Methods': 'POST, OPTIONS',
             },
             body: JSON.stringify({ formFields, amount: amount * 100 }),
           }).then((res) => res.json());
 
           const {
-            paymentIntent: { client_secret },
+            paymentIntent: { client_secret, metadata },
           } = resp;
+
+          setCustomerName(metadata.email);
+
+          console.log(resp);
 
           const paymentResult = await stripe?.confirmCardPayment(client_secret, {
             payment_method: {
               card: elements?.getElement('card') as StripeCardElement | StripeCardNumberElement,
               billing_details: {
-                name: currUser ? currUser.displayName : 'Guest',
+                name: currUser ? currUser.displayName : metadata.name,
               },
             },
           });
@@ -130,6 +154,7 @@ const CheckoutView = () => {
                 error: '',
               });
             }
+            setPaymentPending(false);
             setOpenModal(!openModal);
             resetValues();
           }
@@ -173,10 +198,17 @@ const CheckoutView = () => {
               id="comments"
               name="comments"
               value={formFields.orderInfo.comments}
-              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e, 'orderInfo')}
+              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e, FORM_TYPES.ORDER_INFO)}
               placeholder="Add Comments About Your Order"
             />
-            <ButtonComponent text="Confirm order" width="100%" reverseColors textTransform="uppercase" type="submit" />
+            <ButtonComponent
+              text="Confirm order"
+              width="100%"
+              reverseColors
+              textTransform="uppercase"
+              type="submit"
+              disabled={paymentPending}
+            />
           </Row>
         </Form>
       ) : (
@@ -198,11 +230,11 @@ const CheckoutView = () => {
       {error.valid === false && typeof error.error === 'string' && (
         <PopUp open={openModal} closeModal={closeModal} content={error.error} />
       )}
-      {error.valid && error.error === '' && (
+      {error.valid && error.error === '' && customerName.length && (
         <PopUp
           open={openModal}
           closeModal={closeModal}
-          content={`Payment done successfuly. We have sent order confirmation to ${formFields.accountData.email}`}
+          content={[`Payment done successfuly. We have sent order confirmation to ` + <strong>{customerName}</strong>]}
         />
       )}
     </Row>

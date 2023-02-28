@@ -12,7 +12,7 @@ exports.handler = async (e) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: 'usd',
-      meatdata: {
+      metadata: {
         email: formFields.accountData.email,
         name: `${formFields.accountData.firstName} ${formFields.accountData.lastName}`,
         phone: formFields.accountData?.phone,
@@ -24,7 +24,8 @@ exports.handler = async (e) => {
           city: formFields.shippingData.city,
           country: formFields.shippingData.country,
           postal_code: formFields.shippingData.postcode,
-          line1: formFields.shippingData.company,
+          line1: formFields.shippingData.street,
+          line2: formFields.shippingData.company,
         }
       },
       payment_method_types: ['card'],
@@ -35,7 +36,8 @@ exports.handler = async (e) => {
       // Uncomment below to enable CORS requests
       "headers": {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*"
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
       },
       "body": JSON.stringify({ paymentIntent }),
     };

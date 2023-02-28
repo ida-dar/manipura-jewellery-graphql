@@ -3,6 +3,7 @@ import InputComponent from 'src/components/common/Input/Input';
 import Header from 'src/components/common/Header/Header';
 import { NextInputs, Select } from '../CheckoutFormCSS';
 import _countries from '../../../../data/countries.json';
+import { FORM_TYPES } from '../../../views/CheckoutView/CheckoutView';
 
 type Form = {
   shippingData: {
@@ -30,7 +31,7 @@ const ShippingData = ({ form, handleChange }: PropTypes): any => {
         placeholder="*Street"
         required
         value={form.shippingData.street}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'shippingData')}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, FORM_TYPES.SHIPPING_DATA)}
       />
       <InputComponent
         id="city"
@@ -39,7 +40,7 @@ const ShippingData = ({ form, handleChange }: PropTypes): any => {
         placeholder="*City"
         required
         value={form.shippingData.city}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'shippingData')}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, FORM_TYPES.SHIPPING_DATA)}
       />
       <InputComponent
         id="company"
@@ -47,7 +48,7 @@ const ShippingData = ({ form, handleChange }: PropTypes): any => {
         type="text"
         placeholder="Company (optional)"
         value={form.shippingData.company}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'shippingData')}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, FORM_TYPES.SHIPPING_DATA)}
       />
       <NextInputs>
         <InputComponent
@@ -56,12 +57,12 @@ const ShippingData = ({ form, handleChange }: PropTypes): any => {
           type="text"
           placeholder="*Post Code"
           value={form.shippingData.postcode}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'shippingData')}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, FORM_TYPES.SHIPPING_DATA)}
           pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$"
           required
           margin="10px 10px 10px 0"
         />
-        <Select id="country" name="country" onChange={(e: any) => handleChange(e, 'shippingData')}>
+        <Select id="country" name="country" onChange={(e: any) => handleChange(e, FORM_TYPES.SHIPPING_DATA)}>
           {_countries.map((el) => (
             <option key={el.code} value={el.name} selected={el.code === 'PL'}>
               {el.name}
