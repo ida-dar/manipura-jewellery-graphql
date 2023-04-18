@@ -4,8 +4,8 @@ import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from '../../../assets/theme/GlobalStyle';
 import { theme } from '../../../assets/theme/theme';
-import { startRequest } from 'src/utils/reduxUtils/createAction';
 import { useAppDispatch } from 'src/utils/hooks';
+import { fetchProductsStart } from 'src/redux/products/productActions';
 
 import { Container } from '../../../assets/Flexbox/index';
 import Header from '../Header/Header';
@@ -23,7 +23,7 @@ const MainLayout = ({ children }: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(startRequest('products'));
+    dispatch(fetchProductsStart());
   }, [dispatch]);
 
   return (

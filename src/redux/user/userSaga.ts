@@ -7,7 +7,6 @@ import {
   registerUser,
   logoutUser,
 } from 'src/utils/firebase/firebase';
-import { endRequest, errorRequest, startRequest } from 'src/utils/reduxUtils/createAction';
 import { USER_ACTION_TYPES } from 'src/utils/reduxUtils/reduxTypes';
 import { signInSuccess, signInFail, signUpFail, signUpSucces, signOutSuccess, signOutFailed } from './userActions';
 
@@ -38,7 +37,8 @@ export function* isUserAuth(): any {
 export function* signInWithGoogle(): any {
   try {
     const user = yield call(signInWithGooglePopup);
-    yield call(getSnapshotFromUserAuth, user);
+    console.log('user', user, user.user.uid);
+    yield call(getSnapshotFromUserAuth, user, { uid: user.user.uid });
   } catch (e) {
     yield put(signInFail(e));
   }
@@ -46,13 +46,11 @@ export function* signInWithGoogle(): any {
 
 export function* signInWithEmail({ payload }: any): any {
   try {
-    yield put(startRequest('user'));
     const { email, password } = payload;
     const { user } = yield call(loginUser, email, password);
     yield call(getSnapshotFromUserAuth, user);
-    yield put(endRequest('user'));
-  } catch (error) {
-    yield put(errorRequest('user'));
+  } catch (e) {
+    yield put(signInFail(e));
   }
 }
 

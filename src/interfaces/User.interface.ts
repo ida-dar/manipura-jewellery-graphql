@@ -1,5 +1,5 @@
 export default interface UserData {
-  createdAt: Date;
+  created: Date;
   displayName: string;
   email: string;
 }

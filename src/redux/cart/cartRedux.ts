@@ -9,6 +9,10 @@ const initialState: CartState = {
   shippingPrice: globalValues.shipping as number,
 };
 
+/**
+ * used createSlice only instead of classic reducer for practice
+ */
+
 /* slice */
 const cartSlice = createSlice({
   name: 'cart',

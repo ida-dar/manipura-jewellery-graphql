@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getRedirectResult, UserCredential } from 'firebase/auth';
 
-import { auth, createUserDocFromAuth } from 'src/utils/firebase/firebase';
 import { appRoutes } from 'src/utils/routes';
 import { useAppDispatch } from 'src/utils/hooks';
 import { emailSignIn, googleSignIn } from 'src/redux/user/userActions';
@@ -32,24 +30,26 @@ const LoginForm = () => {
   const dispatch = useAppDispatch();
   const [formFields, setFormFields] = useState(defaultForm);
   const [loginError, setLoginError] = useState(errors);
+  const [googleSignInStart, setGoogleSignInstart] = useState(false);
   const { email, password } = formFields;
 
-  useEffect(() => {
-    const getRedirectSignInData = async () => {
-      const resp: UserCredential | null = await getRedirectResult(auth);
-      if (resp) {
-        await createUserDocFromAuth(resp.user);
-        navigate(-3); // if set to "-1" it redirects to google login page
-      } else {
-        setLoginError({
-          valid: false,
-          error: 'Login was unsuccessful. Please try again.',
-        });
-      }
-    };
+  // Unnecessary code, needed for signInWithGoogleRedirect. Left for future reference
+  // useEffect(() => {
+  //   const getRedirectSignInData = async () => {
+  //     const resp: UserCredential | null = await getRedirectResult(auth);
+  //     if (resp) {
+  //       await createUserDocFromAuth(resp.user);
+  //       navigate(-3); // if set to "-1" it redirects to google login page
+  //     } else {
+  //       setLoginError({
+  //         valid: false,
+  //         error: 'Login was unsuccessful. Please try again.',
+  //       });
+  //     }
+  //   };
 
-    getRedirectSignInData();
-  }, []);
+  //   getRedirectSignInData();
+  // }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -65,20 +65,24 @@ const LoginForm = () => {
   };
 
   const loginWithGoogle = () => {
+    setGoogleSignInstart(false);
+    resetValues();
     try {
+      setGoogleSignInstart(true);
       dispatch(googleSignIn());
     } catch (e) {
+      setGoogleSignInstart(false);
       console.error('Error: ', e);
     }
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (googleSignInStart) return;
     if (!email || !password) return;
 
     try {
-      const user = { email: email, password: password };
-      dispatch(emailSignIn(user));
+      dispatch(emailSignIn(email, password));
       resetValues();
       navigate(-1); // redirect to previous page, e.g. watched product
     } catch (e: any) {

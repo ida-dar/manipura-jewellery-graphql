@@ -1,10 +1,28 @@
-import { AnyAction } from '@reduxjs/toolkit';
-import { STATUS_ACTION_TYPES } from './reduxTypes';
+import { AnyAction } from 'redux';
+import { ActionWithPayload, Action } from './reduxTypes';
+
+type Match<AC extends () => AnyAction> = AC & {
+  type: ReturnType<AC>['type'];
+  match(action: AnyAction): action is ReturnType<AC>;
+};
+
+export function withMatcher<AC extends () => AnyAction & { type: string }>(actionCreator: AC): Match<AC>;
+export function withMatcher<AC extends (...args: any) => AnyAction & { type: string }>(actionCreator: AC): Match<AC>;
+
+export function withMatcher(actionCreator: Function) {
+  const type = actionCreator().type;
+  return Object.assign(actionCreator, {
+    type,
+    match(action: AnyAction) {
+      return action.type === type;
+    },
+  });
+}
 
 /* generic action */
-export const createAction = (type: string, payload?: any): AnyAction => ({ type, payload });
+export function createAction<T extends string, P>(type: T, payload: P): ActionWithPayload<T, P>;
+export function createAction<T extends string>(type: T, payload: void): Action<T>;
 
-/* request status actions */
-export const startRequest = (name: string) => ({ type: `${name}/${STATUS_ACTION_TYPES.START_REQUEST}` });
-export const endRequest = (name: string) => ({ type: `${name}/${STATUS_ACTION_TYPES.END_REQUEST}` });
-export const errorRequest = (name: any) => ({ type: `${name}/${STATUS_ACTION_TYPES.ERROR_REQUEST}` });
+export function createAction<T extends string, P>(type: T, payload: P) {
+  return { type, payload };
+}

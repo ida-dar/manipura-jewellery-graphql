@@ -28,7 +28,7 @@ const RegisterView = () => {
   const dispatch = useAppDispatch();
 
   const [formFields, setFormFields] = useState(defaultForm);
-  const [matchedPasswords, setMatchedPasswords] = useState(false);
+  const [matchedPasswords, setMatchedPasswords] = useState<boolean>(false);
   const [registrationError, setRegistrationError] = useState(errors);
   const { firstName, lastName, email, password, passwordConfirm } = formFields;
 

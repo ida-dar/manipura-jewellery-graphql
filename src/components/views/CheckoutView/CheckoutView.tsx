@@ -52,19 +52,19 @@ const CheckoutView = () => {
   };
 
   const errors = {
-    valid: true,
+    valid: true as boolean,
     error: '' as any,
   };
 
   const stripe = useStripe();
   const elements = useElements();
-  const amount = useAppSelector(selectCartTotal);
+  const amount = useAppSelector<number>(selectCartTotal);
   const currUser = useAppSelector(selectCurrUser);
   const [formFields, setFormFields] = useState(defaultForm);
   const [error, setError] = useState(errors);
-  const [openModal, setOpenModal] = useState(false);
-  const [paymentPending, setPaymentPending] = useState(false);
-  const [customerName, setCustomerName] = useState('');
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [paymentPending, setPaymentPending] = useState<boolean>(false);
+  const [customerName, setCustomerName] = useState<string>('');
 
   const handleChange = (e: HandleChangeEvent, form: string): void => {
     const { name, value } = e.target;
@@ -230,7 +230,7 @@ const CheckoutView = () => {
       {error.valid === false && typeof error.error === 'string' && (
         <PopUp open={openModal} closeModal={closeModal} content={error.error} />
       )}
-      {error.valid && error.error === '' && customerName.length && (
+      {error.valid && error.error === '' && customerName !== '' && (
         <PopUp
           open={openModal}
           closeModal={closeModal}

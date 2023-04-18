@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   };
 
   const [formFields, setFormFields] = useState(defaultForm);
-  const [emailSent, setEmailSent] = useState(false);
+  const [emailSent, setEmailSent] = useState<boolean>(false);
   const { email } = formFields;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

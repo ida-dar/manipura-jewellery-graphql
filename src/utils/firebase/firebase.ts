@@ -14,7 +14,18 @@ import {
   sendPasswordResetEmail,
   signInWithPopup,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  query,
+  getDocs,
+  DocumentData,
+  QueryDocumentSnapshot,
+} from 'firebase/firestore';
+import { Product, UserData } from 'src/interfaces';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -43,7 +54,7 @@ provider.setCustomParameters({
 Initialize Firebase Authentication and get a reference to the service
 */
 export const auth = getAuth();
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
+// export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 export const signInWithGooglePopup = (): any => signInWithPopup(auth, provider);
 
 /*
@@ -52,7 +63,11 @@ Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore();
 
 // Unnecessary code, was needed only for uploading data from js file to Firestore, left for future reference
-// export const addCollectionAndDocs = async (key: string, objects: any) => {
+// type ObjToAdd = {
+//   title: string;
+// };
+
+// export const addCollectionAndDocs = async <T extends ObjToAdd>(key: string, objects: T[]) => {
 //   const collRef = collection(db, key);
 //   const batch = writeBatch(db);
 
@@ -73,7 +88,7 @@ export const getCollectionAndDocs = async (dbName: string) => {
   const collMap = querySnapshot.docs.map((docSnapshot) => {
     const finalObj = {
       id: docSnapshot.id, // get product id given by Firebase
-      data: docSnapshot.data(), // get the rest of products data
+      data: docSnapshot.data() as Product, // get the rest of products data
     };
     return finalObj;
   });
@@ -81,21 +96,31 @@ export const getCollectionAndDocs = async (dbName: string) => {
 };
 
 // User auth
-export const createUserDocFromAuth = async (userAuth: User, userInfo: any = {}) => {
-  if (!userAuth) return;
+type UserInfo = {
+  displayName?: string;
+  uid?: string;
+};
 
-  const docRef = doc(db, 'users', userAuth.uid);
+export const createUserDocFromAuth = async (
+  userAuth: User,
+  userInfo = {} as UserInfo
+): Promise<void | QueryDocumentSnapshot> => {
+  if (!userAuth) return;
+  // with google sign in with popup the following error appears: 'TypeError: can't access property "indexOf", n is undefined'. The user gets correctly logged in only after page reload. The workaround is to pass the user uid from user object from the signInWithGooglePopup request
+  let uid = userInfo.uid ? userInfo.uid : userAuth.uid;
+
+  const docRef = doc(db, 'users', uid);
   const userSnapshot = await getDoc(docRef);
 
   if (!userSnapshot.exists()) {
     const created = new Date();
     const { displayName, email } = userAuth;
-    const user: User = {
+    const user = {
       displayName,
       email,
       created,
       ...userInfo,
-    };
+    } as UserData;
 
     try {
       await setDoc(docRef, user);
@@ -103,7 +128,7 @@ export const createUserDocFromAuth = async (userAuth: User, userInfo: any = {}) 
       console.log('Firebase error: ', e);
     }
   }
-  return userSnapshot;
+  return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 
 export const registerUser = async (email: string, password: string): Promise<UserCredential | undefined> => {
@@ -122,7 +147,7 @@ export const logoutUser = async (): Promise<void> => await signOut(auth);
 
 export const authStateListener = (cb: NextOrObserver<User>) => onAuthStateChanged(auth, cb);
 
-export const getCurrUser = () => {
+export const getCurrUser = (): Promise<User | null> => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(
       auth,
